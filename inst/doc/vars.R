@@ -158,7 +158,7 @@ var2c.arch
 ###################################################
 ### chunk number 18: diag1
 ###################################################
-var2c.norm <- normality(var.2c)
+var2c.norm <- normality(var.2c, multivariate.only = TRUE)
 names(var2c.norm)
 var2c.norm
 plot(var2c.norm)
@@ -167,17 +167,20 @@ plot(var2c.norm)
 ###################################################
 ### chunk number 19: diag2
 ###################################################
-var2c.serial <- serial(var.2c, lags.pt = 16, lags.bg = 5)
-names(var2c.serial)
-var2c.serial$pt.mul
-plot(var2c.serial)
+var2c.pt.asy <- serial(var.2c, lags.pt = 16, type = "PT.asymptotic")
+var2c.pt.asy
+var2c.pt.adj <- serial(var.2c, lags.pt = 16, type = "PT.adjusted")
+var2c.pt.adj
+plot(var2c.pt.asy)
 
 
 ###################################################
 ### chunk number 20: diag3
 ###################################################
-var2c.serial$LMh
-var2c.serial$LMFh
+var2c.BG <- serial(var.2c, lags.pt = 16, type = "BG")
+var2c.BG
+var2c.ES <- serial(var.2c, lags.pt = 16, type = "ES")
+var2c.ES
 
 
 ###################################################
@@ -252,7 +255,7 @@ fcstu <- c(rep(NA, smpl - 1), var.f10$endog[smpl, 1], var.f10$fcst[[1]][, 3])
 smply <- c(var.f10$endog[, 1], rep(NA, length(var.f10$fcst[[1]][, 1])))
 min.y <- min(na.omit(c(fcsty, fcstl, fcstu, smply)))
 max.y <- max(na.omit(c(fcsty, fcstl, fcstu, smply)))               
-plot.ts(fcsty, ylab = "", xlab = "", ylim = c(min.y, max.y), main = paste("Forecast of series", ynames[1]), col = "green", lty = 2)
+plot.ts(fcsty, ylab = "", xlab = "", ylim = c(min.y, max.y), main = paste("Forecast of series", ynames[1]), col = "blue", lty = 2)
 lines(smply, col = "black", lty = 1)
 lines(fcstl, col = "red", lty = 3)
 lines(fcstu, col = "red", lty = 3)
@@ -262,7 +265,7 @@ abline(v = smpl, col = "grey", lty = 4)
 ###################################################
 ### chunk number 31: 
 ###################################################
-colors <- heat.colors(9)
+colors <- gray(sqrt(seq(from = 0.05, to = 1, length = 9)))
 cis <- seq(0.1, 0.9, by = 0.1)
 n.regions <- length(cis)
 n.ahead <- nrow(var.f10$fcst[[1]])
@@ -296,7 +299,7 @@ args(irf)
 Canada2 <- Canada[, c(3, 1, 4, 2)]
 names(Canada2)
 var.2c.alt <- VAR(Canada2, p = 2, type = "const")
-irf.rw.eU <- irf(var.2c.alt, impulse = "rw", response = c("e", "U")) 
+irf.rw.eU <- irf(var.2c.alt, impulse = "rw", response = c("e", "U"), boot = TRUE) 
 names(irf.rw.eU)
 plot(irf.rw.eU)
 
@@ -346,7 +349,8 @@ amat
 ### chunk number 38: SVAR2
 ###################################################
 args(optim)
-svar2c.A <- SVAR(var.2c, Amat = amat, Bmat = NULL, hessian = TRUE, method = "BFGS")
+svar2c.A <- SVAR(var.2c, estmethod = "logLik", Amat = amat, Bmat = NULL, 
+   hessian = TRUE, method = "BFGS") 
 svar2c.A
 
 
