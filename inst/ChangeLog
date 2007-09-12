@@ -2,9 +2,9 @@
 
 	* R/restrict.R ("restrict"): Fixed buglet: if all rhs-variables
 	are significant.
-	* R/causality.R ("restrict"): Fixed buglet: duplication of y.names
+	* R/causality.R ("causality"): Fixed buglet: duplication of y.names
 	for matching set to p.
-	* R/SVAR.R ("restrict"): Fixed buglet: In call to SVAR2 max.iter =
+	* R/SVAR.R ("SVAR"): Fixed buglet: In call to SVAR2 max.iter =
 	max.iter.
 	
 2007-08-17    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
