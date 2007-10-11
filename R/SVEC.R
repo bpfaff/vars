@@ -46,7 +46,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   ##
   Coef.vecr <- coef(vecr$rlm)
   alpha <- t(Coef.vecr[1:r, ])
-  alpha.orth <- Null(alpha)
+  ifelse(r == 1, alpha.orth <- Null(t(alpha)), alpha.orth <- Null(alpha))
   beta <- vecr$beta[1:K, ]
   beta.orth <- Null(beta)
   Gamma.array <- array(c(t(tail(coef(vecr$rlm), K*P))), c(K, K, P))
