@@ -12,17 +12,26 @@ function(z, r = 1){
   coeffs <- coef(lm(z@Z0 ~ -1 + etc + z@Z1))
   rownames(coeffs) <- c(colnames(etc), colnames(z@Z1))
   PI <- z@W[, 1:r] %*% t(z@V[, 1:r])
-  if("constant" %in% colnames(PI)){
-    detcoeffs <- matrix(PI[, "constant"], nrow = 1, ncol = ncol(z@x), byrow = TRUE)
-    PI <- subset(PI, select = !(colnames(PI) == "constant"))
+  if(z@ecdet == "const"){
+    detcoeffs <- matrix(PI[, z@P + 1], nrow = 1, ncol = ncol(z@x), byrow = TRUE)
+    rownames(detcoeffs) <- "constant"
+    colnames(detcoeffs) <- colnames(z@x)
+    PI <- PI[, -(z@P + 1)]
     rhs <- cbind(1, z@Z1)
     colnames(rhs) <- c("constant", colnames(z@Z1))
-  } else {
+  } else if(z@ecdet == "none"){
     detcoeffs <- matrix(coeffs["constant", ], nrow = 1, ncol = ncol(z@x), byrow = TRUE)
+    rownames(detcoeffs) <- "constant"
+    colnames(detcoeffs) <- colnames(z@x)
     rhs <- z@Z1
-  }
-  rownames(detcoeffs) <- "constant"
-  colnames(detcoeffs) <- colnames(z@x)
+  } else if(z@ecdet == "trend"){
+    detcoeffs <- matrix(c(coeffs["constant", ], PI[, z@P + 1]), nrow = 2, ncol = ncol(z@x), byrow = TRUE)
+    rownames(detcoeffs) <- c("constant", colnames(z@ZK)[z@P + 1])
+    colnames(detcoeffs) <- colnames(z@x)
+    PI <- PI[, -(z@P + 1)]
+    rhs <- cbind(1, z@ZK[, z@P + 1], z@Z1[, -1])
+    colnames(rhs) <- c("constant", colnames(z@ZK)[z@P + 1], colnames(z@Z1)[-1])
+  }  
   if(!(is.null(eval(z@season)))){
     seas <- eval(z@season) - 1
     season <- paste("sd", 1:seas, sep = "")

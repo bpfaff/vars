@@ -1,3 +1,24 @@
+2007-10-31    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/irf.vec2var.R ("irf.vec2var"): Inserted names for Lower and Upper.
+	* R/irf.svecest.R: Inserted names for Lower and Upper.
+	* R/internal.R (.bootirfvec2var): Assigning list elements of Lower
+	and Upper in loop.
+	* R/internal.R (.bootirfsvec): Assigning list elements of Lower
+	and Upper in loop.
+
+2007-10-30    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (.bootsvec): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/internal.R (.bootirfsvec): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/internal.R (.bootirfvec2var): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/predict.vec2var.R ("predict.vec2var"): Adjusted for new argument 'ecdet' in ca.jo().
+	* man/vec2var.Rd (examples): Adjusted for new argument 'ecdet' in ca.jo().
+	
+2007-10-29    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/vec2var.R: Adjusted for new argument 'ecdet' in ca.jo().
+
 2007-10-10    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/SVEC.R ("SVEC"): Changed Null(t(alpha)) for r = 1.

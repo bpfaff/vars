@@ -73,7 +73,7 @@ vec2var(z, r = 1)
 library(urca)
 data(finland)
 sjf <- finland
-sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2,
+sjf.vecm <- ca.jo(sjf, ecdet = "none", type = "eigen", K = 2,
 spec = "longrun", season = 4, ctable = "A2")
 vec2var(sjf.vecm, r = 2)
 }

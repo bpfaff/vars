@@ -36,7 +36,9 @@ function(x, impulse=NULL, response=NULL, n.ahead=10, ortho=TRUE, cumulative=FALS
     if(!(is.null(seed))) set.seed(abs(as.integer(seed)))
     BOOT <- .bootirfvec2var(x = x, n.ahead = n.ahead, runs = runs, ortho = ortho, cumulative = cumulative, impulse = impulse, response = response, ci = ci, seed = seed, y.names = y.names)
     Lower <- BOOT$Lower
-    Upper <- BOOT$Upper    
+    Upper <- BOOT$Upper
+    names(Lower) <- impulse
+    names(Upper) <- impulse    
   }
   result <- list(irf=irs, Lower=Lower, Upper=Upper, response=response, impulse=impulse, ortho=ortho, cumulative=cumulative, runs=runs, ci=ci, boot=boot, model = class(x))
   class(result) <- "varirf"

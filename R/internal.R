@@ -256,8 +256,8 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     }else {
       dumvarorig <- x@call$dumvar
     }
-    ifelse(is.null(x@call$constant), constantorig <- FALSE, constantorig <- x@call$constant)    
-    vecm <- ca.jo(x = ysampled, K = Korig, spec = specorig, season = seasonorig, dumvar = dumvarorig, constant = constantorig)
+    ifelse(is.null(x@call$ecdet), ecdetorig <- "none", ecdetorig <- x@call$ecdet)    
+    vecm <- ca.jo(x = ysampled, K = Korig, spec = specorig, season = seasonorig, dumvar = dumvarorig, ecdet = ecdetorig)
     vecm@V <- betafix
     ##
     ## Re-estimating the SVEC
@@ -281,7 +281,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   ## Obtaining VECM arguments
   ##
   vecm <- x$vecm
-  vecm.const <- vecm@const
+  vecm.ecdet <- vecm@ecdet
   vecm.season <- vecm@season
   vecm.dumvar <- vecm@dumvar
   vecm.K <- vecm@lag
@@ -322,7 +322,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
       ysampled[j + p, ] <- B %*% Z + resid[j, ]
       lasty <- c(ysampled[j + p, ], lasty)
     }
-    vec <- ca.jo(ysampled, constant = vecm.const, season = vecm.season, dumvar = vecm.dumvar, K = vecm.K, spec = vecm.spec)
+    vec <- ca.jo(ysampled, ecdet = vecm.ecdet, season = vecm.season, dumvar = vecm.dumvar, K = vecm.K, spec = vecm.spec)
     varboot <- vec2var(vec, r = x$r)
     BOOT[[i]] <- .irf(x = varboot, n.ahead = n.ahead, ortho = ortho, cumulative = cumulative, impulse = impulse, response = response, y.names = y.names)
   }
@@ -353,11 +353,11 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
         mat.u[l, m] <- quantile(temp, upper, na.rm = TRUE)
       }
     }
+    colnames(mat.l) <- response
+    colnames(mat.u) <- response
+    Lower[[j]] <- mat.l
+    Upper[[j]] <- mat.u    
   }
-  colnames(mat.l) <- response
-  colnames(mat.u) <- response
-  Lower[[j]] <- mat.l
-  Upper[[j]] <- mat.u
   result <- list(Lower = Lower, Upper = Upper)
   return(result)
 }
@@ -369,7 +369,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   ## Obtaining VECM arguments
   ##
   vecm <- x$var
-  vecm.const <- vecm@const
+  vecm.ecdet <- vecm@ecdet
   vecm.season <- vecm@season
   vecm.dumvar <- vecm@dumvar
   vecm.K <- vecm@lag
@@ -424,7 +424,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
       ysampled[j + p, ] <- B %*% Z + resid[j, ]
       lasty <- c(ysampled[j + p, ], lasty)
     }
-    vec <- ca.jo(ysampled, constant = vecm.const, season = vecm.season, dumvar = vecm.dumvar, K = vecm.K, spec = vecm.spec)
+    vec <- ca.jo(ysampled, ecdet = vecm.ecdet, season = vecm.season, dumvar = vecm.dumvar, K = vecm.K, spec = vecm.spec)
     ##vec@V <- vecm.beta
     svec <- SVEC(x = vec, LR = x$LRorig, SR = x$SRorig, r = svec.r, max.iter = svec.maxiter, maxls = svec.maxls, lrtest = FALSE, boot = FALSE)
     BOOT[[i]] <- .irf(x = svec, n.ahead = n.ahead, cumulative = cumulative, ortho = ortho, impulse = impulse, response = response, y.names = y.names)    
@@ -456,11 +456,11 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
         mat.u[l, m] <- quantile(temp, upper, na.rm = TRUE)
       }
     }
-  }
-  colnames(mat.l) <- response
-  colnames(mat.u) <- response
-  Lower[[j]] <- mat.l
-  Upper[[j]] <- mat.u
+    colnames(mat.l) <- response
+    colnames(mat.u) <- response
+    Lower[[j]] <- mat.l
+    Upper[[j]] <- mat.u
+  }  
   result <- list(Lower = Lower, Upper = Upper)
   return(result)
 }

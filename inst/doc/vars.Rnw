@@ -25,9 +25,9 @@
 %\VignettePackage{vars}
 \maketitle
 %
-\abstract{The utilisation of the functions contained in the package `vars' are explained by employing a data set of the Canadian economy. The package's scope includes functions for estimating vector autoregressive (henceforth: VAR) and structural vector autoregressive models (henceforth: SVAR). In addition to the two cornerstone functions \texttt{VAR()} and \texttt{SVAR()} for estimating such models, functions for diagnostic testing, estimation of restricted VARs, prediction of VARs, causality analysis, impulse response analysis (henceforth: IRA) and forecast error variance decomposition (henceforth: FEVD) are provided too. In each section, the underlying concept and/or method is briefly explained, thereby drawing on the exibitions in \citeasnoun{LUE2006}, \citeasnoun{LUE2004}, \citeasnoun{LUE1997}, \citeasnoun{HAM1994} and \citeasnoun{WAT1994}.\\
+\abstract{The utilization of the functions contained in the package `vars' are explained by employing a data set of the Canadian economy. The package's scope includes functions for estimating vector autoregressive (henceforth: VAR) and structural vector autoregressive models (henceforth: SVAR). In addition to the two cornerstone functions \texttt{VAR()} and \texttt{SVAR()} for estimating such models, functions for diagnostic testing, estimation of restricted VARs, prediction of VARs, causality analysis, impulse response analysis (henceforth: IRA) and forecast error variance decomposition (henceforth: FEVD) are provided too. In each section, the underlying concept and/or method is briefly explained, thereby drawing on the exhibitions in \citeasnoun{LUE2006}, \citeasnoun{LUE2004}, \citeasnoun{LUE1997}, \citeasnoun{HAM1994} and \citeasnoun{WAT1994}.\\
 \par
-The package's code is purely written in \texttt{R} and S3-classes with methods have been utilised. It is shipped with a NAMESPACE and a ChangeLog file. It has dependencies to \texttt{MASS} (see \citeasnoun{MASS}) and \texttt{strucchange} (see \citeasnoun{strucchange}).} 
+The package's code is purely written in \texttt{R} and S3-classes with methods have been utilized. It is shipped with a NAMESPACE and a ChangeLog file. It has dependencies to \texttt{MASS} (see \citeasnoun{MASS}) and \texttt{strucchange} (see \citeasnoun{strucchange}).} 
 %
 \tableofcontents
 % 1st Sweave
@@ -43,9 +43,9 @@ library(xtable)
 \label{sec:intro}
 %
 \par
-Since the critique of \citeasnoun{SIM1980} in the early eighties of the last century, VAR analysis has evolved as a standard instrument in econometrics for analysing multivariate time series. Because statistical tests are highly used in determining interdependencies and dynamic relationships between variables, it became soon evident to enrich this methodology by incorporating non-statistical \emph{a priori} information, hence SVAR models evolved which try to bypass these shortcomings. At the same time as Sims jeopardised the paradigm of multiple structural equation models laid out by the Cowles Foundation in the fourties and fifties of the last century, \citeasnoun{GRA1981} and \citeasnoun{ENG1987} endowed econometricians with a powerful tool for modelling and testing economic relationships, namely, the concept of integration and and cointegration. Nowadays these traces of research are unified in the form of vector error correction and structural vector error correction models. Although these latter topics are left out in this vignette, the interested reader is referred to the monographies of \citeasnoun{LUE2006}, \citeasnoun{HEN1995}, \citeasnoun{JOH1995}, \citeasnoun{HAM1994}, \citeasnoun{BAN1993} and \citeasnoun{urca} for an exhibition of unit root tests and co-integration analysis in \texttt{R}.\\
+Since the critique of \citeasnoun{SIM1980} in the early eighties of the last century, VAR analysis has evolved as a standard instrument in econometrics for analyzing multivariate time series. Because statistical tests are highly used in determining interdependencies and dynamic relationships between variables, it became soon evident to enrich this methodology by incorporating non-statistical \emph{a priori} information, hence SVAR models evolved which try to bypass these shortcomings. At the same time as Sims jeopardized the paradigm of multiple structural equation models laid out by the Cowles Foundation in the forties and fifties of the last century, \citeasnoun{GRA1981} and \citeasnoun{ENG1987} endowed econometricians with a powerful tool for modeling and testing economic relationships, namely, the concept of integration and and co-integration. Nowadays these traces of research are unified in the form of vector error correction and structural vector error correction models. Although these latter topics are left out in this vignette, the interested reader is referred to the monographes of \citeasnoun{LUE2006}, \citeasnoun{HEN1995}, \citeasnoun{JOH1995}, \citeasnoun{HAM1994}, \citeasnoun{BAN1993} and \citeasnoun{urca} for an exhibition of unit root tests and co-integration analysis in \texttt{R}.\\
 \par
-To the author's knowledge, currently only functions in the base distribution of \texttt{R} and in the \texttt{CRAN}-packages \texttt{dse} (package bundle, see \citename{dse1} \citeyear*{dse3}, \citeyear*{dse2}, \citeyear*{dse1}) and \texttt{fMultivar} \cite{fMultivar} are made available for estimating ARIMA and VARIMA time series models. Though, the \texttt{CRAN}-package \texttt{MSBVAR} \cite{MSBVAR} provides methods for estimating frequentist and Bayesian Vector Autoregression (BVAR) models, the methods and functions provided in the package \texttt{vars} try to fill a gap in the econometrics' methods landscape of \texttt{R} by providing the `standard' tools in the context of VAR and SVAR analysis.\\
+To the author's knowledge, currently only functions in the base distribution of \texttt{R} and in the \texttt{CRAN}-packages \texttt{dse} (package bundle, see \citename{dse1} \citeyear*{dse3}, \citeyear*{dse2}, \citeyear*{dse1}) and \texttt{fMultivar} \cite{fMultivar} are made available for estimating ARIMA and VARIMA time series models. Though, the \texttt{CRAN}-package \texttt{MSBVAR} \cite{MSBVAR} provides methods for estimating frequentest and Bayesian Vector Auto-regression (BVAR) models, the methods and functions provided in the package \texttt{vars} try to fill a gap in the econometrics' methods landscape of \texttt{R} by providing the `standard' tools in the context of VAR and SVAR analysis.\\
 \par
 The vignette is structured as follows: the next section is entirely devoted to VARs (definition, estimation, restrictions, diagnostic testing, forecasting, IRA and FEVD). In the ensuing section the topic of SVAR is elucidated (definition, estimation, IRA and FEVD). Finally, the transformation of a VECM to a VAR in levels is exhibited with its associated methods and functions. 
 %
@@ -72,9 +72,9 @@ One important characteristic of a VAR(p)-process is its stability. This means th
 \det(I_K - A_1 z - \ldots - A_p z^p) \neq 0 \quad \hbox{for} \; |z| \le 1 \;.
 \end{equation} 
 %
-If the solution of the above equation has a root for $z = 1$, then either some or all variables in the VAR(p)-process are integrated of order one, \emph{i.e.} $I(1)$. It might be the case, that cointegration between the variables does exist. This instance can be better analysed in the context of a vector-error-correction model (VECM). The reader is referred to the monography of \citeasnoun{JOH1995} for a theoretical exposition and to \citeasnoun{urca} for an implementation with the \texttt{CRAN}-package `urca' in \texttt{R}.\\
+If the solution of the above equation has a root for $z = 1$, then either some or all variables in the VAR(p)-process are integrated of order one, \emph{i.e.} $I(1)$. It might be the case, that co-integration between the variables does exist. This instance can be better analyzed in the context of a vector-error-correction model (VECM). The reader is referred to the monograph of \citeasnoun{JOH1995} for a theoretical exposition and to \citeasnoun{urca} for an implementation with the \texttt{CRAN}-package `urca' in \texttt{R}.\\
 \par
-In practice, the stability of an empirical VAR(p)-process can be analysed by considering the companion form and caculating the \emph{eigenvalues} of the coefficient matrix. A VAR(p)-process can be written as a VAR(1)-process as:
+In practice, the stability of an empirical VAR(p)-process can be analyzed by considering the companion form and calculating the \emph{eigenvalues} of the coefficient matrix. A VAR(p)-process can be written as a VAR(1)-process as:
 %
 \begin{equation}
 \mathbf{\xi}_t = A \mathbf{\xi}_{t-1} + \mathbf{v}_t \; ,
@@ -116,7 +116,7 @@ whereby the dimensions of the stacked vectors $\mathbf{\xi}_t$ and $\mathbf{v}_t
 %
 For a given sample of the endogenous variables $\mathbf{y}_1, \ldots \mathbf{y}_T$ and sufficient presample values $\mathbf{y}_{-p+1}, \ldots, \mathbf{y}_0$, the coefficients of a VAR(p)-process can be estimated efficiently by least-squares applied separately to each of the equations.\\
 \par
-Before considering the implementation in the package `vars', let us briefly discuss the utilised data set and plot the series (see figure \ref{fig-canada}). The original time series are published by the OECD and the transformed series, as described in the help page to \texttt{Canada} are provided with \texttt{JMulti} (see \citeasnoun{LUE2004}). The sample range is from the 1stQ 1980 until 4thQ 2000.
+Before considering the implementation in the package `vars', let us briefly discuss the utilized data set and plot the series (see figure \ref{fig-canada}). The original time series are published by the OECD and the transformed series, as described in the help page to \texttt{Canada} are provided with \texttt{JMulti} (see \citeasnoun{LUE2004}). The sample range is from the 1stQ 1980 until 4thQ 2000.
 %
 % 2nd Sweave
 <<data, echo=TRUE, results=hide>>= 
@@ -129,7 +129,7 @@ plot.ts(Canada$rw, main="Real Wage", ylab = "", xlab = "")
 plot.ts(Canada$U, main="Unemployment Rate", ylab = "", xlab = "")
 @
 % 
-The variable \texttt{e} is used for employment; \texttt{prod} is a measure of labour productivity; \texttt{rw} assigns the real wage and finally \texttt{U} is the unemployment rate.
+The variable \texttt{e} is used for employment; \texttt{prod} is a measure of labor productivity; \texttt{rw} assigns the real wage and finally \texttt{U} is the unemployment rate.
 %
 \begin{figure}[Ht]
 \centering
@@ -152,7 +152,7 @@ args(VARselect)
 VARselect(Canada, lag.max = 5, type = "const") 
 @ 
 %
-The \texttt{VARselect()} enables the user to determine an optimal lag length according to an information criteria or the final prediction error of an empirical VAR(p)-process. Each of these measures are defined in the function's help file. The function returns a list object with the optimal lag-order according to each of the criteria, as well as a matrix containing the values for all lags up to \texttt{lag.max}. According to the more conservative $SC(n)$ and $HQ(n)$ criteria, the empirical optimal lag-order is 2. Please note, that the calculation of these criteria is based upon the same sample size, and hence the criteria might take slightly different values whence a VAR for the choosen order is estimated.\\
+The \texttt{VARselect()} enables the user to determine an optimal lag length according to an information criteria or the final prediction error of an empirical VAR(p)-process. Each of these measures are defined in the function's help file. The function returns a list object with the optimal lag-order according to each of the criteria, as well as a matrix containing the values for all lags up to \texttt{lag.max}. According to the more conservative $SC(n)$ and $HQ(n)$ criteria, the empirical optimal lag-order is 2. Please note, that the calculation of these criteria is based upon the same sample size, and hence the criteria might take slightly different values whence a VAR for the chosen order is estimated.\\
 \par
 In a next step, the VAR(2) is estimated with the function \texttt{VAR()} and as deterministic regressors a constant is included.
 %
@@ -168,7 +168,7 @@ summary(var.2c)
 plot(var.2c)
 @ 
 %
-The \texttt{summary} method simply applies the \texttt{summary.lm} method to the \texttt{lm} objects contained in \texttt{varresult}. The OLS results of the example are shown in separate tables \ref{var.2c.e} -- \ref{var.2c.U} below. It turns out, that not all lagged endogenous variables enter significanctly into the equations of the VAR(2). The estimation of a restricted VAR is the topic of the next section.\\ 
+The \texttt{summary} method simply applies the \texttt{summary.lm} method to the \texttt{lm} objects contained in \texttt{varresult}. The OLS results of the example are shown in separate tables \ref{var.2c.e} -- \ref{var.2c.U} below. It turns out, that not all lagged endogenous variables enter significantly into the equations of the VAR(2). The estimation of a restricted VAR is the topic of the next section.\\ 
 %
 <<VARsum.e, echo = FALSE, results = tex>>=
 xtable(summary(var.2c)[[1]], caption = "Regression result for employment equation", label = "var.2c.e")
@@ -193,7 +193,7 @@ pacf(var.2c$varresult[[1]]$residuals, main = "PACF Residuals", ylab = "")
 xtable(summary(var.2c)[[2]], caption = "Regression result for productivity equation", label = "var.2c.prod")
 @
 \par
-Before we proceed with the estimation of restricted VARs, let us first look at the \texttt{plot} method for objects with class attribute \texttt{varest} and the \texttt{roots()} function for checking the VAR's stability, that was briefly mentioned at the end of the previous section. For each equation in a VAR, a plot consisting of a diagram of fit, a residual plot, the autocorrelation and partial autocorrelation function of the residuals are shown. If the plot method is called interactively, the user is requested to enter \texttt{<RETURN>} for commencing to the next plot. Currently, the \dots-argument of the \texttt{plot} method is unused. However, given the information contained in an object of class \texttt{varest}, it is fairly easy to set up such plots and tailormade them to her/his needs. The plots of the four equations are shown in the exhibits \ref{fig-e} to \ref{fig-U}.
+Before we proceed with the estimation of restricted VARs, let us first look at the \texttt{plot} method for objects with class attribute \texttt{varest} and the \texttt{roots()} function for checking the VARs stability, that was briefly mentioned at the end of the previous section. For each equation in a VAR, a plot consisting of a diagram of fit, a residual plot, the autocorrelation and partial autocorrelation function of the residuals are shown. If the plot method is called interactively, the user is requested to enter \texttt{<RETURN>} for commencing to the next plot. Currently, the \dots-argument of the \texttt{plot} method is unused. However, given the information contained in an object of class \texttt{varest}, it is fairly easy to set up such plots and tailor made them to her/his needs. The plots of the four equations are shown in the exhibits \ref{fig-e} to \ref{fig-U}.
 %
 \begin{figure}[Ht]
 \centering
@@ -259,7 +259,7 @@ Although, the first \emph{eigenvalue} is pretty close to unity, for the sake of 
 \subsection{Restricted VARs}
 \label{subsec:var-res}
 %
-From tables \ref{var.2c.e}-\ref{var.2c.U} it is obvious that not all regressors enter significanctly. With the function \texttt{restrict()} the user has the option to re-estimate the VAR either by significance (argument \texttt{method = 'ser'}) or by imposing zero restrictions manually (argument \texttt{method = 'manual'}). In the former case, each equation is re-estimated separately as long as there are t-values that are in absolut value below the threshhold value set by the function's argument \texttt{thresh}. In the latter case, a restriction matrix has to be provided that consists of 0/1 values, thereby selecting the coefficients to be retained in the model. The function's arguments are therefore:
+From tables \ref{var.2c.e}-\ref{var.2c.U} it is obvious that not all regressors enter significantly. With the function \texttt{restrict()} the user has the option to re-estimate the VAR either by significance (argument \texttt{method = 'ser'}) or by imposing zero restrictions manually (argument \texttt{method = 'manual'}). In the former case, each equation is re-estimated separately as long as there are t-values that are in absolute value below the threshold value set by the function's argument \texttt{thresh}. In the latter case, a restriction matrix has to be provided that consists of 0/1 values, thereby selecting the coefficients to be retained in the model. The function's arguments are therefore:
 %
 <<restrict1, echo = TRUE>>=
 args(restrict)
@@ -277,20 +277,20 @@ var2c.man$restrictions
 B(var2c.man)
 @
 %  
-In the example above, the third and fourth coefficient of the employment equation (\emph{i.e.}, the first equation) are set to zero for \texttt{method = 'manual'}. The function \texttt{restrict()} returns a list object with class attribute \texttt{varest}. The coefficients of these objects can be displayed conveniently by either \texttt{B()} (all coeffiecients, including deterministic coefficients) or by \texttt{A()} (only coefficients of lagged endogenous variables). The output of the former is shown in the code snippet above. It should be noted at this point, that a restricted VAR is estimated by OLS too, instead of employing the EGLS method (see \citeasnoun{LUE2006} for an exposition and section \ref{sec:outlook}).  
+In the example above, the third and fourth coefficient of the employment equation (\emph{i.e.}, the first equation) are set to zero for \texttt{method = 'manual'}. The function \texttt{restrict()} returns a list object with class attribute \texttt{varest}. The coefficients of these objects can be displayed conveniently by either \texttt{B()} (all coefficients, including deterministic coefficients) or by \texttt{A()} (only coefficients of lagged endogenous variables). The output of the former is shown in the code snippet above. It should be noted at this point, that a restricted VAR is estimated by OLS too, instead of employing the EGLS method (see \citeasnoun{LUE2006} for an exposition).  
 %
 \subsection{Diagnostic testing}
 \label{subsec:var-diag}
 %
 In package `vars' the functions for diagnostic testing are \texttt{arch()}, \texttt{normality()}, \texttt{serial()} and \texttt{stability()}. The former three functions return a list object with class attribute \texttt{varcheck} for which a \texttt{plot}-method exists. The plots, one for each equation, include a residual plot, an empirical distribution plot and the ACFs and PACFs of the residuals and their squares. The function \texttt{stability()} returns a list object with class attribute \texttt{varstabil}. The function itself is just a wrapper for the function \texttt{efp()} from package \texttt{strucchange}. The first element of the returned list object is itself a list of objects with class attribute \texttt{efp}. Hence, the \texttt{plot}-method for objects of class \texttt{varstabil} just call the \texttt{plot}-method for objects of class \texttt{efp}. Let us now turn to each of these functions in more detail.\\
 \par
-The implemented tests for heteroscedasticity are the univariate and multivariate ARCH test (see \citeasnoun{ENG1982}, \citeasnoun{HAM1994} and \citeasnoun{LUE2006}). The multivariate ARCH-LM test is based on the following regression (the univariate test can be considered as special case of the exhibtion below and is skipped):
+The implemented tests for heteroscedasticity are the univariate and multivariate ARCH test (see \citeasnoun{ENG1982}, \citeasnoun{HAM1994} and \citeasnoun{LUE2006}). The multivariate ARCH-LM test is based on the following regression (the univariate test can be considered as special case of the exhibition below and is skipped):
 %
 \begin{equation}
 vech(\hat{\mathbf{u}_t}\hat{\mathbf{u}_t}') = \mathbf{\beta}_0 + B_1 vech(\hat{\mathbf{u}}_{t-1}\hat{\mathbf{u}}_{t-1}') + \ldots + B_q vech(\hat{\mathbf{u}}_{t-q}\hat{\mathbf{u}}_{t-q}') + \mathbf{v}_t \quad , 
 \end{equation}
 %
-whereby $\mathbf{v}_t$ assigns a spherical error process and $vech$ is the column-stacking operator for symmetric matrices that stacks the columns from the main diagonal on downwards. The dimension of $\mathbf{\beta}_0$ is $\frac{1}{2}K(K +1)$ and for the coefficient matrices $B_i$ with $i=1, \ldots, q$, $\frac{1}{2}K(K +1) \times \frac{1}{2}K(K +1)$. The null hypothesis is: $H_0 := B_1 = B_2 = \ldots = B_q = 0$ and the alternative is: $H_1: B_1 \neq 0 \cap B_2 \neq 0 \cap \ldots \cap B_q \neq 0$. The test statistic is defined as:
+whereby $\mathbf{v}_t$ assigns a spherical error process and $vech$ is the column-stacking operator for symmetric matrices that stacks the columns from the main diagonal on downward. The dimension of $\mathbf{\beta}_0$ is $\frac{1}{2}K(K +1)$ and for the coefficient matrices $B_i$ with $i=1, \ldots, q$, $\frac{1}{2}K(K +1) \times \frac{1}{2}K(K +1)$. The null hypothesis is: $H_0 := B_1 = B_2 = \ldots = B_q = 0$ and the alternative is: $H_1: B_1 \neq 0 \cap B_2 \neq 0 \cap \ldots \cap B_q \neq 0$. The test statistic is defined as:
 %
 \begin{equation}
 VARCH_{LM}(q) = \frac{1}{2}T K (K + 1)R_m^2 \quad ,
@@ -312,7 +312,7 @@ var2c.arch
 @ 
 %
 \par
-The Jarque-Bera normality tests for univariate and multivariate series are implemented and applied to the residuals of a VAR(p) as well as seperate tests for multivariate skewness and kurtosis (see \citeasnoun{BER1980}, [\citeyear*{BER1981}] and \citeasnoun{JAR1987} and \citeasnoun{LUE2006}). The univariate versions of the Jarque-Bera test are applied to the residuals of each equation. A multivariate version of this test can be computed by using the residuals that are standardized by a Choleski decomposition of the variance-covariance matrix for the centered residuals. Please note, that in this case the test result is dependant upon the ordering of the variables.
+The Jarque-Bera normality tests for univariate and multivariate series are implemented and applied to the residuals of a VAR(p) as well as separate tests for multivariate skewness and kurtosis (see \citeasnoun{BER1980}, [\citeyear*{BER1981}] and \citeasnoun{JAR1987} and \citeasnoun{LUE2006}). The univariate versions of the Jarque-Bera test are applied to the residuals of each equation. A multivariate version of this test can be computed by using the residuals that are standardized by a Choleski decomposition of the variance-covariance matrix for the centered residuals. Please note, that in this case the test result is dependent upon the ordering of the variables.
 % 
 <<diag1, echo = TRUE>>=
 var2c.norm <- normality(var.2c, multivariate.only = TRUE)
@@ -320,7 +320,7 @@ names(var2c.norm)
 var2c.norm
 plot(var2c.norm)
 @ 
-The test statistics for the mutlivariate case are defined as:
+The test statistics for the multivariate case are defined as:
 %
 \begin{equation}
 JB_{mv} = s_3^2 + s_4^2 \; ,
@@ -344,7 +344,7 @@ The Portmanteau statistic is defined as:
 Q_h = T \sum_{j=1}^h tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{C}_0^{-1}) \; ,
 \end{equation}
 %
-with $\hat{C}_i = \frac{1}{T}\Sigma_{t=i+1}^T \hat{\mathbf{u}}_t \hat{\mathbf{u}}_{t-i}'$. The test statistic has an approximate $\chi^2(K^2h-n^*)$ distribution, and $n^*$ is the number of coefficients excluding deterministic terms of a VAR(p). The limiting distribution is only valid for $h$ tending to infinity at suitable rate with growing sample size. Hence, the trade-off is between a decent approximation to the $\chi^2$ distribution and a loss in power of the test, when $h$ is choosen too large. The small sample properties of the test statistic:
+with $\hat{C}_i = \frac{1}{T}\Sigma_{t=i+1}^T \hat{\mathbf{u}}_t \hat{\mathbf{u}}_{t-i}'$. The test statistic has an approximate $\chi^2(K^2h-n^*)$ distribution, and $n^*$ is the number of coefficients excluding deterministic terms of a VAR(p). The limiting distribution is only valid for $h$ tending to infinity at suitable rate with growing sample size. Hence, the trade-off is between a decent approximation to the $\chi^2$ distribution and a loss in power of the test, when $h$ is chosen too large. The small sample properties of the test statistic:
 %
 \begin{equation}
 Q_h^* = T^2 \sum_{j=1}^h \frac{1}{T-j} tr(\hat{C}_j'\hat{C}_0^{-1}\hat{C}_j\hat{C}_0^{-1})
@@ -448,7 +448,7 @@ args(causality)
 %
 The function \texttt{causality()} has two arguments. The first argument, \texttt{x}, is an object of class \texttt{varest} and the second, \texttt{cause}, is a character vector of the variable names, that are assumed to be causal to the remaining variables in a VAR(p)-process. If this argument is unset, then the variable in the first column of \texttt{x\$y} is used as cause variable and a warning is printed.\\
 
-For both tests the vector of endogenous variables $\mathbf{y}_t$ is split into two subvectors $\mathbf{y}_{1t}$ and $\mathbf{y}_{2t}$ with dimensions $(K_1 \times 1)$ and $(K_2 \times 1)$ with $K = K_1 + K_2$. For the rewritten VAR(p):
+For both tests the vector of endogenous variables $\mathbf{y}_t$ is split into two sub-vectors $\mathbf{y}_{1t}$ and $\mathbf{y}_{2t}$ with dimensions $(K_1 \times 1)$ and $(K_2 \times 1)$ with $K = K_1 + K_2$. For the rewritten VAR(p):
 %
 \begin{equation}
 \begin{bmatrix}
@@ -472,7 +472,7 @@ For both tests the vector of endogenous variables $\mathbf{y}_t$ is split into t
 \; ,
 \end{equation}
 %
-the null hypothesis that the subvector $\mathbf{y}_{1t}$ does not Granger-cause $\mathbf{y}_{2t}$, is defined as $\mathbf{\alpha}_{21, i} = 0$ for $i = 1, 2, \ldots, p$. The alternative is: $\exists \mathbf{\alpha}_{21,i} \ne 0$ for $i = 1, 2, \ldots, p$. The test statistic is distributed as $F(p K_1 K_2, KT - n^*)$, with $n^*$ equal to the total number of parameters in the above VAR(p)-process, including deterministic regressors. The null hypothesis for non-instantaneous causality is defined as: $H_0: C \mathbf{\sigma} = 0$, where $C$ is a $(N \times K(K + 1)/2)$ matrix of rank $N$ selecting the relevant co-variances of $\mathbf{u}_{1t}$ and $\mathbf{u}_{2t}$; $\mathbf{\tilde{\sigma}} = vech(\tilde{\Sigma}_u)$. The Wald statistic is defined as:
+the null hypothesis that the sub-vector $\mathbf{y}_{1t}$ does not Granger-cause $\mathbf{y}_{2t}$, is defined as $\mathbf{\alpha}_{21, i} = 0$ for $i = 1, 2, \ldots, p$. The alternative is: $\exists \mathbf{\alpha}_{21,i} \ne 0$ for $i = 1, 2, \ldots, p$. The test statistic is distributed as $F(p K_1 K_2, KT - n^*)$, with $n^*$ equal to the total number of parameters in the above VAR(p)-process, including deterministic regressors. The null hypothesis for non-instantaneous causality is defined as: $H_0: C \mathbf{\sigma} = 0$, where $C$ is a $(N \times K(K + 1)/2)$ matrix of rank $N$ selecting the relevant co-variances of $\mathbf{u}_{1t}$ and $\mathbf{u}_{2t}$; $\mathbf{\tilde{\sigma}} = vech(\tilde{\Sigma}_u)$. The Wald statistic is defined as:
 %
 \begin{equation}
 \lambda_W = T \tilde{\mathbf{\sigma}}'C'[2 C D_{K}^{+}(\tilde{\Sigma}_u \otimes \tilde{\Sigma}_u) D_{K}^{+'} C']^{-1} C \tilde{\mathbf{\sigma}}  \; ,
@@ -486,7 +486,7 @@ The function \texttt{causality()} is now applied for investigating if the real w
 causality(var.2c, cause = c("rw", "prod"))
 @ 
 %
-The null hypothesis of no Granger-causality from the real wage and labour productivity to employment and unemployment must be rejected; whereas the null hypothesis of non-instantenous causality cannot be rejected. This test outcome is economically plausible, given the frictions observed in labour markets.  
+The null hypothesis of no Granger-causality from the real wage and labor productivity to employment and unemployment must be rejected; whereas the null hypothesis of non-instantaneous causality cannot be rejected. This test outcome is economically plausible, given the frictions observed in labor markets.  
 %
 \subsection{Forecasting}
 \label{subsec:var-pred}
@@ -546,7 +546,7 @@ with $\Phi_0 = I_K$ and $\Phi_s$ can be computed recursively according to:
 %
 whereby $A_j = 0$ for $j > p$.\\
 
-The \texttt{predict}-method does return a list object of class \texttt{varprd} with three elements. The first element, \texttt{fcst}, is a list of matrices containing the predicted values, the lower and upper bounds according to the choosen confidence interval, \texttt{ci} and its size. The second element, \texttt{endog} is a matrix object containing the endogenous variables and the third is the submitted \texttt{varest} object. A \texttt{plot}-method for objects of class \texttt{varprd} does exist as well as a \texttt{fanchart()} function for plotting fan charts as described in \citeasnoun{BRI1998}.
+The \texttt{predict}-method does return a list object of class \texttt{varprd} with three elements. The first element, \texttt{fcst}, is a list of matrices containing the predicted values, the lower and upper bounds according to the chosen confidence interval, \texttt{ci} and its size. The second element, \texttt{endog} is a matrix object containing the endogenous variables and the third is the submitted \texttt{varest} object. A \texttt{plot}-method for objects of class \texttt{varprd} does exist as well as a \texttt{fanchart()} function for plotting fan charts as described in \citeasnoun{BRI1998}.
 %
 <<fanchart1, echo = TRUE>>=
 args(fanchart)
@@ -611,13 +611,13 @@ for(l in 2:n.regions){
 \subsection{Impulse response analysis}
 \label{subsec:var-ira}
 %
-The impulse response analysis is based upon the Wold moving average representation of a VAR(p)-process (see equations \eqref{eq15} and \eqref{eq16} above). It is used to investigate the dynamic interactions between the endogenous variables. The $(i, j)th$ coefficients of the matrices $\Phi_s$ are thereby interpreted as the expected response of variable $y_{i, t+s}$ to a unit change in variable $y_{jt}$. These effects can be cumulated through time $s = 1, 2, \ldots$ and hence one would obtain the cumulated impact of a unit change in variable $j$ to the variable $i$ at time $s$. Aside of these impulse response coefficients, it is often conceivable to use orthogonalised impulse reponses as an alternative. This is the case, if the underlying shocks are less likely to occur in isolation, but rather contemporaneous correlation between the components of the error process $\mathbf{u}_t$ are existent, \emph{i.e.}, the off-diagonal elements of $\Sigma_{\mathbf{u}}$ are non-zero. The orthogonalised impulse responses are derived from a Choleski decomposition of the error variance-covariance matrix: $\Sigma_{\mathbf{u}} = P P'$ with $P$ being a lower triangular. The moving average representation can then be transformed to: 
+The impulse response analysis is based upon the Wold moving average representation of a VAR(p)-process (see equations \eqref{eq15} and \eqref{eq16} above). It is used to investigate the dynamic interactions between the endogenous variables. The $(i, j)th$ coefficients of the matrices $\Phi_s$ are thereby interpreted as the expected response of variable $y_{i, t+s}$ to a unit change in variable $y_{jt}$. These effects can be cumulated through time $s = 1, 2, \ldots$ and hence one would obtain the cumulated impact of a unit change in variable $j$ to the variable $i$ at time $s$. Aside of these impulse response coefficients, it is often conceivable to use orthogonalized impulse responses as an alternative. This is the case, if the underlying shocks are less likely to occur in isolation, but rather contemporaneous correlation between the components of the error process $\mathbf{u}_t$ are existent, \emph{i.e.}, the off-diagonal elements of $\Sigma_{\mathbf{u}}$ are non-zero. The orthogonalized impulse responses are derived from a Choleski decomposition of the error variance-covariance matrix: $\Sigma_{\mathbf{u}} = P P'$ with $P$ being a lower triangular. The moving average representation can then be transformed to: 
 %
 \begin{equation}
 \mathbf{y}_t = \Psi_0 \mathbf{\varepsilon}_t + \Psi_1 \mathbf{\varepsilon}_{t-1} + \ldots \;, 
 \end{equation}
 %
-with $\mathbf{\varepsilon}_t = P^{-1}\mathbf{u}_t$ and $\Psi_i = \Phi_i P$ for $i = 0, 1, 2, \ldots$ and $\Psi_0 = P$. Incidentally, because the matrix $P$ is lower triangular, it follows that only a shock in the first variable of a VAR(p)-process does exert an influence on all the remaining ones and that the second and following variables cannot have a direct impact on $y_{1t}$. One should bear this in mind whence orthogonal impulse responses are employed (see the code snippet below and figure \ref{fig-irf} for a re-ordering of the data to compute the impulse responses originating from a real wage shock to employment and unemployment). Please note further, that a different ordering of the variables might produce different outcomes with respect to the impulse responses. As we shall see in section \ref{sec:svar}, the non-uniqueness of the impulse reponses can be circumvented by analysing a set of endogenous variables in the structural VAR (SVAR) framework. 
+with $\mathbf{\varepsilon}_t = P^{-1}\mathbf{u}_t$ and $\Psi_i = \Phi_i P$ for $i = 0, 1, 2, \ldots$ and $\Psi_0 = P$. Incidentally, because the matrix $P$ is lower triangular, it follows that only a shock in the first variable of a VAR(p)-process does exert an influence on all the remaining ones and that the second and following variables cannot have a direct impact on $y_{1t}$. One should bear this in mind whence orthogonal impulse responses are employed (see the code snippet below and figure \ref{fig-irf} for a re-ordering of the data to compute the impulse responses originating from a real wage shock to employment and unemployment). Please note further, that a different ordering of the variables might produce different outcomes with respect to the impulse responses. As we shall see in section \ref{sec:svar}, the non-uniqueness of the impulse responses can be circumvented by analyzing a set of endogenous variables in the structural VAR (SVAR) framework. 
 %
 <<irf1, echo = TRUE>>=
 args(irf)
@@ -629,7 +629,7 @@ names(irf.rw.eU)
 plot(irf.rw.eU)
 @  
 %
-The function for conducting impulse response analysis is \texttt{irf()}. It is a method for objects with class attribute \texttt{varest} and \texttt{svarest}. The function's arguments are displayed in the R-code example above. The impulse variables are set as a character vector \texttt{impulse} and the responses are provided likewise in the argument \texttt{response}. If either one is unset, then all variables are considered as impulses or responses, respectively. The default length of the impulse reponses is set to $10$ via argument \texttt{n.ahead}. The computation of orthogonalised and/or cumulated impulse responses is controlled by the logical switches \texttt{ortho} and \texttt{cumulative}, respectively. Finally, confidence bands can be returned by setting \texttt{boot = TRUE} (default). The pre-set values are to run 100 replications and return 95\% confidence bands. It is at the user's leisure to specify a \texttt{seed} for replicability of the  results. The standard percentile interval is calculated as $CI_s = [s_{\gamma/2}^*, s_{(1-\gamma)/2}^*]$, where $s_{\gamma/2}^*$ and $s_{(1-\gamma)/2}^*$ are the $\gamma/2$ and $(1-\gamma)/2$ quantiles of the estimated bootstraped impulse response coefficients $\hat{\Phi}^*$ or $\hat{\Psi}^*$ \cite{EFR1993}. The function \texttt{irf()} returns an object with class attribute \texttt{varirf} for which a \texttt{plot} method does exist.   
+The function for conducting impulse response analysis is \texttt{irf()}. It is a method for objects with class attribute \texttt{varest} and \texttt{svarest}. The function's arguments are displayed in the R-code example above. The impulse variables are set as a character vector \texttt{impulse} and the responses are provided likewise in the argument \texttt{response}. If either one is unset, then all variables are considered as impulses or responses, respectively. The default length of the impulse responses is set to $10$ via argument \texttt{n.ahead}. The computation of orthogonalized and/or cumulated impulse responses is controlled by the logical switches \texttt{ortho} and \texttt{cumulative}, respectively. Finally, confidence bands can be returned by setting \texttt{boot = TRUE} (default). The pre-set values are to run 100 replications and return 95\% confidence bands. It is at the user's leisure to specify a \texttt{seed} for replicability of the  results. The standard percentile interval is calculated as $CI_s = [s_{\gamma/2}^*, s_{(1-\gamma)/2}^*]$, where $s_{\gamma/2}^*$ and $s_{(1-\gamma)/2}^*$ are the $\gamma/2$ and $(1-\gamma)/2$ quantiles of the estimated bootstraped impulse response coefficients $\hat{\Phi}^*$ or $\hat{\Psi}^*$ \cite{EFR1993}. The function \texttt{irf()} returns an object with class attribute \texttt{varirf} for which a \texttt{plot} method does exist.   
 %
 \begin{figure}[Ht]
 \centering
@@ -640,12 +640,12 @@ plot(irf.rw.eU)
 \label{fig-irf}
 \end{figure}
 %
-In figure \ref{fig-irf} the result of the impulse response analysis is depicted. Although a positive real wage shock does influence employment and unemployment in the directions one would \emph{a priori} assume, it does so only significantly for unemployment during the time span ranging from the third period to the sixth period.\footnote{Incidentally, the result should not be mistaken or interpreted as demanding higher real wages, \emph{i.e.}, having a free lunch, without facing the consequences beyond of the model's scope. The example has been primarily choosen for demonstrations purposes only.} 
+In figure \ref{fig-irf} the result of the impulse response analysis is depicted. Although a positive real wage shock does influence employment and unemployment in the directions one would \emph{a priori} assume, it does so only significantly for unemployment during the time span ranging from the third period to the sixth period.\footnote{Incidentally, the result should not be mistaken or interpreted as demanding higher real wages, \emph{i.e.}, having a free lunch, without facing the consequences beyond of the model's scope. The example has been primarily chosen for demonstrations purposes only.} 
 %
 \subsection{Forecast error variance decomposition}
 \label{subsec:var-fevd}
 %
-The forecast error variance decomposition (henceforth: FEVD) is based upon the orthogonalised impulse response coefficient matrices $\Psi_{n}$ (see section \ref{subsec:var-ira} above). The FEVD allows the user to analyse the contribution of variable $j$ to the $h$-step forecast error variance of variable $k$. If the elementwise squared orthogonalised impulse reponses are divided by the variance of the forecast error variance, $\sigma_k^2(h)$, the resultant is a percentage figure. Formally, the forecast error variance for $y_{k, T+h} - Y_{k, T+h|T}$ is defined as:
+The forecast error variance decomposition (henceforth: FEVD) is based upon the orthogonalized impulse response coefficient matrices $\Psi_{n}$ (see section \ref{subsec:var-ira} above). The FEVD allows the user to analyze the contribution of variable $j$ to the $h$-step forecast error variance of variable $k$. If the element-wise squared orthogonalized impulse responses are divided by the variance of the forecast error variance, $\sigma_k^2(h)$, the resultant is a percentage figure. Formally, the forecast error variance for $y_{k, T+h} - Y_{k, T+h|T}$ is defined as:
 %
 \begin{equation}
 \sigma_k^2(h) = \sum_{n=0}^{h-1}(\psi_{k1, n}^2 + \ldots + \psi_{kK, n}^2)
@@ -669,7 +669,7 @@ The method \texttt{fevd} is available for conducting FEVD. Functions for objects
 args(fevd)
 @  
 %
-The method does return a list object with class attribute \texttt{varfevd} for which a \texttt{plot}-method does exists. The list elements are the forecast error variances organised on a per-variable basis.
+The method does return a list object with class attribute \texttt{varfevd} for which a \texttt{plot}-method does exists. The list elements are the forecast error variances organized on a per-variable basis.
 %
 <<fevd2, echo = TRUE>>=
 var2c.fevd <- fevd(var.2c, n.ahead = 5)
@@ -720,8 +720,8 @@ A SVAR-model can be used to identify shocks and trace these out by employing IRA
 Depending on the imposed restrictions, three types of SVAR- models can be distinguished:
 %
 \begin{itemize}
-\item A model: $B$ ist set to $I_K$ (minimum number of restrictions for identification is $K(K-1)/2$ ).
-\item B model: $A$ ist set to $I_K$ (minimum number of restrictions to be imposed for identification is the same as for A model).
+\item A model: $B$ is set to $I_K$ (minimum number of restrictions for identification is $K(K-1)/2$ ).
+\item B model: $A$ is set to $I_K$ (minimum number of restrictions to be imposed for identification is the same as for A model).
 \item AB model: restrictions can be placed on both matrices (minimum number of restrictions for identification is $K^2 + K(K-1)/2$).
 \end{itemize} 
 %
@@ -730,7 +730,7 @@ Depending on the imposed restrictions, three types of SVAR- models can be distin
 %
 A SVAR model is estimated with the function
 \texttt{SVAR()}.\footnote{The following exhibition uses the estimation method
-\texttt{logLik} for directly minimising the negative
+\texttt{logLik} for directly minimizing the negative
 log-likelihood function. It also possible to use a scoring algorithm. Hereby,
 the restrictions have to be provided in a different form (see
 \texttt{example(SVAR)} for further details.} Its arguments are shown in the
@@ -760,9 +760,9 @@ amat[4, 1] <- NA
 amat
 @
 %
-In the example above, an expository object \texttt{amat} has been set up. The next function's argument is \texttt{start}. This argument expects a vector of starting values, hence, the user has one handle at hand for controlling the optimisation process in case one encounters convergence problems. If left \texttt{NULL}, then starting values are set to $0.1$ for all coefficients to be optimised. Finally, the $\ldots$ argument in \texttt{SVAR()} is parsed to the \texttt{optim()} function. Therefore, it is possible to choose the numerical optimisation method and set \texttt{hessian = TRUE} to obtain the numerical standard errors, for instance.\\
+In the example above, an expository object \texttt{amat} has been set up. The next function's argument is \texttt{start}. This argument expects a vector of starting values, hence, the user has one handle at hand for controlling the optimization process in case one encounters convergence problems. If left \texttt{NULL}, then starting values are set to $0.1$ for all coefficients to be optimized. Finally, the $\ldots$ argument in \texttt{SVAR()} is parsed to the \texttt{optim()} function. Therefore, it is possible to choose the numerical optimization method and set \texttt{hessian = TRUE} to obtain the numerical standard errors, for instance.\\
 \par
-The parameters are estimated by minimising the negative of the concentrated log-likelihood function:
+The parameters are estimated by minimizing the negative of the concentrated log-likelihood function:
 %
 \begin{equation}
 \label{eq23}
@@ -772,7 +772,7 @@ The parameters are estimated by minimising the negative of the concentrated log-
 \end{split}
 \end{equation}
 %
-by utilising \texttt{optim}. 
+by utilizing \texttt{optim}. 
 %
 <<SVAR2, echo = TRUE>>=
 args(optim)
@@ -788,7 +788,7 @@ class(svar2c.A)
 names(svar2c.A)
 @ 
 %
-Dependent on the choosen model and if the argument \texttt{hessian = TRUE} has been set, the list elements \texttt{A, Ase, B, Bse} contain the estimated coefficient matrices with the numerical standard errors, if applicable. The element \texttt{LRIM} does contain the long-run impact matrix in case a SVAR of type Blanchard \& Quah is estimated, otherwise this element is \texttt{NULL} (see below for more details). The list element \texttt{Sigma.U} is the variance-covariance matrix of the reduced form residuals times 100, \emph{i.e.}, $\Sigma_U = A^{-1}BB'A^{-1'} \times 100$. The list element \texttt{LR} is an object with class attribute \texttt{htest}, holding the Likelihood ratio overidentification test, whereby the test statistic is defined as:
+Dependent on the chosen model and if the argument \texttt{hessian = TRUE} has been set, the list elements \texttt{A, Ase, B, Bse} contain the estimated coefficient matrices with the numerical standard errors, if applicable. The element \texttt{LRIM} does contain the long-run impact matrix in case a SVAR of type Blanchard \& Quah is estimated, otherwise this element is \texttt{NULL} (see below for more details). The list element \texttt{Sigma.U} is the variance-covariance matrix of the reduced form residuals times 100, \emph{i.e.}, $\Sigma_U = A^{-1}BB'A^{-1'} \times 100$. The list element \texttt{LR} is an object with class attribute \texttt{htest}, holding the Likelihood ratio over-identification test, whereby the test statistic is defined as:
 %
 \begin{equation}
 \label{eq24}
@@ -818,7 +818,7 @@ The matrices $\hat{A}_i$ for $i = 1, \ldots, p$ assign the reduced form estimate
 (I_K - A_1 - \cdots - A_p)Q \quad,
 \end{equation}
 %
-where $Q$ assigns the lower-trinagular Choleski decomposition. It should be noted that a re-ordering of the VAR might become necessary due to the recursive nature of the model.\\
+where $Q$ assigns the lower-triangular Choleski decomposition. It should be noted that a re-ordering of the VAR might become necessary due to the recursive nature of the model.\\
 \par
 The \citename{BLA1989} model is implemented as function \texttt{BQ()}. It has one argument $x$, which is an object with class attribute \texttt{varest}. The function does return a list object with class attribute \texttt{svarest}. Below is a trivial example of applying a \citeasnoun{BLA1989}-type SVAR to the already available VAR \texttt{var.2c}.
 %
@@ -891,7 +891,7 @@ and
 \label{eq31}
 \Pi = -(I - A_1 - \ldots - A_p) \quad.
 \end{equation}
-The $\Gamma_i$ matrices contain the cumulative long-run impacts, hence this VECM specification is signified by longrun form. The other specification is given as follows:
+The $\Gamma_i$ matrices contain the cumulative long-run impacts, hence this VECM specification is signified by long-run form. The other specification is given as follows:
 %
 \begin{equation}
 \label{eq32}
@@ -905,18 +905,18 @@ with
 \end{equation}
 Equation \ref{eq31} applies to this specification too. Hence, the $\Pi$  matrix is the same as in the first specification. However, the $\Gamma_i$ matrices now differ, in the sense that they measure transitory effects. Therefore this specification is signified by transitory form.\\
 \par
-With function \texttt{vec2var()} a VECM (\emph{i.e} an object of formal class \texttt{ca.jo}, generated by \texttt{ca.jo()}) is transormed into its level VAR representation. For illustration purposes, an example taken from \citeasnoun{JOH1990} is used in the following.
+With function \texttt{vec2var()} a VECM (\emph{i.e} an object of formal class \texttt{ca.jo}, generated by \texttt{ca.jo()}) is transformed into its level VAR representation. For illustration purposes, an example taken from \citeasnoun{JOH1990} is used in the following.
 %
 <<vecm, echo = TRUE, fig = FALSE>>=
 library(urca)
 data(finland)
 sjf <- finland
-sjf.vecm <- ca.jo(sjf, constant = FALSE, type = "eigen", K = 2,
-spec = "longrun", season = 4, ctable = "A2")
+sjf.vecm <- ca.jo(sjf, ecdet = "none", type = "eigen", K = 2,
+spec = "longrun", season = 4)
 summary(sjf.vecm)
 @ 
 %
-One can conclude that two cointegration relationships do exist. The cointegrating rank is needed for the above transformation with function \texttt{vec2var}. Given the object \texttt{sjf.vecm} of class \texttt{ca.jo} with $r = 2$, one can now swiftly proceed:
+One can conclude that two co-integration relationships do exist. The co-integrating rank is needed for the above transformation with function \texttt{vec2var}. Given the object \texttt{sjf.vecm} of class \texttt{ca.jo} with $r = 2$, one can now swiftly proceed:
 <<vec2var, echo = TRUE, fig = FALSE>>=
 args(vec2var)
 sjf.var <- vec2var(sjf.vecm, r = 2)
@@ -935,7 +935,7 @@ The object has assigned class attribute \texttt{vec2var} and a \texttt{print}- ,
 \par
 Finally, structural vector error correction models can be estimated
 with the function \texttt{SVEC()}. Likewise to the function
-\texttt{SVAR2()} a scoring algorithm is utilised for determining the
+\texttt{SVAR2()} a scoring algorithm is utilized for determining the
 coefficients of the long run and contemporaneous impact matrices. The
 estimated standard errors of these parameters can be calculated by a
 bootstrapping procedure. The latter is controlled by the functional
