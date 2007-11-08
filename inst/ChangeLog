@@ -1,3 +1,7 @@
+2007-11-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* doc/vars.Rnw: Dropped void argument 'ctable' in R chunk.
+
 2007-10-31    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/irf.vec2var.R ("irf.vec2var"): Inserted names for Lower and Upper.
