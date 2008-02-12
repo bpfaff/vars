@@ -16,6 +16,7 @@
 VAR(y, p = 1, type = c("const", "trend", "both", "none"),
 season = NULL, exogen = NULL, lag.max = NULL,
 ic = c("AIC", "HQ", "SC", "FPE"))
+\method{print}{varest}(x, digits = max(3, getOption("digits") - 3), ...)
 }
 
 \arguments{
@@ -29,6 +30,9 @@ ic = c("AIC", "HQ", "SC", "FPE"))
     length selection according to the choosen \code{ic}.}
   \item{ic}{Character, selects the information criteria, if
     \code{lag.max} is not \code{NULL}.}
+  \item{x}{Object with class attribute \sQuote{varest}.}
+  \item{digits}{the number of significant digits to use when printing.}
+  \item{\dots}{further arguments passed to or from other methods.}
 }
 
 \details{
@@ -88,7 +92,7 @@ ic = c("AIC", "HQ", "SC", "FPE"))
   \code{\link{coef}}, \code{\link{residuals}},
   \code{\link{fitted}}, \code{\link{predict}}, \code{\link{irf}},
   \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
-  \code{\link{normality}}, \code{\link{arch}}, \code{\link{serial}},
+  \code{\link{normality.test}}, \code{\link{arch.test}}, \code{\link{serial.test}},
   \code{\link{VARselect}}, \code{\link{logLik}} 
 }
 

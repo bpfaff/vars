@@ -1,6 +1,8 @@
-\name{A}
+\name{Acoef}
 
-\alias{A}
+\alias{Acoef}
+
+\alias{A-deprecated}
 
 \title{Coefficient matrices of the lagged endogenous variables}
 
@@ -10,7 +12,7 @@
 }
 
 \usage{
-A(x)
+Acoef(x)
 }
 
 \arguments{
@@ -32,16 +34,20 @@ A(x)
   A list object with coefficient matrices for the lagged endogenous variables.
 }
 
+\note{This function was named \code{A} in earlier versions of package
+  \pkg{vars}; it is now deprecated. See \code{\link{vars-deprecated}} too.
+  }
+
 \author{Bernhard Pfaff}
 
 \seealso{
-  \code{\link{B}}, \code{\link{VAR}}
+  \code{\link{Bcoef}}, \code{\link{VAR}}
 }
 
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-A(var.2c)
+Acoef(var.2c)
 }
 
 \keyword{regression}

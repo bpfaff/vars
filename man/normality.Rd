@@ -1,6 +1,8 @@
-\name{normality}
+\name{normality.test}
 
-\alias{normality}
+\alias{normality.test}
+
+\alias{normality-deprecated}
 
 \title{Normality, multivariate skewness and kurtosis test}
 
@@ -13,7 +15,7 @@
 }
 
 \usage{
-normality(x, multivariate.only = TRUE)
+normality.test(x, multivariate.only = TRUE)
 }
 
 \arguments{
@@ -47,6 +49,10 @@ normality(x, multivariate.only = TRUE)
   test, the multivariate Skewness and Kurtosis tests.    
 }
 
+\note{This function was named \code{normality} in earlier versions of package
+  \pkg{vars}; it is now deprecated. See \code{\link{vars-deprecated}} too.
+  }
+
 \author{Bernhard Pfaff}
 
 \references{
@@ -68,7 +74,7 @@ normality(x, multivariate.only = TRUE)
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-normality(var.2c)
+normality.test(var.2c)
 }
 
 \keyword{regression}

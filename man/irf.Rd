@@ -131,7 +131,7 @@ FALSE)
 ## For SVAR
 amat <- diag(4)
 diag(amat) <- NA
-svar.a <- SVAR(var.2c, estmethod = "logLik", Amat = amat)
+svar.a <- SVAR(var.2c, estmethod = "direct", Amat = amat)
 irf(svar.a, impulse = "e", response = c("prod", "rw", "U"), boot =
 FALSE)
 }

@@ -31,21 +31,23 @@ NULL, ylim.resid = NULL, ylim.hist = NULL, ylab.resid = NULL, xlab.resid
 = NULL, xlab.acf = NULL, lty.resid = NULL, lwd.resid = NULL, col.resid =
 NULL, col.edf = NULL, lag.acf = NULL, lag.pacf = NULL, lag.acf2 = NULL,
 lag.pacf2 = NULL, mar = par("mar"), oma = par("oma"), ...)
-\method{plot}{varest}(x, names = NULL, main.fit = NULL, main.resid =
-NULL, main.acf = NULL, main.pacf = NULL, ylim.fit = NULL, ylim.resid =
-NULL, lty.fit = NULL, lty.resid = NULL, lwd.fit = NULL, lwd.resid =
-NULL, lag.acf = NULL, lag.pacf = NULL, col.fit = NULL, col.resid = NULL,
-ylab.fit = NULL, ylab.resid = NULL, ylab.acf = NULL, ylab.pacf = NULL,
-xlab.fit = NULL, xlab.resid = NULL, nc, mar = par("mar"), oma =
-par("oma"), ...)
+\method{plot}{varest}(x, names = NULL, main.fit = NULL, main.acf = NULL,
+main.pacf = NULL, ylim.fit = NULL, ylim.resid = NULL, lty.fit = NULL,
+lty.resid = NULL, lwd.fit = NULL, lwd.resid = NULL, lag.acf = NULL,
+lag.pacf = NULL, col.fit = NULL, col.resid = NULL, ylab.fit = NULL,
+ylab.resid = NULL, ylab.acf = NULL, ylab.pacf = NULL, xlab.fit = NULL,
+xlab.resid = NULL, nc, mar = par("mar"), oma = par("oma"), adj.mtext =
+NA, padj.mtext = NA, col.mtext = NA, ...)
 \method{plot}{vec2var}(x, ...)
 \method{plot}{varfevd}(x, plot.type = c("multiple", "single"),
 names = NULL, main = NULL, col = NULL, ylim = NULL, ylab = NULL,
 xlab = NULL, legend = NULL, names.arg = NULL, nc,
 mar = par("mar"), oma = par("oma"), addbars = 1, ...)
 \method{plot}{varirf}(x, plot.type = c("multiple", "single"), names =
-NULL, main = NULL, lty = NULL, lwd = NULL, col = NULL, ylim = NULL, ylab
-= NULL, xlab = NULL, nc, mar = par("mar"), oma = par("oma"), ...) 
+NULL, main = NULL, sub = NULL, lty = NULL, lwd = NULL, col = NULL, ylim
+= NULL, ylab = NULL, xlab = NULL, nc, mar.multi = c(0, 4, 0, 4),
+oma.multi = c(6, 4, 6, 4), adj.mtext = NA, padj.mtext = NA, col.mtext =
+NA, ...)  
 \method{plot}{varprd}(x, plot.type = c("multiple", "single"),
 names = NULL, main = NULL, col = NULL, lty = NULL, lwd = NULL,
 ylim = NULL, ylab = NULL, xlab = NULL, nc, mar = par("mar"),
@@ -57,9 +59,12 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
 \arguments{
   \item{addbars}{Integer, number of empty bars in barplot to reserve
     space for legend. If set to zero, no legend will be returned.}
+  \item{adj.mtext}{Adjustment for \code{mtext()}, only applicable if \code{plot.type = "multiple"}.}
   \item{col}{Character vector, colors to use in plot.}
   \item{col.edf}{Character, color of residuals' EDF.}
   \item{col.fit}{Character vector, colors for diagram of fit.}
+  \item{col.mtext}{Character, color for \code{mtext()}, only applicable
+  if \code{plot.type = "multiple"}.} 
   \item{col.resid}{Character vector, colors for residual plot.}
   \item{lag.acf}{Integer, lag.max for ACF of residuals.}
   \item{lag.acf2}{Integer, lag.max for ACF of squared residuals.}
@@ -81,13 +86,18 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
   \item{main.pacf2}{Character vector, main for squared residuals' PACF.}
   \item{main.resid}{Character vector, main for residual plot.}
   \item{mar}{Setting of margins.}
+  \item{mar.multi}{Setting of margins, if \code{plot.type = "multiple"}.}
   \item{names}{Character vector, the variables names to be plotted. If
     left \code{NULL}, all variables are plotted.} 
   \item{names.arg}{Character vector, names for x-axis of barplot.}
   \item{nc}{Integer, number of columns for multiple plot.}
   \item{oma}{Setting of outer margins.}
+  \item{oma.multi}{Setting of margins, if \code{plot.type = "multiple"}.}
+  \item{padj.mtext}{Adjustment for \code{mtext()}, only applicable if
+  \code{plot.type = "multiple"}.} 
   \item{plot.type}{Character, if \code{multiple} all plots are drawn in
     a single device, otherwise the plots are shown consecutively.}
+  \item{sub}{Character, sub title in plot.}
   \item{x}{An object of one of the above classes.}
   \item{xlab}{Character vector signifying the labels for the x-axis.}
   \item{xlab.acf}{Character, xlab for ACF and PACF of residuals and
@@ -130,8 +140,8 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
 \seealso{
   \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{fevd}},
   \code{\link{irf}}, \code{\link{predict}}, \code{\link{fanchart}},
-  \code{\link{stability}}, \code{\link{arch}}, \code{\link{normality}},
-  \code{\link{serial}}  
+  \code{\link{stability}}, \code{\link{arch.test}}, \code{\link{normality.test}},
+  \code{\link{serial.test}}  
 }
 
 \examples{
@@ -141,13 +151,13 @@ var.2c <- VAR(Canada, p = 2, type = "const")
 plot(var.2c)
 ## Diagnostic Testing
 ## ARCH test
-archtest <- arch(var.2c)
+archtest <- arch.test(var.2c)
 plot(archtest)
 ## Normality test
-normalitytest <- normality(var.2c)
+normalitytest <- normality.test(var.2c)
 plot(normalitytest)
 ## serial correlation test
-serialtest <- serial(var.2c)
+serialtest <- serial.test(var.2c)
 plot(serialtest)
 ## FEVD
 var.2c.fevd <- fevd(var.2c, n.ahead = 5)

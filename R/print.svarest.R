@@ -1,35 +1,26 @@
 "print.svarest" <-
-function(x, ...){
-  title <- paste("# SVAR:", x$type, "#", sep=" ")
-  row <- paste(rep("#", nchar(title)), collapse="")
-  cat("\n")
-  cat(row, "\n")
-  cat(title, "\n")
+function(x, digits = max(3, getOption("digits") - 3), ...){
+  text1 <- "SVAR Estimation Results:"
+  cat(paste("\n", text1, "\n", sep = ""))
+  row <- paste(rep("=", nchar(text1)), collapse = "")
   cat(row, "\n")
   cat("\n")
   if(identical(x$type, "Blanchard-Quah")){
     cat("\nEstimated contemporaneous impact matrix:\n")
-    print(x$B)
+    print(x$B, digits = digits, ...)
     cat("\nEstimated identified long run impact matrix:\n")
-    print(x$LRIM)
-    invisible(x)
-  } else {
-    if(!is.null(x$LR)){
-      cat("\nLR overidentification test:\n")
-      print(x$LR)
-    }
+    print(x$LRIM, digits = digits, ...)
+  } else if(identical(x$type, "A-model")){
     cat("\nEstimated A matrix:\n")
-    print(x$A)
-    if(!is.null(x$Ase)){
-      cat("\nEstimated standard errors for A matrix:\n")
-      print(x$Ase)
-    }
+    print(x$A, digits = digits, ...)
+  } else if(identical(x$type, "B-model")){
     cat("\nEstimated B matrix:\n")
-    print(x$B)
-    if(!is.null(x$Bse)){
-      cat("\nEstimated standard errors for B matrix:\n")
-      print(x$Bse)
-    }
-    invisible(x)
+    print(x$B, digits = digits, ...)
+  } else if(identical(x$type, "AB-model")){
+    cat("\nEstimated A matrix:\n")
+    print(x$A, digits = digits, ...)
+    cat("\nEstimated B matrix:\n")
+    print(x$B, digits = digits, ...)
   }
+  invisible(x)
 }

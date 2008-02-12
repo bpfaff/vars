@@ -1,6 +1,8 @@
-\name{arch}
+\name{arch.test}
 
-\alias{arch}
+\alias{arch.test}
+
+\alias{arch-deprecated}
 
 \alias{print.varcheck}
 
@@ -14,7 +16,7 @@
 }
 
 \usage{
-arch(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
+arch.test(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
 }
 
 \arguments{
@@ -75,6 +77,10 @@ arch(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
       containing the multivariate ARCH-LM statistic.}
 }
 
+\note{This function was named \code{arch} in earlier versions of package
+  \pkg{vars}; it is now deprecated. See \code{\link{vars-deprecated}} too.
+  }
+
 \author{Bernhard Pfaff}
 
 \references{
@@ -101,7 +107,7 @@ arch(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-arch(var.2c)
+arch.test(var.2c)
 }
 
 \keyword{regression}

@@ -19,7 +19,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   IK <- diag(K)
   IK2 <- diag(K2)
   Kkk <- diag(K2)[, c(sapply(1:K, function(i) seq(i, K2, K)))]
-  svartype <- "SVEC (B-type)"
+  svartype <- "B-model"
   ##
   ## Checking for correct dimensions of LR and SR
   ##
@@ -154,6 +154,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
       break
     }
   }
+  iter <- iters - 1
   vecab <- S %*% gamma + s
   SR <- B
   ##
@@ -225,7 +226,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   ##
   ## Assembling svecest object
   ##
-  result <- list(SR = SR, SRse = SRse, LR = LR, LRse = LRse, Sigma.U = Sigma.U * 100, Restrictions = c(nResC1, nResB), LRover = LRover, start = start, type = svartype, var = x, LRorig = LRorig, SRorig = SRorig, r = r, call = match.call())
+  result <- list(SR = SR, SRse = SRse, LR = LR, LRse = LRse, Sigma.U = Sigma.U * 100, Restrictions = c(nResC1, nResB), LRover = LRover, start = start, type = svartype, var = x, LRorig = LRorig, SRorig = SRorig, r = r, iter = iter, call = match.call())
   class(result) <- "svecest"
   return(result)
 }

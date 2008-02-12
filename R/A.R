@@ -1,4 +1,4 @@
-"A" <-
+"Acoef" <-
 function (x) 
 {
     if (!(class(x) == "varest")) {
@@ -6,7 +6,7 @@ function (x)
     }
     K <- x$K
     p <- x$p
-    A <- B(x)[, 1:(K*p)]
+    A <- Bcoef(x)[, 1:(K*p)]
     As <- list()
     start <- seq(1, p * K, K)
     end <- seq(K, p * K, K)
@@ -16,4 +16,8 @@ function (x)
         colnames(As[[i]]) <- colnames(A[, start[i]:end[i]])
     }
     return(As)
+}
+A <- function(x){
+  .Deprecated("Acoef", package = "vars", msg = "Function 'A' is deprecated; use 'Acoef' instead.\nSee help(\"vars-deprecated\") and help(\"A-deprecated\") for more information.")
+  Acoef(x = x)
 }

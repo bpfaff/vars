@@ -5,7 +5,7 @@ function(x, modulus = TRUE){
   }
   K <- x$K
   p <- x$p
-  A <- unlist(A(x))
+  A <- unlist(Acoef(x))
   companion <- matrix(0, nrow = K * p, ncol = K * p)
   companion[1:K, 1:(K * p)] <- A
   if(p > 1){

@@ -1,27 +1,13 @@
 "print.svecest" <-
-function(x, ...){
-  title <- paste("#", x$type, "#", sep=" ")
-  row <- paste(rep("#", nchar(title)), collapse="")
-  cat("\n")
-  cat(row, "\n")
-  cat(title, "\n")
+function(x, digits = max(3, getOption("digits") - 3), ...){
+  text1 <- "SVEC Estimation Results:"
+  cat(paste("\n", text1, "\n", sep = ""))
+  row <- paste(rep("=", nchar(text1)), collapse = "")
   cat(row, "\n")
   cat("\n")
-  if(!is.null(x$LRover)){
-    cat("\nLR overidentification test:\n")
-    print(x$LRover)
-  }
   cat("\nEstimated contemporaneous impact matrix:\n")
-  print(x$SR)
-  if(!is.null(x$SRse)){
-    cat("\nBootstrap standard errors for contemp. impact matrix:\n")
-    print(x$SRse)
-  }  
+  print(x$SR, digits = digits, ...)
   cat("\nEstimated long run impact matrix:\n")
-  print(x$LR)
-  if(!is.null(x$LRse)){
-    cat("\nBootstrap standard errors for long run impact matrix:\n")
-    print(x$LRse)
-  }
+  print(x$LR, digits = digits, ...)
   invisible(x)
 }

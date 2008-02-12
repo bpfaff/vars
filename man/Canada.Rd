@@ -40,7 +40,7 @@
 
 \usage{Canada}
 
-\format{A data frame containing four variables with 84 observations.}
+\format{An object with class attributes \code{mts} and \code{ts} containing four variables with 84 observations.}
 
 \source{\acronym{OECD}: \url{http://www.oecd.org}; data set is available
   for download at \url{http://www.jmulti.org/data_atse.html}, the

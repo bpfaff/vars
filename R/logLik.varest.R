@@ -1,5 +1,6 @@
 logLik.varest <- function(object, ...){
   obs <- object$obs
+  df <- min(unlist(lapply(object$varresult, function(x) summary(x)$df[2])))
   K <- object$K
   resids <- resid(object)
   Sigma <- crossprod(resids) / obs

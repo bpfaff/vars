@@ -1,4 +1,4 @@
 print.varprd <- function(x, ...){
-  print(x$fcst)
+  print(x$fcst, ...)
   invisible(x)
 }

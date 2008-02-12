@@ -1,6 +1,8 @@
-\name{serial}
+\name{serial.test}
 
-\alias{serial}
+\alias{serial.test}
+
+\alias{serial-deprecated}
 
 \title{Test for serially correlated errors}
 
@@ -12,7 +14,7 @@
 }
 
 \usage{
-serial(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic",
+serial.test(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic",
 "PT.adjusted", "BG", "ES") )
 }
 
@@ -98,6 +100,10 @@ serial(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic",
     containing the Edgerton-Shukur F-statistic.}  
 }
 
+\note{This function was named \code{serial} in earlier versions of package
+  \pkg{vars}; it is now deprecated. See \code{\link{vars-deprecated}} too.
+  }
+
 \author{Bernhard Pfaff}
 
 \references{
@@ -125,7 +131,7 @@ serial(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic",
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-serial(var.2c, lags.pt = 16, type = "PT.adjusted")
+serial.test(var.2c, lags.pt = 16, type = "PT.adjusted")
 }
 
 \keyword{regression}

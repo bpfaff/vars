@@ -1,6 +1,8 @@
-\name{B}
+\name{Bcoef}
 
-\alias{B}
+\alias{Bcoef}
+
+\alias{B-deprecated}
 
 \title{Coefficient matrix of an estimated VAR(p)}
 
@@ -9,7 +11,7 @@
 }
 
 \usage{
-B(x)
+Bcoef(x)
 }
 
 \arguments{
@@ -30,16 +32,20 @@ B(x)
   A matrix holding the estimated coefficients of a VAR.
 }
 
+\note{This function was named \code{B} in earlier versions of package
+  \pkg{vars}; it is now deprecated. See \code{\link{vars-deprecated}} too.
+  }
+
 \author{Bernhard Pfaff}
 
 \seealso{
-  \code{\link{A}}, \code{\link{VAR}}
+  \code{\link{Acoef}}, \code{\link{VAR}}
 }
 
 \examples{
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
-B(var.2c)
+Bcoef(var.2c)
 }
 
 \keyword{regression}

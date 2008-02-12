@@ -17,7 +17,7 @@ function(x, cause = NULL){
   y1.names <- subset(y.names, subset = y.names %in% cause)
   y2.names <- subset(y.names, subset = !(y.names %in% cause))
   Z <- x$datamat[, -c(1 : K)]
-  PI <- B(x)
+  PI <- Bcoef(x)
   if(ncol(PI) > K*p){
     colnames(PI) <- c(rep(y.names, p), colnames(PI)[(K*p + 1):ncol(PI)])
     detcoeff <- length(PI) - K^2 * p

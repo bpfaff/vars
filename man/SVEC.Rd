@@ -15,6 +15,7 @@
 \usage{
 SVEC(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100,
 conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
+\method{print}{svecest}(x, digits = max(3, getOption("digits") - 3), ...)
 }
 
 \arguments{
@@ -32,7 +33,9 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
     to \command{NULL} for just-identified system.}
   \item{boot}{Logical, if \code{TRUE}, standard errors of the parameters
     are computed by bootstrapping. Default is \code{FALSE}.}
-  \item{runs}{Integer, number of bootstrap replications.}  
+  \item{runs}{Integer, number of bootstrap replications.}
+  \item{digits}{the number of significant digits to use when printing.}
+  \item{\dots}{further arguments passed to or from other methods.}    
 }
 
 \details{
@@ -110,6 +113,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
   \item{LRorig}{The supplied long run impact matrix.}
   \item{SRorig}{The supplied contemporaneous impact matrix.}
   \item{r}{Integer, the supplied cointegration rank.}
+  \item{iter}{Integer, the count of iterations.}   
   \item{call}{The \code{call} to \command{SVEC()}.}
 }
 
@@ -137,14 +141,15 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 
 \examples{
 data(Canada)
-vec.can <- ca.jo(Canada, K = 2, spec = "transitory")
-summary(vec.can)
+vecm <- ca.jo(Canada[, c("prod", "e", "U", "rw")], type = "trace", ecdet = "trend", K = 3, spec = "transitory")
+SR <- matrix(NA, nrow = 4, ncol = 4)
+SR[4, 2] <- 0
+SR
 LR <- matrix(NA, nrow = 4, ncol = 4)
-SR <- diag(NA, 4)
-SR[2, 1] <- NA
-SR[3, 1] <- NA
-SR[4, 1] <- NA
-SVEC(vec.can, r = 2, LR = LR, SR = SR, lrtest = TRUE)
+LR[1, 2:4] <- 0
+LR[2:4, 4] <- 0
+LR
+SVEC(vecm, LR = LR, SR = SR, r = 1, lrtest = FALSE, boot = FALSE)
 }
 
 \keyword{regression}

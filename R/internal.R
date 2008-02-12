@@ -129,7 +129,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   obs <- VAR$obs
   total <- VAR$totobs
   type <- VAR$type
-  B <- B(VAR)
+  B <- Bcoef(VAR)
   BOOT <- vector("list", runs)
   ysampled <- matrix(0, nrow = total, ncol = K)
   colnames(ysampled) <- colnames(VAR$y)
@@ -138,7 +138,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     Zdet <- as.matrix(VAR$datamat[, (K * (p + 1) + 1):ncol(VAR$datamat)])
   }
   resorig <- scale(resid(VAR), scale = FALSE)
-  B <- B(VAR)
+  B <- Bcoef(VAR)
   for(i in 1:runs){
     booted <- sample(c(1 : obs), replace=TRUE)
     resid <- resorig[booted, ]

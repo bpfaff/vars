@@ -1,3 +1,67 @@
+2008-02-12    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): Enhanced plot-method for varirf.
+
+2008-02-06    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/logLik.svecest.R: Added logLik-method for objects of class "svecest".
+	* R/summary.svecest.R ("summary.svecest"): Summary-method added
+	for objects of class "svecest".
+	* R/print.svecsum.R ("print.svecsum"): Print-method for objects of
+	class "svecsum" added.
+
+	
+2008-02-05    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/print.svarest.R ("print.svarest"): Changed header appearance of
+	print-method to print.svarsum.
+	* R/SVAR.R ("SVAR"): Included stop() if free parameters are in
+	Amat and Bmat for AB-models.
+	* R/print.varest.R ("print.varest"): Changed header appearance of
+	print-method to print.svarest.
+	* R/print.svecest.R ("print.svecest"): Changed header appearance of
+	print-method to print.svarest.
+	* R/logLik.svarest.R (logLik.svarest): Replaced ML-estimator for
+	Sigma with unbiased estimator.
+	* R/logLik.varest.R (logLik.varest): Replaced ML-estimator for
+	Sigma with unbiased estimator. 
+	* R/SVAR.R (logLc): Normalization of sign for Amat and Bmat
+	implemented, if applicable.
+
+	
+2008-02-04    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVAR.R ("SVAR"): Changed to same Amat/Bmat arguments for
+	method "scoring" and "logLik". The latter is now termed "direct".
+	* R/summary.svarsum.R ("summary.svarest"): Summary-method for
+	objects with class attribute 'svarest' included.
+	* R/print.svarsum.R ("print.svarsum"): Print-method added for
+	objects with class attribute 'svarsum'.
+
+	
+2008-01-31    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/print.varest.R ("print.varest"): Altered print-method for
+	objects of class 'varest'.
+	* R/summary.varest.R ("summary.varest"): Enhanced
+	summary.varest-method.
+	* R/print.varsum.R: Enhanced print.varsum-method.
+
+2007-01-30    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/stability.R ("stability"): Changed default test to "OLS-CUSUM".
+	* R/A.R (A): Function 'A' is deprecated and a synonym is 'Acoef'.
+	* R/arch.R (arch): Function 'arch' is deprecated and a synonym is 'arch.test'.
+	* R/B.R (B): Function 'B' is deprecated and a synonym is 'Bcoef'.
+	* R/logLik.svarest.R (logLik.svarest): Bug fixed in computation of log-Likelihood.
+	* R/normality.R (normality): Function 'normality' is deprecated and a synonym is 'normality.test'.
+	* R/plot.varest.R ("plot.varest"): Adjusted plot (same x-axis for
+	diagram of fit and residuals and dropped 'main.resid').
+	* R/serial.R (serial): Function 'serial' is deprecated and a
+	synonym is 'serial.test'.
+	* inst/doc/: Removed temporarily vignette from package.
+	* man/Canada.Rd: Changed data.frame 'Canada' to 'mts' object.
+	
 2007-11-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* doc/vars.Rnw: Dropped void argument 'ctable' in R chunk.

@@ -1,5 +1,5 @@
 "print.varfevd" <-
 function(x, ...){
-  print(x[])
+  print(x[], ...)
   invisible(x)
 }

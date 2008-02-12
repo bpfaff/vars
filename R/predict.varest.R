@@ -8,7 +8,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
   ynames <- colnames(object$y)
   n.ahead <- as.integer(n.ahead)
   Z <- object$datamat[, -c(1 : K)]
-  B <- B(object)
+  B <- Bcoef(object)
   ##
   ## Deterministic and lagged y's
   ## Retrieval of A in matrix (whole)

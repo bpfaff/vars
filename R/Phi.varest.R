@@ -6,7 +6,7 @@ function(x, nstep=10, ...){
   nstep <- abs(as.integer(nstep))
   K <- x$K
   p <- x$p
-  A <- as.array(A(x))
+  A <- as.array(Acoef(x))
   if(nstep >= p){
     As <- array(0, dim = c(K, K, nstep + 1))
     for(i in (p + 1):(nstep + 1)){
