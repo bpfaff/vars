@@ -1,3 +1,8 @@
+2008-05-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (".boot"): eval.parent() inserted for retrieving
+	objects with class attributes 'varest' or 'svarest'.
+
 2008-02-12    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/plot.varirf.R ("plot.varirf"): Enhanced plot-method for varirf.

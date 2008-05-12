@@ -118,9 +118,9 @@ function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
 function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.names){
   if(!(is.null(seed))) set.seed(abs(as.integer(seed)))
   if(class(x) == "varest"){
-    VAR <- x
+    VAR <- eval.parent(x)
   }else if(class(x) == "svarest"){
-    VAR <- x$var
+    VAR <- eval.parent(x$var)
   } else {
     stop("Bootstrap not implemented for this class.\n")
   }
