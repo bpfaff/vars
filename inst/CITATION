@@ -1,0 +1,37 @@
+citHeader("To cite vars in publications use:")
+
+citFooter("For BibTex versions of citations use: toBibtex(citation('vars'))")
+
+citEntry(entry = "Article",
+  title        = "VAR, SVAR and SVEC Models: Implementation Within {R} Package {vars}",
+  author       = personList(as.person("Bernhard Pfaff")),
+  journal      = "Journal of Statistical Software",
+  year         = "2008",
+  volume       = "27",
+  number       = "4",
+  url          = "http://www.jstatsoft.org/v27/i04/",
+
+  textVersion  =
+  paste("Bernhard Pfaff (2008).",
+        "VAR, SVAR and SVEC Models: Implementation Within R Package vars.",
+        "Journal of Statistical Software 27(4).",
+        "URL http://www.jstatsoft.org/v27/i04/.")
+) 
+
+citEntry(entry = "Book",
+         title = "Analysis of Integrated and Cointegrated Time Series with R",
+         author = personList(as.person("B. Pfaff")),
+	 publisher = "Springer",
+         edition = "Second",
+         address      = "New York",
+         year         = 2008,
+         note         = "ISBN 0-387-27960-1",
+         url          = "http://www.pfaffikus.de",
+         
+ textVersion = 
+ paste("Pfaff, B. (2008)", 
+       "Analysis of Integrated and Cointegrated Time Series with R.",
+       "Second Edition. Springer, New York. ISBN 0-387-27960-1")
+
+)
+
