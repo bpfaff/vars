@@ -1,3 +1,9 @@
+2008-06-30  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* inst/CITATION: Added citation file.
+	* inst/book-ex: Added Rcode examples pf second edition.
+	* inst/doc/vars.Rnw: Added vignette to package (JSS-article):
+	
 2008-05-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
 
 	* R/internal.R (".boot"): eval.parent() inserted for retrieving
