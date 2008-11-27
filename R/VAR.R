@@ -80,6 +80,9 @@ function (y, p = 1, type = c("const", "trend", "both", "none"),
     for (i in 1:K) {
         y <- yend[, i]
         equation[[colnames(yend)[i]]] <- lm(y ~ -1 + ., data = datamat)
+        if(any(c("const", "both") %in% type)){
+         attr(equation[[colnames(yend)[i]]]$terms, "intercept") <- 1
+        }
     }
     result <- list(varresult = equation, datamat = data.frame(cbind(yend, 
         rhs)), y = y.orig, type = type, p = p, K = K, obs = sample, 

@@ -5,7 +5,7 @@ y1 <- cumsum(e1)
 y2 <- 0.6*y1 + e2
 lr.reg <- lm(y2 ~ y1)
 error <- residuals(lr.reg)
-error.lagged <- error[-c(99, 100)]
+error.lagged <- error[-c(1, 100)]
 dy1 <- diff(y1)
 dy2 <- diff(y2)
 diff.dat <- data.frame(embed(cbind(dy1, dy2), 2))

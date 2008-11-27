@@ -1,3 +1,10 @@
+2008-11-27    Dr. Bernhard Pfaff  <bp@callisto>
+
+	* book-ex/Rcode-4-2.R: Fixed bug in example: error[-c(1, 100)],
+	formerly error[-c(99, 100)]
+	* R/VAR.R ("VAR"): In lm object attribute "intercept" set to 1 if
+	type = "const" or type = "both" to fix an improper F-test calculation.
+
 2008-06-30  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* inst/CITATION: Added citation file.
