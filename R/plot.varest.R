@@ -55,7 +55,7 @@ function (x, names = NULL, main.fit = NULL, main.acf = NULL, main.pacf = NULL, y
   }
   par(mar = mar, oma = oma)
   for (i in 1:nv) {
-    plotest(y = y[, i], fitted = fitted[, i], resids = resids[, i], main.fit = main.fit[i], main.acf = main.acf[i], main.pacf = main.pacf[i], ylab.fit = ylab.fit[i], ylab.resid = ylab.resid[i], ylab.acf = ylab.acf[i], ylab.pacf = ylab.pacf[i], xlab.fit = xlab.fit[i], xlab.resid = xlab.resid[i], adj.mtext = adj.mtext, padj.mtext = padj.mtext, col.mtext = col.mtext, ...)
+    plotest(y = y[, names[i]], fitted = fitted[, names[i]], resids = resids[, names[i]], main.fit = main.fit[i], main.acf = main.acf[i], main.pacf = main.pacf[i], ylab.fit = ylab.fit[i], ylab.resid = ylab.resid[i], ylab.acf = ylab.acf[i], ylab.pacf = ylab.pacf[i], xlab.fit = xlab.fit[i], xlab.resid = xlab.resid[i], adj.mtext = adj.mtext, padj.mtext = padj.mtext, col.mtext = col.mtext, ...)
     if (nv > 1) par(ask = TRUE)
   }
   on.exit(par(op))
