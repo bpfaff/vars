@@ -1,3 +1,8 @@
+2009-01-09    Dr. Bernhard Pfaff  <bp@callisto>
+
+	* man/SVAR.Rd: Fixed warning on htest.
+	* man/SVEC.Rd: Fixed warning on htest.
+
 2008-12-14  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* R/plot.varest.R (plotest): Fixed bug, in for loop names[i] in [ used.

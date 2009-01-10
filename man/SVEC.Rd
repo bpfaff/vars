@@ -105,7 +105,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
       \times 100}.}
   \item{Restrictions}{Vector, containing the ranks of the restricted
     long run and contemporaneous impact matrices.}
-  \item{LRover}{Object of class \sQuote{code{htest}}, holding the Likelihood
+  \item{LRover}{Object of class \sQuote{\code{htest}}, holding the Likelihood
   ratio overidentification test.}
   \item{start}{Vector of used starting values.}
   \item{type}{Character, type of the SVEC-model.}

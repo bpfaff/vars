@@ -126,7 +126,7 @@ lrtest = TRUE, ...)
   \item{Sigma.U}{The variance-covariance matrix of the reduced form
     residuals times 100, \emph{i.e.}, \eqn{\Sigma_U = A^{-1}BB'A^{-1'}
       \times 100}.}
-  \item{LR}{Object of class \sQuote{code{htest}}, holding the Likelihood
+  \item{LR}{Object of class \sQuote{\code{htest}}, holding the Likelihood
   ratio overidentification test.}
   \item{opt}{List object returned by \command{optim()}.}
   \item{start}{Vector of starting values.}
