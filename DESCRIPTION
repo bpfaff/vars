@@ -1,7 +1,7 @@
 Package: vars
 Type: Package
 Title: VAR Modelling
-Version: 1.4-3
+Version: 1.4-4
 Date: 2009-01-09
 Author: Bernhard Pfaff
 Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
