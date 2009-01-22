@@ -84,9 +84,11 @@ function (y, p = 1, type = c("const", "trend", "both", "none"),
          attr(equation[[colnames(yend)[i]]]$terms, "intercept") <- 1
         }
     }
+  call <- match.call()
+  if("season" %in% names(call)) call$season <- eval(season)
     result <- list(varresult = equation, datamat = data.frame(cbind(yend, 
         rhs)), y = y.orig, type = type, p = p, K = K, obs = sample, 
-        totobs = sample + p, restrictions = NULL, call = match.call())
+        totobs = sample + p, restrictions = NULL, call = call)
     class(result) <- "varest"
     return(result)
 }

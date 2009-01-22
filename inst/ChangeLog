@@ -1,3 +1,9 @@
+2009-01-22  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/VAR.R: Fixed bug, season is directly evaluated and replaced in
+	match.call().  
+
+
 2009-01-09    Dr. Bernhard Pfaff  <bp@callisto>
 
 	* man/SVAR.Rd: Fixed warning on htest.
