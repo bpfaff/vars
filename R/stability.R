@@ -8,7 +8,7 @@ function(x, type = c("OLS-CUSUM", "Rec-CUSUM", "Rec-MOSUM", "OLS-MOSUM", "RE", "
   stability <- list()
   endog <- colnames(x$datamat)[1 : K]
   for(i in 1 : K){
-    formula <- x$varresult[[i]]
+    formula <- formula(x$varresult[[i]])
     data <- x$varresult[[i]]$model
     stability[[endog[i]]] <- efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic, rescale = rescale)
   }
