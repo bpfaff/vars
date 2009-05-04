@@ -61,8 +61,8 @@ function (x, method = c("ser", "manual"), thresh = 2, resmat = NULL)
         colnames(x$restrictions) <- namesall
         rownames(x$restrictions) <- colnames(yendog)
         for (i in 1:K) {
-            datares <- datasub[, which(x$restrictions[i, ] == 
-                1)]
+            datares <- data.frame(datasub[, which(x$restrictions[i, ] == 1)])
+            colnames(datares) <- colnames(datasub)[which(x$restrictions[i, ] == 1)]
             y <- yendog[, i]
             lmres <- lm(y ~ -1 + ., data = datares)
             x$varresult[[i]] <- lmres

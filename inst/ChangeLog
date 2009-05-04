@@ -1,3 +1,7 @@
+2009-05-04  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/restrict.R ("manual"): Fixed bug (coercing lhs to data frame). 
+
 2009-04-29  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* R/stability.R ("stability"): Fixed bug (extracting formula from
