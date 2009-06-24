@@ -2,7 +2,7 @@ Package: vars
 Type: Package
 Title: VAR Modelling
 Version: 1.4-6
-Date: 2009-05-04
+Date: 2009-06-24
 Author: Bernhard Pfaff
 Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
 Depends: R (>= 2.0.0), MASS, strucchange, urca (>= 1.1-6)

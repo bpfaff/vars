@@ -1,6 +1,7 @@
 library(urca)
 data(npext)
-y <- ts(na.omit(npext$unemploy), start=1909, end=1988,
+npext
+y <- ts(na.omit(npext$unemploy), start=1890, end=1988,
         frequency=1)
 op <- par(no.readonly=TRUE)
 layout(matrix(c(1, 1, 2, 3), 2, 2, byrow=TRUE))
