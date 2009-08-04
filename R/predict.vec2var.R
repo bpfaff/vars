@@ -16,7 +16,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
   Zdet <- matrix(rep(1, n.ahead), nrow = n.ahead, ncol = 1)
   rownames(Zdet) <- seq(nrow(data.all) + 1, length = n.ahead)
   if(eval(object$vecm@ecdet) == "trend"){
-    trendf <- seq(obs + p + 1 , length = n.ahead)
+    trendf <- seq(obs + p, length = n.ahead)
     Zdet <- cbind(Zdet, trendf)
   }
   if(!is.null(eval(object$vecm@season))){

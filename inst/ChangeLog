@@ -1,6 +1,10 @@
+2009-08-04  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/predict-vec2var.R: Fixed bug in trend generation for forecasts.
+
 2009-05-04  Dr. Bernhard Pfaff  <bp@callisto>
 
-	* inst/book-ex/Rcode-1-3.R: Changed start year for unemployment 	rate. 
+	* inst/book-ex/Rcode-1-3.R: Changed start year for unemployment rate. 
 
 2009-05-04  Dr. Bernhard Pfaff  <bp@callisto>
 
@@ -412,10 +416,8 @@
 2006-09-13  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
 
 	* inst/doc/vars.Rnw: Vignette created.
-
 	* DESCRIPTION (Package): Suggests field added (xtable) for
-	vignette processing.
-	
+	vignette processing.	
 	* R/predict.varest.R: List element model added to 'result' for
 	fanchart function.
 	
@@ -423,9 +425,7 @@
 
 	* R/fanchart.R: Function for fan chart added (needs object of
 	class 'varprd').
-
 	* man/fanchart.Rd: Help file for function 'fanchart()' added.
-
 	* NAMESPACE: Entry for function 'fanchart()' added.
 
 2006-08-29  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
@@ -435,51 +435,32 @@
 2006-08-27  Dr. Bernhard Pfaff  <bernhard@pfaffikus>
 
 	* man/roots.Rd: Rd-file for new function 'roots' added.
-
 	* R/roots.R: Function for calculating eigenvalues added.
-
 	* NAMESPACE: Function 'root' added to 'NAMESPACE'.
 	
 2006-07-27    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
-
+	
 	* R/SVAR.R: Function added for SVAR estimation (A-, B-, and AB-model); 
-	returns a list with class attribute 'svarest'.
-	
+	returns a list with class attribute 'svarest'.	
 	* R/Psi.varest.R: Method 'Psi' for 'varest' objects.
-
 	* R/Psi.R: Defined formerly function 'Psi' as S3-method.
-
-	* R/plot.varirf.R: Adapted plot method for objects of class 'svarest'.
-	
+	* R/plot.varirf.R: Adapted plot method for objects of class 'svarest'.	
 	* R/irf.varest.R: Method 'irf' for 'varest' objects.
-
 	* R/irf.svarest.R: Method 'irf' for 'svarest' objects.
-
 	* R/irf.R: Defined formerly function 'irf' as S3-method.
-
 	* R/fevd.varest.R: Method 'fevd' for 'varest' objects.
-
 	* R/fevd.svarest.R: Method 'fevd' for 'svarest' objects.
-
 	* R/fevd.R: Defined formerly function 'fevd' as S3-method.
-
 	* R/Phi.varest.R: Method 'Phi' for 'varest' objects.
-
 	* R/Phi.svarest.R: Method 'Phi' for 'svarest' objects.
-
 	* R/Phi.R ("Phi"): Defined formerly function 'Phi' as S3-method.
-
 	* man/SVAR.Rd: Rd-file for function 'SVAR' created.
-
 	* man/fevd.Rd: \alias for 'fevd.varest' and 'fevd.svarest' included 
 	and \arguments and \usage sections adjusted.
-
 	* man/Phi.Rd: \alias for 'Phi.varest' and 'Phi.svarest' included 
 	and \arguments and \usage sections adjusted.
-
 	* man/irf.Rd: \alias for 'irf.varest' and 'irf.svarest' included 
 	and \arguments and \usage sections adjusted.
-
 	* man/Psi.Rd: \alias for 'Psi.varest' included and \arguments 
 	and \usage sections adjusted.
 
