@@ -1,3 +1,7 @@
+2009-08-10  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* man/summary.Rd: Deleted erroneous \cr.
+
 2009-08-04  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* R/predict-vec2var.R: Fixed bug in trend generation for forecasts.

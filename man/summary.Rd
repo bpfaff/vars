@@ -47,16 +47,19 @@ signif.stars = getOption("show.signif.stars"), ...)
 
 \value{
   Returns either a list with class attribute \code{varsum} which contains the
-  following elements:\cr
+  following elements:
+  
   \item{names}{Character vector with the names of the endogenous
-correlation matrix of VAR residuals.}
+    correlation matrix of VAR residuals.}
   \item{logLik}{Numeric, value of log Likelihood.}
   \item{obs}{Integer, sample size.}
   \item{roots}{Vector, roots of the characteristic polynomial.}
   \item{type}{Character vector, deterministic regressors included in VAR:}
-  \item{call}{Call, the initial call to \code{VAR}.}\cr
+  \item{call}{Call, the initial call to \code{VAR}.}
+  
   Or a list with class attribute \code{svarsum} which contains the
-  following elements:\cr
+  following elements:
+  
   \item{type}{Character, the type of SVAR-model.}
   \item{A}{Matrix, estimated coefficients for A matrix.}
   \item{B}{Matrix, estimated coefficients for B matrix.}
@@ -69,9 +72,11 @@ correlation matrix of VAR residuals.}
   \item{obs}{Integer, number of observations used.}
   \item{opt}{List, result of \code{optim()}.}
   \item{iter}{Integer, the count of iterations.}
-  \item{call}{Call, the call to \code{SVAR()}.}  
+  \item{call}{Call, the call to \code{SVAR()}.}
+  
   Or a list with class attribute \code{svecsum} which contains the
-  following elements:\cr
+  following elements:
+  
   \item{type}{Character, the type of SVEC-model.}
   \item{SR}{Matrix, contemporaneous impact matrix.}
   \item{LR}{Matrix, long-run impact matrix.}
