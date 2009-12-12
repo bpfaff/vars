@@ -65,7 +65,6 @@ function(x, cause = NULL){
   ##
   ## Instantaneous Causality
   ##
-  sigma.u <- crossprod(resid(x)) / (obs - ncol(Z))
   colnames(sigma.u) <- y.names
   rownames(sigma.u) <- y.names
   select <- sigma.u[rownames(sigma.u) %in% y2.names, colnames(sigma.u) %in% y1.names ]
