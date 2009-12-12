@@ -12,7 +12,7 @@ function(x, cause = NULL){
   y.names <- colnames(x$y)
   if(is.null(cause)){
     cause <- y.names[1]
-    warning("\nArgument 'cause' has not been specified;\nusing first variable in 'x$y' as cause variable.\n")
+    warning("\nArgument 'cause' has not been specified;\nusing first variable in 'x$y' (", cause, ") as cause variable.\n")
   } else {
     if(!all(cause%in%y.names)) stop("Argument cause does not match variables names.\n")
   }
