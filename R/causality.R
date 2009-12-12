@@ -13,6 +13,8 @@ function(x, cause = NULL){
   if(is.null(cause)){
     cause <- y.names[1]
     warning("\nArgument 'cause' has not been specified;\nusing first variable in 'x$y' as cause variable.\n")
+  } else {
+    if(!all(cause%in%y.names)) stop("Argument cause does not match variables names.\n")
   }
   y1.names <- subset(y.names, subset = y.names %in% cause)
   y2.names <- subset(y.names, subset = !(y.names %in% cause))
