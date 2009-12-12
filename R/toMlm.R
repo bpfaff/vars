@@ -9,11 +9,17 @@ toMlm.default <- function(x){
 toMlm.varest<-function(x){
   ix <- 1:x$K
   X<-x$datamat
+  type<-x$type
+  is.const<-type%in%c("const", "both")
   #remove constant in datamat
-  if(x$type%in%c("const", "both")) X<-X[, -grep("const", colnames(X))]
+  if(is.const) X<-X[, -grep("const", colnames(X))]
   #construct formula
   left <- paste(names(X)[ix], collapse = ",")
-  fo <- as.formula(paste("cbind(", left, ") ~ ."))
+  if(is.const) {
+    fo <- as.formula(paste("cbind(", left, ") ~ ."))
+  } else {
+    fo <- as.formula(paste("cbind(", left, ") ~ .-1")) #remove automatical constant
+  }
   #apply lm
   res<-eval(substitute(lm(fo, X), list(fo = fo))) #code suggested by Gabor Groothendick
   return(res)
