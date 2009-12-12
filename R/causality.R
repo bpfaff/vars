@@ -19,39 +19,29 @@ function(x, cause = NULL){
   y1.names <- subset(y.names, subset = y.names %in% cause)
   y2.names <- subset(y.names, subset = !(y.names %in% cause))
   Z <- x$datamat[, -c(1 : K)]
-  PI <- Bcoef(x)
-  if(ncol(PI) > K*p){
-    colnames(PI) <- c(rep(y.names, p), colnames(PI)[(K*p + 1):ncol(PI)])
-    detcoeff <- length(PI) - K^2 * p
-  } else {
-    colnames(PI) <- rep(y.names, p)
-    detcoeff <- 0
-  }
-  rownames(PI) <- y.names
+  xMlm<-toMlm(x)
+  PI <- coef(xMlm)
   PI.vec <- as.vector(PI)
-  temp <- matrix(1 : (K^2), nrow = K, ncol = K)
-  colnames(temp) <- y.names
-  rownames(temp) <- y.names
-  temp <- as.vector(temp[rownames(temp) %in% y2.names, colnames(temp) %in% y1.names ])
-  if(p > 1){
-    tmp <- temp
-    for(i in 1:(p-1)){
-      tmp <- c(tmp, temp + i*K^2)
-    }
-    temp <- tmp
-  }
-  N <- length(temp)
-  R <- matrix(0, nrow = N, ncol = dim(PI)[1] * dim(PI)[2])
-  for(i in 1 : N){
-    R[i, temp[i]] <- 1
-  }
+
+  ###Restriction matrix R for Granger causality
+  #build matrix of same size as coef matrix indicating which to be restricted
+  R2<-matrix(0, ncol=ncol(PI), nrow=nrow(PI)) 
+  g<-which(gsub("\\.l[[:digit:]]", "", rownames(PI))%in%cause) #select cause regressors
+  j<-which(colnames(PI)%in%cause) #select cause regressand
+  R2[g,-j]<-1	#select coef to be tested
+  w<-which(as.vector(R2)!=0)
+  #build corresponding matrix as coef are not vectorized
+  N <- length(w)
+  R<-matrix(0, ncol=ncol(PI)*nrow(PI), nrow=N) #matrix of restrictions
+  for(i in 1:N) R[i,w[i]]<-1
+
+
   ##
   ## Granger-causality
   ##
-  sigma.u <- crossprod(resid(x)) / (obs - ncol(Z))
-  sigma.pi <- kronecker(solve(crossprod(as.matrix(Z))), sigma.u)
+  sigma.pi <- vcov(xMlm)
   df1 <- p * length(y1.names) * length(y2.names)
-  df2 <- K * obs - K^2 * p - detcoeff
+  df2 <- K * obs - length(PI)#K^2 * p - detcoeff
   STATISTIC <- t(R %*% PI.vec) %*% solve(R %*% sigma.pi %*% t(R)) %*% R %*% PI.vec / N
   names(STATISTIC) <- "F-Test"
   PARAMETER1 <- df1
@@ -65,6 +55,7 @@ function(x, cause = NULL){
   ##
   ## Instantaneous Causality
   ##
+  sigma.u <- crossprod(resid(x)) / (obs - ncol(Z))
   colnames(sigma.u) <- y.names
   rownames(sigma.u) <- y.names
   select <- sigma.u[rownames(sigma.u) %in% y2.names, colnames(sigma.u) %in% y1.names ]
