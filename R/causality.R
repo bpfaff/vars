@@ -35,7 +35,6 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   R<-matrix(0, ncol=ncol(PI)*nrow(PI), nrow=N) #matrix of restrictions
   for(i in 1:N) R[i,w[i]]<-1
 
-
   ##
   ## Granger-causality
   ##
@@ -44,33 +43,45 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   df1 <- p * length(y1.names) * length(y2.names)
   df2 <- K * obs - length(PI)#K^2 * p - detcoeff
   STATISTIC <- t(R %*% PI.vec) %*% solve(R %*% sigma.pi %*% t(R)) %*% R %*% PI.vec / N
+
+  ###bootstrap procedure
   if(boot){
-    pred<-predict(xMlm)
-    res<-residuals(xMlm)
-    Zmlm<-model.matrix(xMlm)
-    cross<-crossprod(Zmlm)
-    inside<-solve(R %*% sigma.pi %*% t(R))
+    ###Restricted model: estimation under null of Granger non-causality
+    co.names<-Bcoef(x)
+    k<-which(gsub("\\.l[[:digit:]]", "", colnames(co.names))%in%cause) #select cause regressors
+    l<-which(rownames(co.names)%in%cause) #select cause regressand
+    R2inv<-matrix(1, ncol=nrow(PI), nrow=ncol(PI)) #exact inverse steps as R2
+    R2inv[-l,k]<-0	#select coef to be tested  
+    xres<-restrict(x, method = "man", resmat = R2inv)
+    pred<-sapply(xres$varresult,predict)
+    res<-residuals(xres)
+
     #bootstrap function for homo case: use more efficient low-level, as XX-1 already computed
-    bootit.Homo<-function(x){
-      Ynew<-pred+res*rnorm(n=obs, sd=0)
-      PI.boot<-solve(cross, crossprod(Zmlm,Ynew)) #this could be made more efficent: compute only interest coefs,
-      PI.boot.vec<-as.vector(PI.boot)
-      t(R %*% PI.boot.vec) %*% inside %*% (R %*% PI.boot.vec) / N
-    }
+    if(is.null(vcov.)){
+      Zmlm<-model.matrix(xMlm)
+      cross<-crossprod(Zmlm)
+      inside<-solve(R %*% sigma.pi %*% t(R))
+      boot.fun<-function(x=1){
+	Ynew<-pred+res*rnorm(n=obs, mean=0, sd=x)
+	PI.boot<-solve(cross, crossprod(Zmlm,Ynew)) #this could be made more efficent: compute only interest coefs,
+	PI.boot.vec<-as.vector(PI.boot)
+	t(R %*% PI.boot.vec) %*% inside %*% (R %*% PI.boot.vec) / N
+      }
+    } else {
     #bootstrap function for hetero case: obliged to run whole lm
-    bootit.Hetero<-function(x){
-      Ynew<-pred+res*rnorm(n=obs)
-      #two next lines as needed as x<-freeny.x; mylm<-lm(freeny.y~x); rm(x);update(mylm) #does not work
+    #two next lines as needed as x<-freeny.x; mylm<-lm(freeny.y~x); rm(x);update(mylm) #does not work
       X<-x$datamat 
       if(x$type%in%c("const", "both")) X<-X[, -grep("const", colnames(X))]
-      xMlm.boot<-update(xMlm, Ynew~.)
-      sigma.pi.boot  <- if (is.function(vcov.)) vcov.(xMlm.boot) else {vcov.;
-	warning("vcov. should be function, not an object, when used with boot=TRUE")}
-      PI.boot.vec <- as.vector(coef(xMlm.boot))
-      t(R %*% PI.boot.vec) %*% solve(R %*% sigma.pi.boot %*% t(R)) %*% R %*% PI.boot.vec / N
-    }
-    boot.fun<-if(is.null(vcov.)) bootit.Homo else bootit.Hetero
-    res.rep<-replicate(boot.runs, boot.fun(Xmlm))
+      boot.fun<-function(x=1){
+	X[,1:K]<-pred+res*rnorm(n=obs, sd=x, mean=1) #workaround as calling it ynew and putting in update() fails
+	xMlm.boot<-update(xMlm, .~.)
+	sigma.pi.boot  <- if (is.function(vcov.)) vcov.(xMlm.boot) else {vcov.;
+	  warning("vcov. should be function, not an object, when used with boot=TRUE")}
+	PI.boot.vec <- as.vector(coef(xMlm.boot))
+	t(R %*% PI.boot.vec) %*% solve(R %*% sigma.pi.boot %*% t(R)) %*% R %*% PI.boot.vec / N
+      }
+    }    
+    res.rep<-replicate(boot.runs, boot.fun(x=1))
     pval<-mean(res.rep>as.numeric(STATISTIC))
   }
   names(STATISTIC) <- "F-Test"
@@ -118,3 +129,4 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   result2
   return(list(Granger = result1, Instant = result2))
 }
+
