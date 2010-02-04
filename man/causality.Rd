@@ -12,7 +12,7 @@
 }
 
 \usage{
-causality(x, cause = NULL, vcov.=NULL)
+causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
 }
 
 \arguments{
@@ -23,6 +23,8 @@ causality(x, cause = NULL, vcov.=NULL)
     variable and a warning is printed.}   
   \item{vcov.}{a specification of the covariance matrix of the estimated coefficients. This can be
     specified as a matrix or as a function yielding a matrix when applied to \code{x}.}
+  \item{boot}{Logical. Whether a wild bootstrap procedure should be used to compute the critical  	values. Default is no}
+  \item{boot.runs}{Number of bootstrap replications if boot=TRUE}
 }
 
 \details{
@@ -71,7 +73,7 @@ causality(x, cause = NULL, vcov.=NULL)
   Fot the Granger causality test, a robust covariance-matrix estimator can be 
   used through argument \code{vcov.} It can be either a pre-computed matrix or
   a function for extracting the covariance matrix. See \code{\link[sandwich]{vcovHC}}
-  from package \pkg{sandwich} for duther details.
+  from package \pkg{sandwich} for further details. A wild bootstrap computation (imposing the restricted model as null) of the p values is available through argument \code{boot}. 
 }
 
 \value{
