@@ -12,7 +12,7 @@
 }
 
 \usage{
-causality(x, cause = NULL)
+causality(x, cause = NULL, vcov.=NULL)
 }
 
 \arguments{
@@ -21,6 +21,8 @@ causality(x, cause = NULL)
   \item{cause}{A character vector of the cause variable(s). If not set,
     then the variable in the first column of \code{x$y} is used as cause
     variable and a warning is printed.}   
+  \item{vcov.}{a specification of the covariance matrix of the estimated coefficients. This can be
+    specified as a matrix or as a function yielding a matrix when applied to \code{x}.}
 }
 
 \details{
@@ -64,7 +66,12 @@ causality(x, cause = NULL)
     \frac{1}{2}K(K + 1))} and is defined such that for any symmetric
   \eqn{(K \times K)} matrix A, \eqn{vec(A) = D_K vech(A)} holds. The
   test statistic \eqn{\lambda_W} is asymptotically distributed as
-  \eqn{\chi^2(N)}.   
+  \eqn{\chi^2(N)}.
+  
+  Fot the Granger causality test, a robust covariance-matrix estimator can be 
+  used through argument \code{vcov.} It can be either a pre-computed matrix or
+  a function for extracting the covariance matrix. See \code{\link[sandwich]{vcovHC}}
+  from package \pkg{sandwich} for duther details.
 }
 
 \value{
