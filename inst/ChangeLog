@@ -1,3 +1,7 @@
+2010-02-05  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/causality.R: Enhanced causality testing by supporting HAC.
+
 2009-08-10  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* man/summary.Rd: Deleted erroneous \cr.
