@@ -48,6 +48,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   if(boot){
     ###Restricted model: estimation under null of Granger non-causality
     co.names<-Bcoef(x)
+    #needs to rebuild another restriction matrix for restrict(), as disposition of coef is different
     k<-which(gsub("\\.l[[:digit:]]", "", colnames(co.names))%in%cause) #select cause regressors
     l<-which(rownames(co.names)%in%cause) #select cause regressand
     R2inv<-matrix(1, ncol=nrow(PI), nrow=ncol(PI)) #exact inverse steps as R2

@@ -97,7 +97,11 @@ causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
   Granger, C. W. J. (1969), Investigating causal relations by
   econometric models and cross-spectral methods, \emph{Econometrica},
   \bold{37}: 424-438. 
-  
+
+  Hafner, C. M. and Herwartz, H. (2009) Testing for linear vector autoregressive 
+  dynamics under multivariate generalized autoregressive heteroskedasticity, 
+  \emph{Statistica Neerlandica}, \bold{63}: 294-323
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 
@@ -106,6 +110,9 @@ causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
   
   Venables, W. N. and B. D. Ripley (2002), \emph{Modern Applied
     Statistics with S}, 4th edition, Springer, New York.
+
+  Zeileis, A. (2006) Object-Oriented Computation of Sandwich Estimators
+  \emph{Journal of Statistical Software}, \bold{16}, 1-16
 }
 
 \seealso{
