@@ -23,7 +23,7 @@ causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
     variable and a warning is printed.}   
   \item{vcov.}{a specification of the covariance matrix of the estimated coefficients. This can be
     specified as a matrix or as a function yielding a matrix when applied to \code{x}.}
-  \item{boot}{Logical. Whether a wild bootstrap procedure should be used to compute the critical  	values. Default is no}
+  \item{boot}{Logical. Whether a wild bootstrap procedure should be used to compute the critical values. Default is no}
   \item{boot.runs}{Number of bootstrap replications if boot=TRUE}
 }
 
@@ -71,9 +71,12 @@ causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
   \eqn{\chi^2(N)}.
   
   Fot the Granger causality test, a robust covariance-matrix estimator can be 
-  used through argument \code{vcov.} It can be either a pre-computed matrix or
+  used in case of heteroskedasticity through argument \code{vcov.} It can be either a pre-computed matrix or
   a function for extracting the covariance matrix. See \code{\link[sandwich]{vcovHC}}
-  from package \pkg{sandwich} for further details. A wild bootstrap computation (imposing the restricted model as null) of the p values is available through argument \code{boot}. 
+  from package \pkg{sandwich} for further details. 
+
+  A wild bootstrap computation (imposing the restricted model as null)
+  of the p values is available through argument \code{boot} and \code{boot.runs} following Hafner and Herwartz (2009). 
 }
 
 \value{
@@ -123,6 +126,12 @@ causality(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100)
 data(Canada)
 var.2c <- VAR(Canada, p = 2, type = "const")
 causality(var.2c, cause = "e")
+
+#use a robust HC variance-covariance matrix for the Granger test:
+causality(var.2c, cause = "e", vcov.=vcovHC(var.2c))
+
+#use a wild-bootstrap procedure to for the Granger test
+\dontrun{causality(var.2c, cause = "e", boot=TRUE, boot.runs=1000)}
 }
 
 \keyword{regression}
