@@ -1,3 +1,8 @@
+2010-02-05  Matthieu Stigler  
+
+	* R/internal.R: Correct predict() for case when VAR is restricted (different df).
+
+
 2010-02-05  Dr. Bernhard Pfaff  <bp@callisto>
 
 	* R/causality.R: Enhanced causality testing by supporting HAC.
