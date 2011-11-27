@@ -1,26 +1,37 @@
 
-R version 2.10.0 (2009-10-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.14.0 (2011-10-31)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: i486-pc-linux-gnu (32-bit)
 
-R est un logiciel libre livré sans AUCUNE GARANTIE.
-Vous pouvez le redistribuer sous certaines conditions.
-Tapez 'license()' ou 'licence()' pour plus de détails.
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
 
-R est un projet collaboratif avec de nombreux contributeurs.
-Tapez 'contributors()' pour plus d'information et
-'citation()' pour la façon de le citer dans les publications.
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
 
-Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
-en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
-Tapez 'q()' pour quitter R.
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
+
+[Vorher gesicherter Workspace wiederhergestellt]
 
 > library(vars)
-Le chargement a nécessité le package : MASS
-Le chargement a nécessité le package : strucchange
-Le chargement a nécessité le package : zoo
-Le chargement a nécessité le package : sandwich
-Le chargement a nécessité le package : urca
+Lade nötiges Paket: MASS
+Lade nötiges Paket: strucchange
+Lade nötiges Paket: zoo
+
+Attache Paket: ‘zoo’
+
+The following object(s) are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+Lade nötiges Paket: sandwich
+Lade nötiges Paket: urca
+Lade nötiges Paket: lmtest
 > 
 > 
 > 
@@ -95,11 +106,11 @@ rw    0.082112  0.28588  0.71874  0.06162
 U     0.129451  0.05668 -0.01039  0.24111
 
 Estimated identified long run impact matrix:
-          e    prod     rw      U
-e    104.37  0.0000  0.000 0.0000
-prod  45.35  5.1971  0.000 0.0000
-rw   168.41 -2.1145 10.720 0.0000
-U    -19.26 -0.4562  1.410 0.5331
+          e    prod    rw      U
+e    104.37  0.0000  0.00 0.0000
+prod  45.35  5.1971  0.00 0.0000
+rw   168.41 -2.1145 10.72 0.0000
+U    -19.26 -0.4562  1.41 0.5331
 > example(causality)
 
 caslty> data(Canada)
@@ -123,7 +134,42 @@ data:  VAR object var.2c
 Chi-squared = 26.0685, df = 3, p-value = 9.228e-06
 
 
+
+caslty> #use a robust HC variance-covariance matrix for the Granger test:
+caslty> causality(var.2c, cause = "e", vcov.=vcovHC(var.2c))
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object var.2c 
+F-Test = 6.4593, df1 = 6, df2 = 292, p-value = 2.072e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object var.2c 
+Chi-squared = 26.0685, df = 3, p-value = 9.228e-06
+
+
+
+caslty> #use a wild-bootstrap procedure to for the Granger test
+caslty> ## Not run: causality(var.2c, cause = "e", boot=TRUE, boot.runs=1000)
+caslty> 
+caslty> 
+caslty> 
 > example(fanchart)
+
+fnchrt> ## Not run: 
+fnchrt> ##D data(Canada)
+fnchrt> ##D var.2c <- VAR(Canada, p = 2, type = "const")
+fnchrt> ##D var.2c.prd <- predict(var.2c, n.ahead = 8, ci = 0.95)
+fnchrt> ##D fanchart(var.2c.prd)
+fnchrt> ## End(Not run)
+fnchrt> 
+fnchrt> 
+fnchrt> 
 > example(fevd)
 
 fevd> data(Canada)
@@ -301,11 +347,11 @@ Psi> var.2c <- VAR(Canada, p = 2, type = "const")
 Psi> Psi(var.2c, nstep=4)
 , , 1
 
-            [,1]       [,2]       [,3]      [,4]
-[1,]  0.36281502 0.00000000 0.00000000 0.0000000
-[2,] -0.02058554 0.65214032 0.00000000 0.0000000
-[3,] -0.11603352 0.09541606 0.76569598 0.0000000
-[4,] -0.19042005 0.01533867 0.01392474 0.2037670
+            [,1]       [,2]       [,3]     [,4]
+[1,]  0.36281502 0.00000000 0.00000000 0.000000
+[2,] -0.02058554 0.65214032 0.00000000 0.000000
+[3,] -0.11603352 0.09541606 0.76569598 0.000000
+[4,] -0.19042005 0.01533867 0.01392474 0.203767
 
 , , 2
 
@@ -367,8 +413,8 @@ Estimated coefficients for equation prod:
 Call:
 prod = prod.l1 + e.l2 + rw.l2 + U.l2 + const 
 
-     prod.l1         e.l2        rw.l2         U.l2        const 
-   1.0080992    0.2894399   -0.0972884    0.7503647 -240.5604500 
+      prod.l1          e.l2         rw.l2          U.l2         const 
+   1.00809918    0.28943990   -0.09728839    0.75036470 -240.56045005 
 
 
 Estimated coefficients for equation rw: 
@@ -407,8 +453,8 @@ Estimated coefficients for equation e:
 Call:
 e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 
 
-        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
- 1.602678697  0.175871179  0.001789380  0.054169302 -0.632434103 -0.109824962 
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+ 1.60267870  0.17587118  0.00178938  0.05416930 -0.63243410 -0.10982496 
 
 
 Estimated coefficients for equation prod: 
@@ -501,6 +547,13 @@ Call: efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic,
     rescale = rescale)
 
 
+
+stblty> ## Not run: 
+stblty> ##D plot(var.2c.stabil)
+stblty> ## End(Not run)
+stblty> 
+stblty> 
+stblty> 
 > example(SVAR)
 
 SVAR> data(Canada)
@@ -629,10 +682,10 @@ Estimated coefficients for equation rw:
 Call:
 rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 
 
-       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
--0.27303669 -0.07804660  0.90004789 -0.02480889  0.33126437 -0.00885899 
-      rw.l2        U.l2 
- 0.06258736 -0.17579589 
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+-0.273036691 -0.078046604  0.900047886 -0.024808893  0.331264372 -0.008858991 
+       rw.l2         U.l2 
+ 0.062587364 -0.175795886 
 
 
 Estimated coefficients for equation U: 
@@ -854,5 +907,5 @@ difp -0.03055891 0.001723883 -0.007525805 -0.00835411
 > 
 > 
 > proc.time()
-utilisateur     système      écoulé 
-      5.052       0.108       5.508 
+       User      System verstrichen 
+      3.628       0.100       4.188 

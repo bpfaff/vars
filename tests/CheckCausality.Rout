@@ -1,30 +1,38 @@
 
-R version 2.10.0 (2009-10-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.14.0 (2011-10-31)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: i486-pc-linux-gnu (32-bit)
 
-R est un logiciel libre livré sans AUCUNE GARANTIE.
-Vous pouvez le redistribuer sous certaines conditions.
-Tapez 'license()' ou 'licence()' pour plus de détails.
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
 
-R est un projet collaboratif avec de nombreux contributeurs.
-Tapez 'contributors()' pour plus d'information et
-'citation()' pour la façon de le citer dans les publications.
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
 
-Tapez 'demo()' pour des démonstrations, 'help()' pour l'aide
-en ligne ou 'help.start()' pour obtenir l'aide au format HTML.
-Tapez 'q()' pour quitter R.
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
 
 > 
 > 
 > ###test causality
 > library(vars)
-Le chargement a nécessité le package : MASS
-Le chargement a nécessité le package : strucchange
-Le chargement a nécessité le package : zoo
-Le chargement a nécessité le package : sandwich
-Le chargement a nécessité le package : urca
-Le chargement a nécessité le package : lmtest
+Lade nötiges Paket: MASS
+Lade nötiges Paket: strucchange
+Lade nötiges Paket: zoo
+
+Attache Paket: ‘zoo’
+
+The following object(s) are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+Lade nötiges Paket: sandwich
+Lade nötiges Paket: urca
+Lade nötiges Paket: lmtest
 > data(Canada)
 > 
 > myVar<-VAR(Canada, p=2, season=12)
@@ -46,7 +54,7 @@ data:  VAR object myVar
 Chi-squared = 26.0187, df = 3, p-value = 9.452e-06
 
 
-Message d'avis :
+Warnmeldung:
 In causality(myVar) : 
 Argument 'cause' has not been specified;
 using first variable in 'x$y' (e) as cause variable.
@@ -295,7 +303,7 @@ Chi-squared = 26.2773, df = 3, p-value = 8.344e-06
 
 > 
 >  myVar3<-VAR(Canada[,1:3], p=1, exogen=Canada[,4], type="none")
-Message d'avis :
+Warnmeldung:
 In VAR(Canada[, 1:3], p = 1, exogen = Canada[, 4], type = "none") :
   No column names supplied in exogen, using: exo1 , instead.
 
@@ -317,7 +325,7 @@ data:  VAR object myVar3
 Chi-squared = 11.2607, df = 2, p-value = 0.003587
 
 
-Message d'avis :
+Warnmeldung:
 In causality(myVar3) : 
 Argument 'cause' has not been specified;
 using first variable in 'x$y' (e) as cause variable.
@@ -411,5 +419,5 @@ Chi-squared = 8.1627, df = 2, p-value = 0.01689
 > 
 > 
 > proc.time()
-utilisateur     système      écoulé 
-      2.328       0.064       2.570 
+       User      System verstrichen 
+      2.336       0.136       4.556 
