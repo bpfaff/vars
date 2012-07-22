@@ -1,3 +1,7 @@
+2012-07-22  Bernhard Pfaff  <bp@callisto.local>
+
+	* DESCRIPTION (Date): Included Authors@R
+
 2010-02-05  Matthieu Stigler  
 
 	* R/internal.R: Correct predict() for case when VAR is restricted (different df).
