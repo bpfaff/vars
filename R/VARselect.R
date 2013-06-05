@@ -52,7 +52,7 @@ function (y, lag.max = 10, type = c("const", "trend", "both",
         ys.lagged <- cbind(ylagged[, c(1:idx[i])], rhs)
         sampletot <- nrow(y)
         nstar <- ncol(ys.lagged)
-        resids <- resid(lm(yendog ~ -1 + ys.lagged))
+        resids <- lm.fit(x=ys.lagged, y=yendog)$residuals
         sigma.det <- det(crossprod(resids)/sample)
         criteria[1, i] <- log(sigma.det) + (2/sample) * (i * K^2 + K * detint)
         criteria[2, i] <- log(sigma.det) + (2 * log(log(sample))/sample) * (i * K^2 + K * detint)
