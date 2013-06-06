@@ -141,7 +141,8 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 
 \examples{
 data(Canada)
-vecm <- ca.jo(Canada[, c("prod", "e", "U", "rw")], type = "trace", ecdet = "trend", K = 3, spec = "transitory")
+vecm <- ca.jo(Canada[, c("prod", "e", "U", "rw")], type = "trace",
+              ecdet = "trend", K = 3, spec = "transitory")
 SR <- matrix(NA, nrow = 4, ncol = 4)
 SR[4, 2] <- 0
 SR
