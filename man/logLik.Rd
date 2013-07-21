@@ -35,7 +35,7 @@
 \details{
   The log-likelihood of a VAR or level-VECM model is defined as:
   \deqn{
-    \log l = - \frac{K T}{2} \log 2 \pi - \frac{T}{2} |\Sigma_u| -
+    \log l = - \frac{K T}{2} \log 2 \pi - \frac{T}{2} \log |\Sigma_u| -
     \frac{1}{2} tr (U \Sigma^{-1}_u U')
   }
   and for a SVAR / SVEC model the log-likelihood takes the form of:
