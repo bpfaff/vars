@@ -102,9 +102,9 @@ function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
     if(cumulative){
       if(length(response) > 1) irs[[i]] <- apply(irs[[i]], 2, cumsum)
       if(length(response) == 1){
-        tmp <- matrix(cumsum(irs[[1]]))
+        tmp <- matrix(cumsum(irs[[i]]))
         colnames(tmp) <- response
-        irs[[1]] <- tmp
+        irs[[i]] <- tmp
       }
     }
   }
