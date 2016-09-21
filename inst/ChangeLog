@@ -1,0 +1,489 @@
+2012-07-22  Bernhard Pfaff  <bp@callisto.local>
+
+	* DESCRIPTION (Date): Included Authors@R
+
+2010-02-05  Matthieu Stigler  
+
+	* R/internal.R: Correct predict() for case when VAR is restricted (different df).
+
+
+2010-02-05  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/causality.R: Enhanced causality testing by supporting HAC.
+
+2009-08-10  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* man/summary.Rd: Deleted erroneous \cr.
+
+2009-08-04  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/predict-vec2var.R: Fixed bug in trend generation for forecasts.
+
+2009-05-04  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* inst/book-ex/Rcode-1-3.R: Changed start year for unemployment rate. 
+
+2009-05-04  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/restrict.R ("manual"): Fixed bug (coercing lhs to data frame). 
+
+2009-04-29  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/stability.R ("stability"): Fixed bug (extracting formula from
+	lm object). 
+
+2009-01-22  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/VAR.R: Fixed bug, season is directly evaluated and replaced in
+	match.call().  
+
+
+2009-01-09    Dr. Bernhard Pfaff  <bp@callisto>
+
+	* man/SVAR.Rd: Fixed warning on htest.
+	* man/SVEC.Rd: Fixed warning on htest.
+
+2008-12-14  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* R/plot.varest.R (plotest): Fixed bug, in for loop names[i] in [ used.
+
+2008-11-27    Dr. Bernhard Pfaff  <bp@callisto>
+
+	* book-ex/Rcode-4-2.R: Fixed bug in example: error[-c(1, 100)],
+	formerly error[-c(99, 100)]
+	* R/VAR.R ("VAR"): In lm object attribute "intercept" set to 1 if
+	type = "const" or type = "both" to fix an improper F-test calculation.
+
+2008-06-30  Dr. Bernhard Pfaff  <bp@callisto>
+
+	* inst/CITATION: Added citation file.
+	* inst/book-ex: Added Rcode examples pf second edition.
+	* inst/doc/vars.Rnw: Added vignette to package (JSS-article):
+	
+2008-05-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (".boot"): eval.parent() inserted for retrieving
+	objects with class attributes 'varest' or 'svarest'.
+
+2008-02-12    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): Enhanced plot-method for varirf.
+
+2008-02-06    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/logLik.svecest.R: Added logLik-method for objects of class "svecest".
+	* R/summary.svecest.R ("summary.svecest"): Summary-method added
+	for objects of class "svecest".
+	* R/print.svecsum.R ("print.svecsum"): Print-method for objects of
+	class "svecsum" added.
+
+	
+2008-02-05    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/print.svarest.R ("print.svarest"): Changed header appearance of
+	print-method to print.svarsum.
+	* R/SVAR.R ("SVAR"): Included stop() if free parameters are in
+	Amat and Bmat for AB-models.
+	* R/print.varest.R ("print.varest"): Changed header appearance of
+	print-method to print.svarest.
+	* R/print.svecest.R ("print.svecest"): Changed header appearance of
+	print-method to print.svarest.
+	* R/logLik.svarest.R (logLik.svarest): Replaced ML-estimator for
+	Sigma with unbiased estimator.
+	* R/logLik.varest.R (logLik.varest): Replaced ML-estimator for
+	Sigma with unbiased estimator. 
+	* R/SVAR.R (logLc): Normalization of sign for Amat and Bmat
+	implemented, if applicable.
+
+	
+2008-02-04    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVAR.R ("SVAR"): Changed to same Amat/Bmat arguments for
+	method "scoring" and "logLik". The latter is now termed "direct".
+	* R/summary.svarsum.R ("summary.svarest"): Summary-method for
+	objects with class attribute 'svarest' included.
+	* R/print.svarsum.R ("print.svarsum"): Print-method added for
+	objects with class attribute 'svarsum'.
+
+	
+2008-01-31    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/print.varest.R ("print.varest"): Altered print-method for
+	objects of class 'varest'.
+	* R/summary.varest.R ("summary.varest"): Enhanced
+	summary.varest-method.
+	* R/print.varsum.R: Enhanced print.varsum-method.
+
+2007-01-30    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/stability.R ("stability"): Changed default test to "OLS-CUSUM".
+	* R/A.R (A): Function 'A' is deprecated and a synonym is 'Acoef'.
+	* R/arch.R (arch): Function 'arch' is deprecated and a synonym is 'arch.test'.
+	* R/B.R (B): Function 'B' is deprecated and a synonym is 'Bcoef'.
+	* R/logLik.svarest.R (logLik.svarest): Bug fixed in computation of log-Likelihood.
+	* R/normality.R (normality): Function 'normality' is deprecated and a synonym is 'normality.test'.
+	* R/plot.varest.R ("plot.varest"): Adjusted plot (same x-axis for
+	diagram of fit and residuals and dropped 'main.resid').
+	* R/serial.R (serial): Function 'serial' is deprecated and a
+	synonym is 'serial.test'.
+	* inst/doc/: Removed temporarily vignette from package.
+	* man/Canada.Rd: Changed data.frame 'Canada' to 'mts' object.
+	
+2007-11-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* doc/vars.Rnw: Dropped void argument 'ctable' in R chunk.
+
+2007-10-31    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/irf.vec2var.R ("irf.vec2var"): Inserted names for Lower and Upper.
+	* R/irf.svecest.R: Inserted names for Lower and Upper.
+	* R/internal.R (.bootirfvec2var): Assigning list elements of Lower
+	and Upper in loop.
+	* R/internal.R (.bootirfsvec): Assigning list elements of Lower
+	and Upper in loop.
+
+2007-10-30    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (.bootsvec): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/internal.R (.bootirfsvec): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/internal.R (.bootirfvec2var): Adjusted for new argument 'ecdet' in ca.jo().
+	* R/predict.vec2var.R ("predict.vec2var"): Adjusted for new argument 'ecdet' in ca.jo().
+	* man/vec2var.Rd (examples): Adjusted for new argument 'ecdet' in ca.jo().
+	
+2007-10-29    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/vec2var.R: Adjusted for new argument 'ecdet' in ca.jo().
+
+2007-10-10    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVEC.R ("SVEC"): Changed Null(t(alpha)) for r = 1.
+
+2007-08-21    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/restrict.R ("restrict"): Fixed buglet: if all rhs-variables
+	are significant.
+	* R/causality.R ("causality"): Fixed buglet: duplication of y.names
+	for matching set to p.
+	* R/SVAR.R ("SVAR"): Fixed buglet: In call to SVAR2 max.iter =
+	max.iter.
+	
+2007-08-17    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/restrict.R ("restrict"): Inserted stop() in ser() if no
+	significant regressors are remaining.
+
+2007-08-15    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/SVAR2.R: Deprecated, SVAR estimation is now included in
+	function SVAR as default.
+	* R/SVAR.R ("SVAR"): Included argument estmethod = c("scoring",
+	"logLik") and the non-overlapping arguments formerly SVAR2. The
+	function SVAR is now a wrapper to the formerly SVAR and SVAR2
+	functions, which are renamed to .SVAR1 and .SVAR2, respectively.  
+
+2007-08-14    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/arch.R ("arch"): Argument multivariate.only = TRUE inserted.
+	* R/normality.R ("normality"): Argument multivariate.only = TRUE inserted.
+	* R/serial.R: Argument type = c("PT.asymptotic", "PT.adjusted", "BG", "ES") inserted.
+
+2007-08-09    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): Plot method for objects of class
+	varirf enhanced.
+	* R/plot.varstabil.R ("plot.varstabil"): Plot method for objects of class
+	varstabil enhanced.
+	* R/fanchart.R ("fanchart"): Function enhancement for single
+	variable plotting and customisation of graphs.
+
+2007-08-08    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varfevd.R: Plot method for objects of class
+	varfevd enhanced. 
+	* R/plot.varest.R: Plot method for objects of class
+	varest enhanced.
+	* R/plot.vec2var.R: Plot method for objects of class
+	vec2var enhanced.
+	* R/plot.varcheck.R ("plot.varcheck"): Plot method for objects of class
+	varcheck enhanced. 
+	
+2007-08-07    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varprd.R (plot.varprd): Plot method for objects of class
+	varprd enhanced.
+
+2007-08-06    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/predict.varest.R ("predict.varest"): Season > n.ahead: coerced
+	seasonal to as.matrix.
+
+2007-07-26    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/plot.Rd: Summarised documentation for various plot methods
+	in one file.
+
+2007-07-25    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VAR.R ("VAR"): Included automatic lag length selection by an
+	information criteria.
+
+2007-07-24    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/fanchart.R: Adjusted for exogenous variables.
+	* R/predict.varest.R: Included list element exo.fcst.
+	* R/predict.vec2var.R ("predict.vec2var"): Included list element exo.fcst.
+	* R/logLik.svarest.R (logLik.svarest): Log-Likelihood-method for
+	SVAR models included.
+	* R/logLik.varest.R (logLik.varest): Log-Likelihood-method for
+	VAR models included.
+	* R/logLik.vec2var.R (logLik.vec2var): Log-Likelihood-method for
+	level VECM models included. 
+	
+2007-07-23    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VARselect.R: Included deterministic variables in penalty term.
+	* R/VARselect.R ("VARselect"): Started trend at lag.max + 1.
+	* R/predict.varest.R: Changed start value of trend for type = trend.
+	* R/predict.varest.R ("predict.varest"): Fixed for season only.
+	* R/predict.varest.R ("predict.varest"): Started trend at nrow(Z)
+	+ 1 + p.
+	* R/predict.varest.R: Fixed for exogenous variables, only.
+	* R/VAR.R: Started trend at p + 1.
+	
+2007-07-20    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R: Replaced x$resid and VAR$resid with resid(x) and
+	resid(VAR), respectively.
+	* R/VAR.R ("VAR"): Removed resid from 'varest'.
+	* R/restrict.R: Removed x$resid.
+	* R/internal.R (".boot"): Pre-allocated elements of 'BOOT'.
+
+2007-07-19    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R (".boot"): Adjusted for seasonal and exoegnous
+	variables. 
+	* R/VARselect.R ("VARselect"): Adjusted for seasonal and exogenous
+	variables. 
+	* R/arch.R ("arch"): Replaced x$resid with resid(x).
+	* R/BQ.R ("BQ"): Replaced x$resid with resid(x).
+	* R/causality.R ("causality"): Replaced x$resid with resid(x).
+	* R/residuals.vec2var.R ("residuals.vec2var"): residuals-method
+	for vec2var.
+	* R/fitted.vec2var.R ("fitted.vec2var"): fitted-method for vec2var.
+	* R/plot.vec2var.R (plot.vec2var): plot-method for vec2var.
+	* R/plot.varest.R ("plot.varest"): Use of methods resid and fitted.
+	* R/Psi.varest.R ("Psi.varest"): Replaced x$resid with resid(x).
+	* R/Psi.vec2var.R ("Psi.vec2var"): Replaced x$resid with resid(x).
+	* R/serial.R ("serial"): Replaced x$resid with resid(x).
+	* R/SVAR2.R ("SVAR2"): Replaced x$resid with resid(x).
+	* R/SVAR.R ("SVAR"): Replaced x$resid with resid(x).
+	
+2007-07-18    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/VAR.R: Inserted centered seasonal dummy variable and exogenous
+	variables in function's argument.
+	* R/internal.R: Replaced "Chi^2" with "Chi-squared" in names(STATISTIC)
+	* R/coef.varest.R ("coef.varest"): Changed coef-method such that a
+	list of summary coeffecients is returned. 
+	* R/A.R ("A"): Adjusted for seasonal dummies and exogenous variables.
+	* R/plot.varprd.R ("plot.varprd"): Changed color "green" to "blue"
+	for better visibility.
+	* R/predict.varest.R ("predict.varest"): Adjusted predict method
+	for centered seasonal dummies and exogenous variables.
+	* R/plot.varcheck.R ("plot.varcheck"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varest.R ("plot.varest"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varfevd.R ("plot.varfevd"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varirf.R ("plot.varirf"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varprd.R ("plot.varprd"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/plot.varstabil.R ("plot.varstabil"): on.exit(par(op)) and
+	par(ask = TRUE) included.
+	* R/fanchart.R ("fanchart"): Changed from heat to gray color
+	palette and par(ask = TRUE) and on.exit(par(op)) included.
+	* R/causality.R ("causality"): Changed "Chi^2" to
+	"Chi-squared". Adjusted for seasonal and exogenous variables.
+	
+2007-07-17   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* NAMESPACE: Removed predict. Included fitted.varest, coef.varest
+	and residuals.varest as S3-methods. 
+	* R/fitted.varest.R ("fitted.varest"): fitted-method applied to
+	varresult list element implemented. 
+	* R/coef.varest.R ("coef.varest"): coefficient-method applied to
+	varresult list element implemented. 
+	* R/residuals.varest.R ("residuals.varest"): residuals-method
+	applied to varresult list element implemented. 
+	
+2007-07-13   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/plot.varirf.R ("plot.varirf"): x$model for SVECM included in
+	if-else clause.
+	* R/predict.R: Removed predict-function.  
+	* R/predict.varest.R ("predict.varest"): Changed argument 'x' to
+	'object'. 
+	* R/predict.vec2var.R ("predict.vec2var"): Changed argument 'x' to
+	'object'. 
+	* man/predict.Rd: Replaced argument 'x' with 'object'.
+	* man/irf.Rd (cumulative): Fixed default value to FALSE. 
+
+2007-06-20   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/causality.R ("causality"): Changed wording in METHOD for
+	Granger causality.
+	* R/plot.***.R and fanchart(): op <- par(no.readonly = TRUE) and
+	par(op) inserted  
+	
+2007-06-12   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/plot.varprd.Rd: \encoding{latin1} inserted.
+	* man/roots.Rd: \encoding{latin1} inserted.
+
+2007-05-21   Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/irf.vec2var.R: Bootstrapped CI implemented.
+	* R/irf.svecest.R: Bootstrapped CI implemented.
+	* R/vec2var.R: Use of z@season for obtaining seasonality, instead
+	of call. 
+	* R/SVEC.R ("SVEC"): 'LRorig', 'SRorig' and 'r' included in returned
+	list object. 
+	* R/Phi.svecest.R ("Phi.svecest"): Changed call to vec2var:
+	varlevel <- vec2var(x$var, r = x$r)
+	* R/predict.vec2var.R: if-clause changed in season and dumvar checking.
+
+	
+2007-05-18   Dr. Bernhard Pfaff <bernhard@pfaffikus.de> 
+
+	* R/VAR.R: Checking for correctness of y inserted.
+	* R/Phi.svecest.R: Phi-method for svecest implemented.
+	* R/fevd.svecest.R: FEVD method for svecest implemented.
+	* R/irf.svecest.R: IRF method for svecest implemented (no boot).
+	
+2007-05-16   Dr. Bernhard Pfaff <bernhard@pfaffikus.de> 
+
+	* R/SVEC.R: Bootstrap standard errors included.
+	* R/print.svecest.R: Print-method adjusted.
+	* R/print.svarest.R: Modified for conditional print. 
+	
+2007-05-11  Dr. Bernhard Pfaff <bernhard@pfaffikus.de> 
+
+	* R/SVAR2.R ("SVAR2"): SVAR estimation with scoring algorithm.
+
+2007-04-26  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* doc/vars.Rnw (section{VECM to VAR}): Vignette has been amended for 
+	(vec2var()).
+
+2007-03-29  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/fanchart.Rd: Adjusted for 'vec2var' and links.
+	* man/predict.Rd: Adjusted for 'vec2var' and links.
+	* man/vec2var.Rd: Links inserted.
+	* man/arch.Rd: Links adjusted.
+	* man/serial.Rd: Links adjusted.
+	* man/normality.Rd: Links adjusted.
+	* man/VAR.Rd: Links adjusted.	
+
+2007-03-26  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/vec2var.R: Function for converting VECM (objects belonging to 
+	formal class ca.jo) to VAR inserted. Added to NAMESPACE. 
+	* R/Phi.vec2var.R: Method 'Phi' for 'vec2var' objects.
+	* R/Psi.vec2var.R: Method 'Psi' for 'vec2var' objects.
+	* R/irf.vec2var.R: Method 'irf' for 'vec2var' objects (no boot). 
+	Internal functions .boot and .irf modified.	
+	* R/fevd.vec2var.R: Method 'fevd' for 'vec2var' objects. 
+	Internal functions .fecovvec2var inserted.
+	* R/Phi.varest.R: Fixed for p > 2.
+	* R/normality.R: Included 'vec2var' objects.
+	* R/serial.R: Included 'vec2var' objects. 
+	DF calculation adjusted in '.pt.multi'.
+	* R/arch.R: Included 'vec2var' objects. 
+	* R/predict.R: Predict method included.
+	* R/predict.vec2var.R: Method 'predict' for 'vec2var' objects.	
+	
+2007-03-07  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/causality.R ("causality"): Object temp corrected for proper 
+	calculation if p > 2.
+
+2006-12-29  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* R/internal.R: .jb.multi: rep(3, K) instead of rep(3, 4).
+	
+2006-12-06  Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+
+	* man/SVAR.Rd: Typo fixed in \value{} section.
+	* R/SVAR.R (svarest): Inserted list object LRIM = NULL
+	                      (used by Blanchard-Quah function BQ). 
+	* man/SVAR.Rd: Inserted description of list element LRIM.
+	* R/BQ.R: New function for Blanchard-Quah type SVAR.
+	* man/BQ.Rd: Documentation for BQ() created.
+	* R/print.svarest.R: Adjusted the print-method for Blanchard-Quah. 
+	* NAMESPACE: Inserted BQ
+	* R/SVAR.R (sigma): Used degrees of freedom instead of obs.
+	
+2006-11-02  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/roots.R: If-clause inserted for checking p > 1
+
+2006-09-13  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* inst/doc/vars.Rnw: Vignette created.
+	* DESCRIPTION (Package): Suggests field added (xtable) for
+	vignette processing.	
+	* R/predict.varest.R: List element model added to 'result' for
+	fanchart function.
+	
+2006-08-31  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/fanchart.R: Function for fan chart added (needs object of
+	class 'varprd').
+	* man/fanchart.Rd: Help file for function 'fanchart()' added.
+	* NAMESPACE: Entry for function 'fanchart()' added.
+
+2006-08-29  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* R/plot.varcheck.R: xlab = "" argument inserted in hist(). 
+
+2006-08-27  Dr. Bernhard Pfaff  <bernhard@pfaffikus>
+
+	* man/roots.Rd: Rd-file for new function 'roots' added.
+	* R/roots.R: Function for calculating eigenvalues added.
+	* NAMESPACE: Function 'root' added to 'NAMESPACE'.
+	
+2006-07-27    Dr. Bernhard Pfaff <bernhard@pfaffikus.de>
+	
+	* R/SVAR.R: Function added for SVAR estimation (A-, B-, and AB-model); 
+	returns a list with class attribute 'svarest'.	
+	* R/Psi.varest.R: Method 'Psi' for 'varest' objects.
+	* R/Psi.R: Defined formerly function 'Psi' as S3-method.
+	* R/plot.varirf.R: Adapted plot method for objects of class 'svarest'.	
+	* R/irf.varest.R: Method 'irf' for 'varest' objects.
+	* R/irf.svarest.R: Method 'irf' for 'svarest' objects.
+	* R/irf.R: Defined formerly function 'irf' as S3-method.
+	* R/fevd.varest.R: Method 'fevd' for 'varest' objects.
+	* R/fevd.svarest.R: Method 'fevd' for 'svarest' objects.
+	* R/fevd.R: Defined formerly function 'fevd' as S3-method.
+	* R/Phi.varest.R: Method 'Phi' for 'varest' objects.
+	* R/Phi.svarest.R: Method 'Phi' for 'svarest' objects.
+	* R/Phi.R ("Phi"): Defined formerly function 'Phi' as S3-method.
+	* man/SVAR.Rd: Rd-file for function 'SVAR' created.
+	* man/fevd.Rd: \alias for 'fevd.varest' and 'fevd.svarest' included 
+	and \arguments and \usage sections adjusted.
+	* man/Phi.Rd: \alias for 'Phi.varest' and 'Phi.svarest' included 
+	and \arguments and \usage sections adjusted.
+	* man/irf.Rd: \alias for 'irf.varest' and 'irf.svarest' included 
+	and \arguments and \usage sections adjusted.
+	* man/Psi.Rd: \alias for 'Psi.varest' included and \arguments 
+	and \usage sections adjusted.
+
+	
+2006-07-26  Dr. Bernhard Pfaff  <bernhard@pfaffikus.de>
+
+	* fevd.R: Changed program line: 
+	Psi <- Psi(x)to Psi <- Psi(x, nstep = n.ahead) 
+

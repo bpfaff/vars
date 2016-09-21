@@ -1,0 +1,22 @@
+Package: vars
+Type: Package
+Title: VAR Modelling
+Version: 1.5-2
+Date: 2013-07-22
+Authors@R: c(person("Bernhard", "Pfaff", email = "bernhard@pfaffikus.de", role = c("aut", "cre")), person("Matthieu", "Stigler", role = "ctb"))
+Depends: R (>= 2.0.0), MASS, strucchange, urca (>= 1.1-6), lmtest (>=
+        0.9-26), sandwich (>= 2.2-4)
+LazyLoad: yes
+Description: Estimation, lag selection, diagnostic testing, forecasting, causality analysis, forecast error variance decomposition and impulse response functions of VAR models and estimation of SVAR and SVEC models.
+License: GPL (>= 2)
+URL: http://www.pfaffikus.de
+Author: Bernhard Pfaff [aut, cre],
+  Matthieu Stigler [ctb]
+Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>
+Repository: CRAN
+Repository/R-Forge/Project: vars
+Repository/R-Forge/Revision: 99
+Repository/R-Forge/DateTimeStamp: 2013-07-21 14:35:42
+Date/Publication: 2013-07-22 10:42:44
+Packaged: 2013-07-21 18:20:24 UTC; rforge
+NeedsCompilation: no

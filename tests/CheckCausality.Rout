@@ -1,0 +1,423 @@
+
+R version 2.14.0 (2011-10-31)
+Copyright (C) 2011 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i486-pc-linux-gnu (32-bit)
+
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
+
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
+
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
+
+> 
+> 
+> ###test causality
+> library(vars)
+Lade nötiges Paket: MASS
+Lade nötiges Paket: strucchange
+Lade nötiges Paket: zoo
+
+Attache Paket: ‘zoo’
+
+The following object(s) are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+Lade nötiges Paket: sandwich
+Lade nötiges Paket: urca
+Lade nötiges Paket: lmtest
+> data(Canada)
+> 
+> myVar<-VAR(Canada, p=2, season=12)
+> 
+> causality(myVar)
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object myVar 
+F-Test = 5.6938, df1 = 6, df2 = 248, p-value = 1.454e-05
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object myVar 
+Chi-squared = 26.0187, df = 3, p-value = 9.452e-06
+
+
+Warnmeldung:
+In causality(myVar) : 
+Argument 'cause' has not been specified;
+using first variable in 'x$y' (e) as cause variable.
+
+> causality(myVar, cause="e")
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object myVar 
+F-Test = 5.6938, df1 = 6, df2 = 248, p-value = 1.454e-05
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object myVar 
+Chi-squared = 26.0187, df = 3, p-value = 9.452e-06
+
+
+> causality(myVar, cause="prod")
+$Granger
+
+	Granger causality H0: prod do not Granger-cause e rw U
+
+data:  VAR object myVar 
+F-Test = 2.4819, df1 = 6, df2 = 248, p-value = 0.02381
+
+
+$Instant
+
+	H0: No instantaneous causality between: prod and e rw U
+
+data:  VAR object myVar 
+Chi-squared = 0.2975, df = 3, p-value = 0.9605
+
+
+> causality(myVar, cause="rw")
+$Granger
+
+	Granger causality H0: rw do not Granger-cause e prod U
+
+data:  VAR object myVar 
+F-Test = 2.1694, df1 = 6, df2 = 248, p-value = 0.04653
+
+
+$Instant
+
+	H0: No instantaneous causality between: rw and e prod U
+
+data:  VAR object myVar 
+Chi-squared = 3.0925, df = 3, p-value = 0.3776
+
+
+> causality(myVar, cause="U")
+$Granger
+
+	Granger causality H0: U do not Granger-cause e prod rw
+
+data:  VAR object myVar 
+F-Test = 2.8427, df1 = 6, df2 = 248, p-value = 0.01076
+
+
+$Instant
+
+	H0: No instantaneous causality between: U and e prod rw
+
+data:  VAR object myVar 
+Chi-squared = 26.2773, df = 3, p-value = 8.344e-06
+
+
+> 
+> causality(myVar, cause=c("e", "prod"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw U
+
+data:  VAR object myVar 
+F-Test = 6.1731, df1 = 8, df2 = 248, p-value = 2.868e-07
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw U
+
+data:  VAR object myVar 
+Chi-squared = 26.2651, df = 4, p-value = 2.798e-05
+
+
+> causality(myVar, cause=c("prod","e"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw U
+
+data:  VAR object myVar 
+F-Test = 6.1731, df1 = 8, df2 = 248, p-value = 2.868e-07
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw U
+
+data:  VAR object myVar 
+Chi-squared = 26.2651, df = 4, p-value = 2.798e-05
+
+
+> causality(myVar, cause=c("e", "prod","rw"))
+$Granger
+
+	Granger causality H0: e prod rw do not Granger-cause U
+
+data:  VAR object myVar 
+F-Test = 8.2792, df1 = 6, df2 = 248, p-value = 3.496e-08
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod rw and U
+
+data:  VAR object myVar 
+Chi-squared = 26.2773, df = 3, p-value = 8.344e-06
+
+
+> 
+> myVar2<-VAR(Canada, p=3, type="trend")
+> causality(myVar2, cause="e")
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object myVar2 
+F-Test = 4.7587, df1 = 9, df2 = 272, p-value = 6.768e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object myVar2 
+Chi-squared = 29.6646, df = 3, p-value = 1.623e-06
+
+
+> causality(myVar2, cause="prod")
+$Granger
+
+	Granger causality H0: prod do not Granger-cause e rw U
+
+data:  VAR object myVar2 
+F-Test = 2.3964, df1 = 9, df2 = 272, p-value = 0.01256
+
+
+$Instant
+
+	H0: No instantaneous causality between: prod and e rw U
+
+data:  VAR object myVar2 
+Chi-squared = 1.3713, df = 3, p-value = 0.7123
+
+
+> causality(myVar2, cause="rw")
+$Granger
+
+	Granger causality H0: rw do not Granger-cause e prod U
+
+data:  VAR object myVar2 
+F-Test = 2.221, df1 = 9, df2 = 272, p-value = 0.02101
+
+
+$Instant
+
+	H0: No instantaneous causality between: rw and e prod U
+
+data:  VAR object myVar2 
+Chi-squared = 2.3541, df = 3, p-value = 0.5022
+
+
+> causality(myVar2, cause="U")
+$Granger
+
+	Granger causality H0: U do not Granger-cause e prod rw
+
+data:  VAR object myVar2 
+F-Test = 2.129, df1 = 9, df2 = 272, p-value = 0.02738
+
+
+$Instant
+
+	H0: No instantaneous causality between: U and e prod rw
+
+data:  VAR object myVar2 
+Chi-squared = 29.6082, df = 3, p-value = 1.668e-06
+
+
+> 
+> causality(myVar2, cause=c("e", "prod"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw U
+
+data:  VAR object myVar2 
+F-Test = 4.3402, df1 = 12, df2 = 272, p-value = 2.544e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw U
+
+data:  VAR object myVar2 
+Chi-squared = 29.6006, df = 4, p-value = 5.902e-06
+
+
+> causality(myVar, cause=c("prod","e"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw U
+
+data:  VAR object myVar 
+F-Test = 6.1731, df1 = 8, df2 = 248, p-value = 2.868e-07
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw U
+
+data:  VAR object myVar 
+Chi-squared = 26.2651, df = 4, p-value = 2.798e-05
+
+
+> causality(myVar, cause=c("e", "prod","rw"))
+$Granger
+
+	Granger causality H0: e prod rw do not Granger-cause U
+
+data:  VAR object myVar 
+F-Test = 8.2792, df1 = 6, df2 = 248, p-value = 3.496e-08
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod rw and U
+
+data:  VAR object myVar 
+Chi-squared = 26.2773, df = 3, p-value = 8.344e-06
+
+
+> 
+>  myVar3<-VAR(Canada[,1:3], p=1, exogen=Canada[,4], type="none")
+Warnmeldung:
+In VAR(Canada[, 1:3], p = 1, exogen = Canada[, 4], type = "none") :
+  No column names supplied in exogen, using: exo1 , instead.
+
+> 
+> causality(myVar3)
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw
+
+data:  VAR object myVar3 
+F-Test = 8.0347, df1 = 2, df2 = 237, p-value = 0.0004205
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw
+
+data:  VAR object myVar3 
+Chi-squared = 11.2607, df = 2, p-value = 0.003587
+
+
+Warnmeldung:
+In causality(myVar3) : 
+Argument 'cause' has not been specified;
+using first variable in 'x$y' (e) as cause variable.
+
+> causality(myVar3, cause="e")
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw
+
+data:  VAR object myVar3 
+F-Test = 8.0347, df1 = 2, df2 = 237, p-value = 0.0004205
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw
+
+data:  VAR object myVar3 
+Chi-squared = 11.2607, df = 2, p-value = 0.003587
+
+
+> causality(myVar3, cause="prod")
+$Granger
+
+	Granger causality H0: prod do not Granger-cause e rw
+
+data:  VAR object myVar3 
+F-Test = 13.585, df1 = 2, df2 = 237, p-value = 2.597e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: prod and e rw
+
+data:  VAR object myVar3 
+Chi-squared = 4.8762, df = 2, p-value = 0.08732
+
+
+> causality(myVar3, cause="rw")
+$Granger
+
+	Granger causality H0: rw do not Granger-cause e prod
+
+data:  VAR object myVar3 
+F-Test = 3.7897, df1 = 2, df2 = 237, p-value = 0.02399
+
+
+$Instant
+
+	H0: No instantaneous causality between: rw and e prod
+
+data:  VAR object myVar3 
+Chi-squared = 8.1627, df = 2, p-value = 0.01689
+
+
+> 
+> causality(myVar3, cause=c("e", "prod"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw
+
+data:  VAR object myVar3 
+F-Test = 33.7688, df1 = 2, df2 = 237, p-value = 1.248e-13
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw
+
+data:  VAR object myVar3 
+Chi-squared = 8.1627, df = 2, p-value = 0.01689
+
+
+> causality(myVar3, cause=c("prod","e"))
+$Granger
+
+	Granger causality H0: e prod do not Granger-cause rw
+
+data:  VAR object myVar3 
+F-Test = 33.7688, df1 = 2, df2 = 237, p-value = 1.248e-13
+
+
+$Instant
+
+	H0: No instantaneous causality between: e prod and rw
+
+data:  VAR object myVar3 
+Chi-squared = 8.1627, df = 2, p-value = 0.01689
+
+
+> 
+> 
+> proc.time()
+       User      System verstrichen 
+      2.336       0.136       4.556 

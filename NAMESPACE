@@ -1,0 +1,80 @@
+export(A, Acoef, arch, arch.test, B, Bcoef, BQ, causality, fanchart, fevd, irf, normality, normality.test, Phi, Psi, restrict, roots, serial, serial.test, stability, SVAR, SVEC, VAR, VARselect, vec2var)
+
+S3method(coef, varest)
+
+S3method(fevd, varest)
+S3method(fevd, svarest)
+S3method(fevd, svecest)
+S3method(fevd, vec2var)
+
+S3method(fitted, varest)
+S3method(fitted, vec2var)
+
+S3method(irf, varest)
+S3method(irf, svarest)
+S3method(irf, svecest)
+S3method(irf, vec2var)
+
+S3method(logLik, varest)
+S3method(logLik, vec2var)
+S3method(logLik, svarest)
+S3method(logLik, svecest)
+
+S3method(Phi, varest)
+S3method(Phi, svarest)
+S3method(Phi, svecest)
+S3method(Phi, vec2var)
+
+S3method(Psi, varest)
+S3method(Psi, vec2var)
+
+S3method(print, svarest)
+S3method(print, svarsum)
+S3method(print, svecest)
+S3method(print, svecsum)
+S3method(print, varcheck)
+S3method(print, varest)
+S3method(print, varfevd)
+S3method(print, varirf)
+S3method(print, varprd)
+S3method(print, varstabil)
+S3method(print, varsum)
+S3method(print, vec2var)
+
+S3method(plot, varcheck)
+S3method(plot, varest)
+S3method(plot, varfevd)
+S3method(plot, varirf)
+S3method(plot, varprd)
+S3method(plot, varstabil)
+S3method(plot, vec2var)
+
+S3method(predict, varest)
+S3method(predict, vec2var)
+
+S3method(residuals, varest)
+S3method(residuals, vec2var)
+
+S3method(summary, varest)
+S3method(summary, svarest)
+S3method(summary, svecest)
+
+
+importFrom(lmtest, coeftest)
+importFrom(sandwich, bread)
+importFrom(sandwich, estfun)
+importFrom(sandwich, vcovHC)
+
+S3method(toMlm, varest)
+S3method(coeftest, varest)
+S3method(bread, varest)
+S3method(estfun, varest)
+S3method(vcovHC, varest)
+S3method(vcov, varest)
+
+importFrom(urca, ca.jo)
+importFrom(urca, cajorls)
+
+
+
+

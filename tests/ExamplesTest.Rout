@@ -1,0 +1,911 @@
+
+R version 2.14.0 (2011-10-31)
+Copyright (C) 2011 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i486-pc-linux-gnu (32-bit)
+
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
+
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
+
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
+
+[Vorher gesicherter Workspace wiederhergestellt]
+
+> library(vars)
+Lade nötiges Paket: MASS
+Lade nötiges Paket: strucchange
+Lade nötiges Paket: zoo
+
+Attache Paket: ‘zoo’
+
+The following object(s) are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+Lade nötiges Paket: sandwich
+Lade nötiges Paket: urca
+Lade nötiges Paket: lmtest
+> 
+> 
+> 
+> example(Acoef)
+
+Acoef> data(Canada)
+
+Acoef> var.2c <- VAR(Canada, p = 2, type = "const")
+
+Acoef> Acoef(var.2c)
+[[1]]
+           e.l1     prod.l1       rw.l1        U.l1
+e     1.6378206  0.16727167 -0.06311863  0.26558478
+prod -0.1727658  1.15042820  0.05130390 -0.47850131
+rw   -0.2688329 -0.08106500  0.89547833  0.01213003
+U    -0.5807638 -0.07811707  0.01866214  0.61893150
+
+[[2]]
+           e.l2      prod.l2        rw.l2        U.l2
+e    -0.4971338 -0.101650067  0.003844492  0.13268931
+prod  0.3852589 -0.172411873 -0.118851043  1.01591801
+rw    0.3678489 -0.005180947  0.052676565 -0.12770826
+U     0.4098182  0.052116684  0.041801152 -0.07116885
+
+> example(arch.test)
+
+arch.t> data(Canada)
+
+arch.t> var.2c <- VAR(Canada, p = 2, type = "const")
+
+arch.t> arch.test(var.2c)
+
+	ARCH (multivariate)
+
+data:  Residuals of VAR object var.2c 
+Chi-squared = 538.8897, df = 500, p-value = 0.1112
+
+> example(Bcoef)
+
+Bcoef> data(Canada)
+
+Bcoef> var.2c <- VAR(Canada, p = 2, type = "const")
+
+Bcoef> Bcoef(var.2c)
+           e.l1     prod.l1       rw.l1        U.l1       e.l2      prod.l2
+e     1.6378206  0.16727167 -0.06311863  0.26558478 -0.4971338 -0.101650067
+prod -0.1727658  1.15042820  0.05130390 -0.47850131  0.3852589 -0.172411873
+rw   -0.2688329 -0.08106500  0.89547833  0.01213003  0.3678489 -0.005180947
+U    -0.5807638 -0.07811707  0.01866214  0.61893150  0.4098182  0.052116684
+            rw.l2        U.l2      const
+e     0.003844492  0.13268931 -136.99845
+prod -0.118851043  1.01591801 -166.77552
+rw    0.052676565 -0.12770826  -33.18834
+U     0.041801152 -0.07116885  149.78056
+> example(BQ)
+
+BQ> data(Canada)
+
+BQ> var.2c <- VAR(Canada, p = 2, type = "const")
+
+BQ> BQ(var.2c)
+
+SVAR Estimation Results:
+======================== 
+
+
+Estimated contemporaneous impact matrix:
+             e     prod       rw        U
+e    -0.007644 -0.28470  0.07374 -0.21234
+prod  0.543663  0.21658 -0.03379 -0.28652
+rw    0.082112  0.28588  0.71874  0.06162
+U     0.129451  0.05668 -0.01039  0.24111
+
+Estimated identified long run impact matrix:
+          e    prod    rw      U
+e    104.37  0.0000  0.00 0.0000
+prod  45.35  5.1971  0.00 0.0000
+rw   168.41 -2.1145 10.72 0.0000
+U    -19.26 -0.4562  1.41 0.5331
+> example(causality)
+
+caslty> data(Canada)
+
+caslty> var.2c <- VAR(Canada, p = 2, type = "const")
+
+caslty> causality(var.2c, cause = "e")
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object var.2c 
+F-Test = 6.2768, df1 = 6, df2 = 292, p-value = 3.206e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object var.2c 
+Chi-squared = 26.0685, df = 3, p-value = 9.228e-06
+
+
+
+caslty> #use a robust HC variance-covariance matrix for the Granger test:
+caslty> causality(var.2c, cause = "e", vcov.=vcovHC(var.2c))
+$Granger
+
+	Granger causality H0: e do not Granger-cause prod rw U
+
+data:  VAR object var.2c 
+F-Test = 6.4593, df1 = 6, df2 = 292, p-value = 2.072e-06
+
+
+$Instant
+
+	H0: No instantaneous causality between: e and prod rw U
+
+data:  VAR object var.2c 
+Chi-squared = 26.0685, df = 3, p-value = 9.228e-06
+
+
+
+caslty> #use a wild-bootstrap procedure to for the Granger test
+caslty> ## Not run: causality(var.2c, cause = "e", boot=TRUE, boot.runs=1000)
+caslty> 
+caslty> 
+caslty> 
+> example(fanchart)
+
+fnchrt> ## Not run: 
+fnchrt> ##D data(Canada)
+fnchrt> ##D var.2c <- VAR(Canada, p = 2, type = "const")
+fnchrt> ##D var.2c.prd <- predict(var.2c, n.ahead = 8, ci = 0.95)
+fnchrt> ##D fanchart(var.2c.prd)
+fnchrt> ## End(Not run)
+fnchrt> 
+fnchrt> 
+fnchrt> 
+> example(fevd)
+
+fevd> data(Canada)
+
+fevd> var.2c <- VAR(Canada, p = 2, type = "const")
+
+fevd> fevd(var.2c, n.ahead = 5)
+$e
+             e       prod          rw           U
+[1,] 1.0000000 0.00000000 0.000000000 0.000000000
+[2,] 0.9633815 0.02563062 0.004448081 0.006539797
+[3,] 0.8961692 0.06797131 0.013226872 0.022632567
+[4,] 0.8057174 0.11757589 0.025689192 0.051017495
+[5,] 0.7019003 0.16952744 0.040094324 0.088477959
+
+$prod
+                e      prod          rw           U
+[1,] 0.0009954282 0.9990046 0.000000000 0.000000000
+[2,] 0.0004271364 0.9889540 0.001068905 0.009549939
+[3,] 0.0004117451 0.9923920 0.000714736 0.006481511
+[4,] 0.0005161018 0.9808528 0.003294103 0.015337005
+[5,] 0.0030112576 0.9554064 0.008196778 0.033385578
+
+$rw
+              e        prod        rw            U
+[1,] 0.02211315 0.014952942 0.9629339 0.000000e+00
+[2,] 0.04843396 0.009077935 0.9424827 5.449178e-06
+[3,] 0.05435699 0.008694159 0.9364211 5.277244e-04
+[4,] 0.04758894 0.015753861 0.9345505 2.106688e-03
+[5,] 0.03957649 0.026911791 0.9287321 4.779622e-03
+
+$U
+             e        prod          rw         U
+[1,] 0.4636211 0.003008244 0.002479203 0.5308915
+[2,] 0.7068777 0.008843922 0.003513667 0.2807647
+[3,] 0.7787875 0.037185141 0.020355796 0.1636716
+[4,] 0.7596609 0.079197860 0.046371393 0.1147699
+[5,] 0.6886156 0.128139114 0.076164201 0.1070811
+
+> example(irf)
+
+irf> data(Canada)
+
+irf> ## For VAR
+irf> var.2c <- VAR(Canada, p = 2, type = "const")
+
+irf> irf(var.2c, impulse = "e", response = c("prod", "rw", "U"), boot =
+irf+ FALSE)
+
+Impulse response coefficients
+$e
+              prod           rw            U
+ [1,] -0.020585541 -0.116033519 -0.190420048
+ [2,] -0.001200947 -0.202083140 -0.329124153
+ [3,]  0.014808436 -0.180277335 -0.369053587
+ [4,] -0.021571434 -0.100425475 -0.352501745
+ [5,] -0.084914238  0.008049928 -0.300681928
+ [6,] -0.155700530  0.126762159 -0.229617289
+ [7,] -0.221442354  0.241833321 -0.151593876
+ [8,] -0.274945401  0.343821736 -0.075179522
+ [9,] -0.313059778  0.427131741 -0.005842792
+[10,] -0.335382897  0.489230185  0.053372767
+[11,] -0.343203150  0.529860661  0.101208799
+
+
+irf> ## For SVAR
+irf> amat <- diag(4)
+
+irf> diag(amat) <- NA
+
+irf> svar.a <- SVAR(var.2c, estmethod = "direct", Amat = amat)
+
+irf> irf(svar.a, impulse = "e", response = c("prod", "rw", "U"), boot =
+irf+ FALSE)
+
+Impulse response coefficients
+$e
+             prod          rw          U
+ [1,]  0.00000000  0.00000000  0.0000000
+ [2,] -0.06268865 -0.09754690 -0.2107321
+ [3,]  0.06083197 -0.11111458 -0.3237895
+ [4,]  0.12990844 -0.06461442 -0.3815257
+ [5,]  0.14414443  0.01290689 -0.3982625
+ [6,]  0.12252595  0.11227775 -0.3826520
+ [7,]  0.08032392  0.22380618 -0.3444779
+ [8,]  0.02978788  0.33828494 -0.2925832
+ [9,] -0.02039436  0.44809056 -0.2342600
+[10,] -0.06469598  0.54753637 -0.1750896
+[11,] -0.10009271  0.63288686 -0.1190199
+
+> example(normality.test)
+
+nrmlt.> data(Canada)
+
+nrmlt.> var.2c <- VAR(Canada, p = 2, type = "const")
+
+nrmlt.> normality.test(var.2c)
+$JB
+
+	JB-Test (multivariate)
+
+data:  Residuals of VAR object var.2c 
+Chi-squared = 5.094, df = 8, p-value = 0.7475
+
+
+$Skewness
+
+	Skewness only (multivariate)
+
+data:  Residuals of VAR object var.2c 
+Chi-squared = 1.7761, df = 4, p-value = 0.7769
+
+
+$Kurtosis
+
+	Kurtosis only (multivariate)
+
+data:  Residuals of VAR object var.2c 
+Chi-squared = 3.3179, df = 4, p-value = 0.5061
+
+
+> example(Phi)
+
+Phi> data(Canada)
+
+Phi> var.2c <- VAR(Canada, p = 2, type = "const")
+
+Phi> Phi(var.2c, nstep=4)
+, , 1
+
+     [,1] [,2] [,3] [,4]
+[1,]    1    0    0    0
+[2,]    0    1    0    0
+[3,]    0    0    1    0
+[4,]    0    0    0    1
+
+, , 2
+
+           [,1]        [,2]        [,3]        [,4]
+[1,]  1.6378206  0.16727167 -0.06311863  0.26558478
+[2,] -0.1727658  1.15042820  0.05130390 -0.47850131
+[3,] -0.2688329 -0.08106500  0.89547833  0.01213003
+[4,] -0.5807638 -0.07811707  0.01866214  0.61893150
+
+, , 3
+
+           [,1]       [,2]        [,3]       [,4]
+[1,]  2.0191501  0.3491150 -0.14251580  0.6512430
+[2,]  0.1676489  1.1553945 -0.01191318  0.1240154
+[3,] -0.3062245 -0.2169480  0.86759379 -0.1419466
+[4,] -0.8923428 -0.1847587  0.10271259  0.1952708
+
+, , 4
+
+           [,1]       [,2]       [,3]       [,4]
+[1,]  2.2426353  0.5189024 -0.2308082  1.1469646
+[2,]  0.3580192  1.1425299 -0.1143523  0.7415988
+[3,] -0.1780731 -0.3227527  0.8387395 -0.2880998
+[4,] -1.0514599 -0.2807327  0.1763723 -0.2293339
+
+, , 5
+
+            [,1]       [,2]       [,3]       [,4]
+[1,]  2.32449796  0.6704429 -0.3142239  1.6488512
+[2,]  0.39725263  1.1159032 -0.1846605  1.1947208
+[3,]  0.03557054 -0.3899379  0.8047533 -0.4227269
+[4,] -1.09758548 -0.3630190  0.2377230 -0.6178418
+
+> example(Psi)
+
+Psi> data(Canada)
+
+Psi> var.2c <- VAR(Canada, p = 2, type = "const")
+
+Psi> Psi(var.2c, nstep=4)
+, , 1
+
+            [,1]       [,2]       [,3]     [,4]
+[1,]  0.36281502 0.00000000 0.00000000 0.000000
+[2,] -0.02058554 0.65214032 0.00000000 0.000000
+[3,] -0.11603352 0.09541606 0.76569598 0.000000
+[4,] -0.19042005 0.01533867 0.01392474 0.203767
+
+, , 2
+
+             [,1]        [,2]        [,3]         [,4]
+[1,]  0.547533747  0.10713578 -0.04463148  0.054117425
+[2,] -0.001200947  0.74779626  0.03262018 -0.097502799
+[3,] -0.202083140  0.03276331  0.68583307  0.002471701
+[4,] -0.329124153 -0.03966904  0.02290799  0.126117843
+
+, , 3
+
+            [,1]        [,2]         [,3]        [,4]
+[1,]  0.61791814  0.22406285 -0.100055386  0.13270186
+[2,]  0.01480844  0.75424487 -0.007394995  0.02527026
+[3,] -0.18027734 -0.06087546  0.662336510 -0.02892404
+[4,] -0.36905359 -0.10769297  0.081365710  0.03978976
+
+, , 4
+
+            [,1]       [,2]        [,3]        [,4]
+[1,]  0.61135633  0.3339673 -0.16075773  0.23371359
+[2,] -0.02157143  0.7455539 -0.07723254  0.15111339
+[3,] -0.10042548 -0.1348699  0.63820776 -0.05870525
+[4,] -0.35250174 -0.1697660  0.13185418 -0.04673068
+
+, , 5
+
+             [,1]       [,2]       [,3]        [,4]
+[1,]  0.552047524  0.4325320 -0.2176401  0.33598154
+[2,] -0.084914238  0.7284313 -0.1247576  0.24344474
+[3,]  0.008049928 -0.1839919  0.6103100 -0.08613782
+[4,] -0.300681928 -0.2235336  0.1734203 -0.12589580
+
+> example(restrict)
+
+rstrct> data(Canada)
+
+rstrct> var.2c <- VAR(Canada, p = 2, type = "const")
+
+rstrct> ## Restrictions determined by thresh
+rstrct> restrict(var.2c, method = "ser")
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + const 
+
+         e.l1       prod.l1         rw.l1          U.l1          e.l2 
+   1.72458925    0.07872263   -0.05370603    0.39150612   -0.60070476 
+        const 
+-128.89450474 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = prod.l1 + e.l2 + rw.l2 + U.l2 + const 
+
+      prod.l1          e.l2         rw.l2          U.l2         const 
+   1.00809918    0.28943990   -0.09728839    0.75036470 -240.56045005 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = prod.l1 + rw.l1 + e.l2 + U.l2 
+
+    prod.l1       rw.l1        e.l2        U.l2 
+-0.11816412  0.96382332  0.07092345 -0.19300125 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + U.l1 + e.l2 + rw.l2 + const 
+
+        e.l1         U.l1         e.l2        rw.l2        const 
+ -0.69545493   0.56002276   0.52253799   0.05670873 142.63164064 
+
+
+
+rstrct> ## Restrictions set manually
+rstrct> restrict <- matrix(c(1, 1, 1, 1, 1, 1, 0, 0, 0, 
+rstrct+                      1, 0, 1, 0, 0, 1, 0, 1, 1,
+rstrct+                      0, 0, 1, 1, 0, 1, 0, 0, 1,
+rstrct+                      1, 1, 1, 0, 1, 1, 0, 1, 0),
+rstrct+                    nrow=4, ncol=9, byrow=TRUE)
+
+rstrct> restrict(var.2c, method = "man", resmat = restrict)
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+ 1.60267870  0.17587118  0.00178938  0.05416930 -0.63243410 -0.10982496 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = e.l1 + rw.l1 + prod.l2 + U.l2 + const 
+
+        e.l1        rw.l1      prod.l2         U.l2        const 
+   0.2963549   -0.0891558    0.9673667    0.8139226 -234.5271114 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = rw.l1 + U.l1 + prod.l2 + const 
+
+     rw.l1       U.l1    prod.l2      const 
+ 0.9886096 -0.3319561 -0.1263612 60.6317163 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + prod.l1 + rw.l1 + e.l2 + prod.l2 + U.l2 
+
+        e.l1      prod.l1        rw.l1         e.l2      prod.l2         U.l2 
+-1.074192674 -0.085839420 -0.007743894  1.086784714  0.068131754  0.909941549 
+
+
+> example(roots)
+
+roots> data(Canada)
+
+roots> var.2c <- VAR(Canada, p = 2, type = "const")
+
+roots> roots(var.2c)
+[1] 0.9950338 0.9081062 0.9081062 0.7380565 0.7380565 0.1856381 0.1428889
+[8] 0.1428889
+> example(serial.test)
+
+srl.ts> data(Canada)
+
+srl.ts> var.2c <- VAR(Canada, p = 2, type = "const")
+
+srl.ts> serial.test(var.2c, lags.pt = 16, type = "PT.adjusted")
+
+	Portmanteau Test (adjusted)
+
+data:  Residuals of VAR object var.2c 
+Chi-squared = 231.5907, df = 224, p-value = 0.3497
+
+> example(stability)
+
+stblty> data(Canada)
+
+stblty> var.2c <- VAR(Canada, p = 2, type = "const")
+
+stblty> var.2c.stabil <- stability(var.2c, type = "OLS-CUSUM")
+
+stblty> var.2c.stabil
+$e
+
+Empirical Fluctuation Process: OLS-based CUSUM test 
+
+Call: efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic, 
+    rescale = rescale)
+
+
+$prod
+
+Empirical Fluctuation Process: OLS-based CUSUM test 
+
+Call: efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic, 
+    rescale = rescale)
+
+
+$rw
+
+Empirical Fluctuation Process: OLS-based CUSUM test 
+
+Call: efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic, 
+    rescale = rescale)
+
+
+$U
+
+Empirical Fluctuation Process: OLS-based CUSUM test 
+
+Call: efp(formula = formula, data = data, type = type, h = h, dynamic = dynamic, 
+    rescale = rescale)
+
+
+
+stblty> ## Not run: 
+stblty> ##D plot(var.2c.stabil)
+stblty> ## End(Not run)
+stblty> 
+stblty> 
+stblty> 
+> example(SVAR)
+
+SVAR> data(Canada)
+
+SVAR> var.2c <- VAR(Canada, p = 2, type = "const")
+
+SVAR> amat <- diag(4)
+
+SVAR> diag(amat) <- NA
+
+SVAR> amat[2, 1] <- NA
+
+SVAR> amat[4, 1] <- NA
+
+SVAR> ## Estimation method scoring
+SVAR> SVAR(x = var.2c, estmethod = "scoring", Amat = amat, Bmat = NULL,
+SVAR+ max.iter = 100, maxls = 1000, conv.crit = 1.0e-8) 
+
+SVAR Estimation Results:
+======================== 
+
+
+Estimated A matrix:
+         e  prod    rw     U
+e    2.756 0.000 0.000 0.000
+prod 0.087 1.533 0.000 0.000
+rw   0.000 0.000 1.282 0.000
+U    2.562 0.000 0.000 4.882
+
+SVAR> ## Estimation method direct
+SVAR> SVAR(x = var.2c, estmethod = "direct", Amat = amat, Bmat = NULL,
+SVAR+ hessian = TRUE, method="BFGS") 
+
+SVAR Estimation Results:
+======================== 
+
+
+Estimated A matrix:
+         e  prod    rw     U
+e    2.756 0.000 0.000 0.000
+prod 0.087 1.533 0.000 0.000
+rw   0.000 0.000 1.282 0.000
+U    2.562 0.000 0.000 4.882
+> example(SVEC)
+
+SVEC> data(Canada)
+
+SVEC> vecm <- ca.jo(Canada[, c("prod", "e", "U", "rw")], type = "trace", ecdet = "trend", K = 3, spec = "transitory")
+
+SVEC> SR <- matrix(NA, nrow = 4, ncol = 4)
+
+SVEC> SR[4, 2] <- 0
+
+SVEC> SR
+     [,1] [,2] [,3] [,4]
+[1,]   NA   NA   NA   NA
+[2,]   NA   NA   NA   NA
+[3,]   NA   NA   NA   NA
+[4,]   NA    0   NA   NA
+
+SVEC> LR <- matrix(NA, nrow = 4, ncol = 4)
+
+SVEC> LR[1, 2:4] <- 0
+
+SVEC> LR[2:4, 4] <- 0
+
+SVEC> LR
+     [,1] [,2] [,3] [,4]
+[1,]   NA    0    0    0
+[2,]   NA   NA   NA    0
+[3,]   NA   NA   NA    0
+[4,]   NA   NA   NA    0
+
+SVEC> SVEC(vecm, LR = LR, SR = SR, r = 1, lrtest = FALSE, boot = FALSE)
+
+SVEC Estimation Results:
+======================== 
+
+
+Estimated contemporaneous impact matrix:
+         prod        e         U      rw
+prod  0.58402  0.07434 -0.152578 0.06900
+e    -0.12029  0.26144 -0.155096 0.08978
+U     0.02526 -0.26720  0.005488 0.04982
+rw    0.11170  0.00000  0.483771 0.48791
+
+Estimated long run impact matrix:
+        prod       e       U rw
+prod  0.7910  0.0000  0.0000  0
+e     0.2024  0.5769 -0.4923  0
+U    -0.1592 -0.3409  0.1408  0
+rw   -0.1535  0.5961 -0.2495  0
+> example(VAR)
+
+VAR> data(Canada)
+
+VAR> VAR(Canada, p = 2, type = "none")
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+ 1.62046761  0.17973134 -0.04425592  0.11310425 -0.64815156 -0.11683270 
+      rw.l2        U.l2 
+ 0.04475537 -0.06581206 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+-0.19389053  1.16559603  0.07426648 -0.66412399  0.20141693 -0.19089450 
+      rw.l2        U.l2 
+-0.06904805  0.77427171 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+-0.273036691 -0.078046604  0.900047886 -0.024808893  0.331264372 -0.008858991 
+       rw.l2         U.l2 
+ 0.062587364 -0.175795886 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+-0.561791776 -0.091739246 -0.001960487  0.785638638  0.574926136  0.068715871 
+       rw.l2         U.l2 
+-0.002926763  0.145852929 
+
+
+
+VAR> VAR(Canada, p = 2, type = "const")
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const 
+
+         e.l1       prod.l1         rw.l1          U.l1          e.l2 
+ 1.637821e+00  1.672717e-01 -6.311863e-02  2.655848e-01 -4.971338e-01 
+      prod.l2         rw.l2          U.l2         const 
+-1.016501e-01  3.844492e-03  1.326893e-01 -1.369984e+02 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+  -0.1727658    1.1504282    0.0513039   -0.4785013    0.3852589   -0.1724119 
+       rw.l2         U.l2        const 
+  -0.1188510    1.0159180 -166.7755177 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const 
+
+         e.l1       prod.l1         rw.l1          U.l1          e.l2 
+ -0.268832871  -0.081065001   0.895478330   0.012130033   0.367848941 
+      prod.l2         rw.l2          U.l2         const 
+ -0.005180947   0.052676565  -0.127708256 -33.188338773 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+ -0.58076382  -0.07811707   0.01866214   0.61893150   0.40981822   0.05211668 
+       rw.l2         U.l2        const 
+  0.04180115  -0.07116885 149.78056487 
+
+
+
+VAR> VAR(Canada, p = 2, type = "trend")
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + trend 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+ 1.63082118  0.16456040 -0.05764637  0.13231952 -0.64150027 -0.12338620 
+      rw.l2        U.l2       trend 
+ 0.03934730 -0.04002238  0.01532917 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + trend 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+-0.14823958  1.09870431  0.01522531 -0.57940001  0.23074378 -0.21979021 
+      rw.l2        U.l2       trend 
+-0.09289334  0.88798355  0.06758938 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + trend 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+-0.23961487 -0.12701916  0.85682285  0.03721896  0.35273506 -0.03001403 
+      rw.l2        U.l2       trend 
+ 0.04512982 -0.09254553  0.04948332 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + trend 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+-0.570210031 -0.079404090  0.008926991  0.770015126  0.569518122  0.074044380 
+       rw.l2         U.l2        trend 
+ 0.001470425  0.124883916 -0.012463808 
+
+
+
+VAR> VAR(Canada, p = 2, type = "both")
+
+VAR Estimation Results:
+======================= 
+
+Estimated coefficients for equation e: 
+====================================== 
+Call:
+e = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const + trend 
+
+         e.l1       prod.l1         rw.l1          U.l1          e.l2 
+ 1.635735e+00  1.716493e-01 -6.005622e-02  2.739686e-01 -4.842222e-01 
+      prod.l2         rw.l2          U.l2         const         trend 
+-9.766366e-02  1.689096e-03  1.433151e-01 -1.509574e+02 -5.706013e-03 
+
+
+Estimated coefficients for equation prod: 
+========================================= 
+Call:
+prod = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const + trend 
+
+       e.l1     prod.l1       rw.l1        U.l1        e.l2     prod.l2 
+-0.14816907  1.09880604  0.01519072 -0.57736715  0.23300094 -0.21942106 
+      rw.l2        U.l2       const       trend 
+-0.09343379  0.89061470 -2.16644760  0.06728750 
+
+
+Estimated coefficients for equation rw: 
+======================================= 
+Call:
+rw = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const + trend 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+ -0.24395401  -0.13327924   0.85895095  -0.08786974   0.21384463  -0.05272931 
+       rw.l2         U.l2        const        trend 
+  0.07838534  -0.25444874 133.30872014   0.06805925 
+
+
+Estimated coefficients for equation U: 
+====================================== 
+Call:
+U = e.l1 + prod.l1 + rw.l1 + U.l1 + e.l2 + prod.l2 + rw.l2 + U.l2 + const + trend 
+
+        e.l1      prod.l1        rw.l1         U.l1         e.l2      prod.l2 
+ -0.57610104  -0.08790304   0.01181620   0.60018959   0.38095481   0.04320519 
+       rw.l2         U.l2        const        trend 
+  0.04661948  -0.09492249 180.98536416   0.01275563 
+
+
+> example(VARselect)
+
+VARslc> data(Canada)
+
+VARslc> VARselect(Canada, lag.max = 5, type="const")
+$selection
+AIC(n)  HQ(n)  SC(n) FPE(n) 
+     3      2      2      3 
+
+$criteria
+                  1           2            3            4            5
+AIC(n) -5.817851996 -6.35093701 -6.397756084 -6.145942174 -5.926500201
+HQ(n)  -5.577529641 -5.91835677 -5.772917961 -5.328846166 -4.917146309
+SC(n)  -5.217991781 -5.27118862 -4.838119523 -4.106417440 -3.407087295
+FPE(n)  0.002976003  0.00175206  0.001685528  0.002201523  0.002811116
+
+> example(vec2var)
+
+vec2vr> library(urca)
+
+vec2vr> data(finland)
+
+vec2vr> sjf <- finland
+
+vec2vr> sjf.vecm <- ca.jo(sjf, ecdet = "none", type = "eigen", K = 2,
+vec2vr+ spec = "longrun", season = 4)
+
+vec2vr> vec2var(sjf.vecm, r = 2)
+
+Coefficient matrix of lagged endogenous variables:
+
+A1:
+          lrm1.l1      lny.l1     lnmr.l1    difp.l1
+lrm1  0.855185363 -0.28226832 -0.09298924 -0.1750511
+lny   0.036993826  0.33057494 -0.06731145 -0.1946863
+lnmr -0.156875074 -0.01067717  0.76861874  0.4247362
+difp  0.001331951  0.02850137  0.02361709  0.2063468
+
+
+A2:
+         lrm1.l2      lny.l2     lnmr.l2     difp.l2
+lrm1  0.15787622  0.27655060 -0.10255593 -0.52017728
+lny  -0.02016649  0.65497929 -0.08102873 -0.09357761
+lnmr  0.25725652 -0.10358761 -0.24253117  0.26571672
+difp -0.01313100 -0.01096218 -0.02802090  0.36002057
+
+
+Coefficient matrix of deterministic regressor(s).
+
+        constant         sd1          sd2         sd3
+lrm1  0.03454360 0.039660747  0.037177941  0.10095683
+lny   0.05021877 0.043686282  0.082751819  0.09559270
+lnmr  0.22729778 0.008791390  0.012456612  0.02011396
+difp -0.03055891 0.001723883 -0.007525805 -0.00835411
+> 
+> 
+> 
+> proc.time()
+       User      System verstrichen 
+      3.628       0.100       4.188 
