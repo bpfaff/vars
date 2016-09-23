@@ -1,4 +1,16 @@
-export(A, Acoef, arch, arch.test, B, Bcoef, BQ, causality, fanchart, fevd, irf, normality, normality.test, Phi, Psi, restrict, roots, serial, serial.test, stability, SVAR, SVEC, VAR, VARselect, vec2var)
+import("MASS")
+import("strucchange")
+importFrom("urca", "ca.jo")
+importFrom("urca", "cajorls")
+importFrom("grDevices", "gray", "gray.colors", "xy.coords")
+importFrom("graphics", "abline", "axis", "barplot", "box", "hist",
+           "layout", "lines", "mtext", "par", "plot", "polygon", "title")
+importFrom("stats", "acf", "as.formula", "coef", "cor", "cov", "density",
+           "embed", "fitted", "lm", "lm.fit", "model.matrix", "na.omit",
+           "optim", "pacf", "pchisq", "pf", "plot.ts", "predict",
+           "printCoefmat", "qnorm", "quantile", "resid", "residuals", "rnorm",
+           "update", "vcov")
+importFrom("utils", "head", "tail")
 
 S3method(coef, varest)
 
@@ -72,8 +84,9 @@ S3method(estfun, varest)
 S3method(vcovHC, varest)
 S3method(vcov, varest)
 
-importFrom(urca, ca.jo)
-importFrom(urca, cajorls)
+export(A, Acoef, arch, arch.test, B, Bcoef, BQ, causality, fanchart, fevd, irf, normality, normality.test, Phi, Psi, restrict, roots, serial, serial.test, stability, SVAR, SVEC, VAR, VARselect, vec2var)
+
+
 
 
 
