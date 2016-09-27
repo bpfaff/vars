@@ -11,7 +11,7 @@
 \description{
   This function computes univariate and multivariate Jarque-Bera tests
   and multivariate skewness and kurtosis tests for the residuals of a
-  VAR(p) or of a VECM in levels. 
+  VAR(p) or of a VECM in levels.
 }
 
 \usage{
@@ -38,7 +38,7 @@ normality.test(x, multivariate.only = TRUE)
 \value{
   A list of class \sQuote{\code{varcheck}} with the following elements is
   returned:\cr
-  
+
   \item{resid}{A matrix of the residuals.}
   \item{jb.uni}{A list of elements with class attribute
     \sQuote{\code{htest}} containing the univariate Jarque-Bera
@@ -46,7 +46,7 @@ normality.test(x, multivariate.only = TRUE)
       FALSE} is set.}
   \item{jb.mul}{A list of elements with class attribute
     \sQuote{\code{htest}}.} containing the mutlivariate Jarque-Bera
-  test, the multivariate Skewness and Kurtosis tests.    
+  test, the multivariate Skewness and Kurtosis tests.
 }
 
 \note{This function was named \code{normality} in earlier versions of package
@@ -64,7 +64,7 @@ normality.test(x, multivariate.only = TRUE)
   Review}, \bold{55}: 163-172.
 
   Lütkepohl, H. (2006), \emph{New Introduction to Multiple Time Series
-    Analysis}, Springer, New York.  
+    Analysis}, Springer, New York.
 }
 
 \seealso{

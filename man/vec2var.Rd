@@ -10,7 +10,7 @@
 
 \description{
   An object of formal class 'ca.jo' is transformed to a VAR in level
-  presentation. 
+  presentation.
 }
 
 \usage{
@@ -65,7 +65,7 @@ vec2var(z, r = 1)
   \code{\link[urca]{ca.jo}}, \code{\link{predict}}, \code{\link{irf}},
   \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
   \code{\link{normality.test}}, \code{\link{arch.test}},
-  \code{\link{serial.test}}, \code{\link{logLik}}, \code{\link{plot}} 
+  \code{\link{serial.test}}, \code{\link{logLik}}, \code{\link{plot}}
 }
 
 \examples{

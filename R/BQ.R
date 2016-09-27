@@ -24,7 +24,7 @@ function(x){
     colnames(cim) <- colnames(lrim)
     rownames(cim) <- colnames(lrim)
     result <- list(A = Ident, Ase = NULL, B = cim, Bse = NULL, LRIM = lrim,
-        Sigma.U = SigmaU * 100, LR = NULL, opt = NULL, start = NULL, 
+        Sigma.U = SigmaU * 100, LR = NULL, opt = NULL, start = NULL,
         type = "Blanchard-Quah", var = x, call = match.call())
     class(result) <- "svarest"
     return(result)

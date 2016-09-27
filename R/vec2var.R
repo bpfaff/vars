@@ -31,7 +31,7 @@ function(z, r = 1){
     PI <- PI[, -(z@P + 1)]
     rhs <- cbind(1, z@ZK[, z@P + 1], z@Z1[, -1])
     colnames(rhs) <- c("constant", colnames(z@ZK)[z@P + 1], colnames(z@Z1)[-1])
-  }  
+  }
   if(!(is.null(eval(z@season)))){
     seas <- eval(z@season) - 1
     season <- paste("sd", 1:seas, sep = "")
@@ -70,7 +70,7 @@ function(z, r = 1){
       rownames(A[[z@lag]]) <- colnames(z@x)
       colnames(A[[z@lag]]) <- paste(colnames(z@x), ".l", z@lag, sep = "")
       names(A) <- paste("A", 1:z@lag, sep = "")
-    }    
+    }
   }
   if(identical(z@spec, "longrun")){
     if(identical(z@lag, as.integer(2))){
@@ -79,7 +79,7 @@ function(z, r = 1){
       colnames(A$A1) <- paste(colnames(z@x), ".l1", sep = "")
       A$A2 <- PI + diag(z@P) - A$A1
       rownames(A$A2) <- colnames(z@x)
-      colnames(A$A2) <- paste(colnames(z@x), ".l2", sep = "")    
+      colnames(A$A2) <- paste(colnames(z@x), ".l2", sep = "")
     } else if(z@lag > 2){
       idx.end <- seq(from = z@P, by = z@P, length.out = z@lag - 1)
       idx.start <- idx.end - z@P + 1
@@ -95,7 +95,7 @@ function(z, r = 1){
       rownames(A[[z@lag]]) <- colnames(z@x)
       colnames(A[[z@lag]]) <- paste(colnames(z@x), ".l", z@lag, sep = "")
       names(A) <- paste("A", 1:z@lag, sep = "")
-    }    
+    }
   }
   datamat <- embed(z@x, dimension = z@lag + 1)
   datamat <- cbind(datamat[, 1:ncol(z@x)], rhs[, colnames(detcoeffs)], datamat[, -c(1:ncol(z@x))])
@@ -112,5 +112,5 @@ function(z, r = 1){
   colnames(resids) <- paste("resids of", colnames(z@x))
   result <- list(deterministic = detcoeffs, A = A, p = z@lag, K = ncol(z@x), y = z@x, obs = nrow(z@Z0), totobs = nrow(z@x), call = match.call(), vecm = z, datamat = datamat, resid = resids, r = r)
   class(result) <- "vec2var"
-  return(result)   
+  return(result)
 }

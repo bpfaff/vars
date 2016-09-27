@@ -10,7 +10,7 @@ function(x, lags.pt = 16, lags.bg = 5, type = c("PT.asymptotic", "PT.adjusted", 
   resids <- resid(x)
   if((type == "PT.asymptotic") || (type == "PT.adjusted")){
     lags.pt <- abs(as.integer(lags.pt))
-    ptm <- .pt.multi(x, K = K, obs = obs, lags.pt = lags.pt, obj.name = obj.name, resids = resids)    
+    ptm <- .pt.multi(x, K = K, obs = obs, lags.pt = lags.pt, obj.name = obj.name, resids = resids)
     ifelse(type == "PT.asymptotic", test <- ptm[[1]], test <- ptm[[2]])
   } else {
     lags.bg <- abs(as.integer(lags.bg))

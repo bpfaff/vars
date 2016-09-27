@@ -1,9 +1,9 @@
-"VARselect" <- 
-function (y, lag.max = 10, type = c("const", "trend", "both", 
-    "none"), season = NULL, exogen = NULL) 
+"VARselect" <-
+function (y, lag.max = 10, type = c("const", "trend", "both",
+    "none"), season = NULL, exogen = NULL)
 {
     y <- as.matrix(y)
-    if (any(is.na(y))) 
+    if (any(is.na(y)))
         stop("\nNAs in y.\n")
     colnames(y) <- make.names(colnames(y))
     K <- ncol(y)
@@ -13,8 +13,8 @@ function (y, lag.max = 10, type = c("const", "trend", "both",
     ylagged <- embed(y, lag)[, -c(1:K)]
     yendog <- y[-c(1:lag.max), ]
     sample <- nrow(ylagged)
-    rhs <- switch(type, const = rep(1, sample), trend = seq(lag.max + 1, 
-        length = sample), both = cbind(rep(1, sample), seq(lag.max + 1, length = sample)), none = NULL)    
+    rhs <- switch(type, const = rep(1, sample), trend = seq(lag.max + 1,
+        length = sample), both = cbind(rep(1, sample), seq(lag.max + 1, length = sample)), none = NULL)
     if (!(is.null(season))) {
         season <- abs(as.integer(season))
         dum <- (diag(season) - 1/season)[, -season]
@@ -31,9 +31,9 @@ function (y, lag.max = 10, type = c("const", "trend", "both",
             stop("\nDifferent row size of y and exogen.\n")
         }
         if (is.null(colnames(exogen))) {
-            colnames(exogen) <- paste("exo", 1:ncol(exogen), 
+            colnames(exogen) <- paste("exo", 1:ncol(exogen),
                 sep = "")
-            warning(paste("No column names supplied in exogen, using:", 
+            warning(paste("No column names supplied in exogen, using:",
                 paste(colnames(exogen), collapse = ", "), ", instead.\n"))
         }
         colnames(exogen) <- make.names(colnames(exogen))

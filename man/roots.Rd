@@ -34,7 +34,7 @@ roots(x, modulus = TRUE)
   condition that all eigenvalues of the companion matrix \eqn{A} have
   modulus less than 1. The function \code{roots()}, does compute the
   eigen values of the companion matrix \eqn{A} and returns by default
-  their moduli. 
+  their moduli.
 }
 
 \value{

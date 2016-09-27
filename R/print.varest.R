@@ -10,7 +10,7 @@ function(x, digits = max(3, getOption("digits") - 3), ...){
   for(i in 1:dim){
     result <- coef(x$varresult[[i]])
     text1 <- paste("Estimated coefficients for equation ", names[i], ":", sep = "")
-    cat(text1, "\n")  
+    cat(text1, "\n")
     row <- paste(rep("=", nchar(text1)), collapse="")
     cat(row, "\n")
     text2 <- paste("Call:\n", names[i], " = ", paste(names(result), collapse = " + "), sep = "")

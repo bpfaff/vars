@@ -11,9 +11,9 @@
 \description{
   Estimates an SVAR (either \sQuote{A-model}, \sQuote{B-model} or
   \sQuote{AB-model}) by using a scoring algorithm or by directly
-  minimising the negative log-likelihood with \command{optim()}.  
+  minimising the negative log-likelihood with \command{optim()}.
 }
-  
+
 \usage{
 SVAR(x, estmethod = c("scoring", "direct"), Amat = NULL, Bmat = NULL,
 start = NULL, max.iter = 100, conv.crit = 0.1e-6, maxls = 1.0,
@@ -26,9 +26,9 @@ lrtest = TRUE, ...)
     \command{VAR()}.}
   \item{estmethod}{Character, either scoring for estimating the
     SVAR-model with the scoring algorithm (default), or directly
-  minimizing the negative log-likelihood.} 
+  minimizing the negative log-likelihood.}
   \item{start}{Vector with starting values for the parameters to be
-    optimised.}  
+    optimised.}
   \item{lrtest}{Logical, over-identification LR test, the result is set
     to \command{NULL} for just-identified system.}
   \item{max.iter}{Integer, maximum number of iteration (used if
@@ -43,12 +43,12 @@ lrtest = TRUE, ...)
   \item{Bmat}{Matrix with dimension \eqn{(K \times K)} for B- or
     AB-model.}
   \item{digits}{the number of significant digits to use when printing.}
-  \item{\dots}{further arguments passed to or from other methods.}  
+  \item{\dots}{further arguments passed to or from other methods.}
 }
 
 \details{
   Consider the following structural form of a k-dimensional vector
-  autoregressive model: 
+  autoregressive model:
 
   \deqn{
     A \bold{y}_t = A_1^*\bold{y}_{t-1} + \ldots + A_p^*\bold{y}_{t-p} +
@@ -78,17 +78,17 @@ lrtest = TRUE, ...)
   \sQuote{\code{Bmat}}, have to be set as matrix objects containing
   desired restrictions and \sQuote{\code{NA}} values. The parameters are
   estimated by minimising the negative of the concentrated
-  log-likelihood function:  
+  log-likelihood function:
 
   \deqn{
     \ln L_c(A, B) = - \frac{KT}{2}\ln(2\pi) + \frac{T}{2}\ln|A|^2 -
-    \frac{T}{2}\ln|B|^2 - \frac{T}{2}tr(A'B'^{-1}B^{-1}A\tilde{\Sigma}_u) 
+    \frac{T}{2}\ln|B|^2 - \frac{T}{2}tr(A'B'^{-1}B^{-1}A\tilde{\Sigma}_u)
   }
 
   Two alternatives are implemented for this: a scoring algorithm or
   direct minimization with \code{optim()}. If the latter is chosen, the
   standard errors are returned if \code{SVAR()} is called with
-  \sQuote{\code{hessian = TRUE}}.\cr 
+  \sQuote{\code{hessian = TRUE}}.\cr
 
   If \sQuote{\code{start}} is not set, then \code{0.1} is used as
   starting values for the unknown coefficients.\cr
@@ -96,33 +96,33 @@ lrtest = TRUE, ...)
   The reduced form residuals can be obtained from the above equation
   \emph{via} the relation: \eqn{\bold{u}_t =
   A^{-1}B\bold{\varepsilon}_t}, with variance-covariance matrix
-  \eqn{\Sigma_U = A^{-1}BB'A^{-1'}}.\cr 
-  
+  \eqn{\Sigma_U = A^{-1}BB'A^{-1'}}.\cr
+
   Finally, in case of an overidentified SVAR, a likelihood ratio
-  statistic is computed according to: 
+  statistic is computed according to:
 
   \deqn{
     LR = T(\ln\det(\tilde{\Sigma}_u^r) - \ln\det(\tilde{\Sigma}_u))
-    \quad , 
+    \quad ,
   }
   with \eqn{\tilde{\Sigma}_u^r} being the restricted variance-covariance
   matrix and \eqn{\tilde{\Sigma}_u} being the variance covariance matrix
   of the reduced form residuals. The test statistic is distributed as
   \eqn{\chi^2(nr - 2K^2 - \frac{1}{2}K(K + 1))}, where \eqn{nr} is equal
-  to the number of restrictions.  
+  to the number of restrictions.
 }
 
 \value{
   A list of class \sQuote{\code{svarest}} with the following elements is
   returned:\cr
-  
+
   \item{A}{If A- or AB-model, the matrix of estimated coefficients.}
   \item{Ase}{The standard errors of \sQuote{\code{A}}.}
   \item{B}{If A- or AB-model, the matrix of estimated coefficients.}
   \item{Bse}{The standard errors of \sQuote{\code{B}}.}
   \item{LRIM}{For Blanchard-Quah estimation \code{LRIM} is the estimated
     long-run impact matrix; for all other SVAR models \code{LRIM} is
-    \code{NULL}.}  
+    \code{NULL}.}
   \item{Sigma.U}{The variance-covariance matrix of the reduced form
     residuals times 100, \emph{i.e.}, \eqn{\Sigma_U = A^{-1}BB'A^{-1'}
       \times 100}.}
@@ -132,8 +132,8 @@ lrtest = TRUE, ...)
   \item{start}{Vector of starting values.}
   \item{type}{SVAR-type, character, either \sQuote{A-model},
     \sQuote{B-model} or \sQuote{AB-model}.}
-  \item{var}{The \sQuote{\code{varest}} object \sQuote{\code{x}}.} 
-  \item{iter}{Integer, the count of iterations.} 
+  \item{var}{The \sQuote{\code{varest}} object \sQuote{\code{x}}.}
+  \item{iter}{Integer, the count of iterations.}
   \item{call}{The \code{call} to \command{SVAR()}.}
 }
 
@@ -147,7 +147,7 @@ lrtest = TRUE, ...)
   autoregressive modeling and impulse responses, in H. Lütkepohl and
   M. Krätzig (editors), \emph{Applied Time Series Econometrics},
   Cambridge University Press, Cambridge.
-  
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 
@@ -157,7 +157,7 @@ lrtest = TRUE, ...)
 
 \seealso{
   \code{\link{VAR}}, \code{\link{SVEC}}, \code{\link{logLik}},
-  \code{\link{irf}}, \code{\link{fevd}}  
+  \code{\link{irf}}, \code{\link{fevd}}
 }
 
 \examples{
@@ -169,10 +169,10 @@ amat[2, 1] <- NA
 amat[4, 1] <- NA
 ## Estimation method scoring
 SVAR(x = var.2c, estmethod = "scoring", Amat = amat, Bmat = NULL,
-max.iter = 100, maxls = 1000, conv.crit = 1.0e-8) 
+max.iter = 100, maxls = 1000, conv.crit = 1.0e-8)
 ## Estimation method direct
 SVAR(x = var.2c, estmethod = "direct", Amat = amat, Bmat = NULL,
-hessian = TRUE, method="BFGS") 
+hessian = TRUE, method="BFGS")
 }
 
 \keyword{regression}

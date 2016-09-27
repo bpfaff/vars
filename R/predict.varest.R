@@ -47,7 +47,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
       Zdet <- as.matrix(cbind(Zdet, seasonal))
     } else {
       Zdet <- as.matrix(seasonal)
-    }      
+    }
   }
   ## Include exogenous variables if applicable
   if(!is.null(eval(object$call$exogen))){
@@ -64,10 +64,10 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
       Zdet <- as.matrix(cbind(Zdet, dumvar))
     } else {
       Zdet <- as.matrix(dumvar)
-    }      
+    }
   }
   ## Retrieving predetermined y variables
-  Zy <- as.matrix(object$datamat[, 1:(K * (p + 1))]) 
+  Zy <- as.matrix(object$datamat[, 1:(K * (p + 1))])
   yse <- matrix(NA, nrow = n.ahead, ncol = K)
   sig.y <- .fecov(x = object, n.ahead = n.ahead)
   for(i in 1 : n.ahead){
@@ -96,7 +96,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     colnames(forecasts[[i]]) <- c("fcst", "lower", "upper", "CI")
   }
   names(forecasts) <- ynames
-  result <- list(fcst = forecasts, endog = object$y, model = object, exo.fcst = dumvar) 
+  result <- list(fcst = forecasts, endog = object$y, model = object, exo.fcst = dumvar)
   class(result) <- "varprd"
   return(result)
 }

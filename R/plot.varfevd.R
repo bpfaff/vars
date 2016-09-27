@@ -1,5 +1,5 @@
 "plot.varfevd" <-
-function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col = NULL, ylim = NULL, ylab = NULL, xlab = NULL, legend = NULL, names.arg = NULL, nc, mar = par("mar"), oma = par("oma"), addbars = 1, ...) 
+function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col = NULL, ylim = NULL, ylab = NULL, xlab = NULL, legend = NULL, names.arg = NULL, nc, mar = par("mar"), oma = par("oma"), addbars = 1, ...)
 {
   K <- length(x)
   ynames <- names(x)
@@ -13,7 +13,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col
       names <- ynames[1]
     }
   }
-  nv <- length(names) 
+  nv <- length(names)
   op <- par(no.readonly = TRUE)
   ifelse(is.null(main), main <- paste("FEVD for", names), main <- rep(main, nv)[1:nv])
   ifelse(is.null(col), col <- gray.colors(K), col <- rep(col, K)[1:K])
@@ -46,7 +46,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col
       nc <- ifelse(nv > 4, 2, 1)
     }
     nr <- ceiling(nv / nc)
-    par(mfcol = c(nr, nc), mar = mar, oma = oma)    
+    par(mfcol = c(nr, nc), mar = mar, oma = oma)
     for (i in 1:nv) {
       plotfevd(x = x[[names[i]]], main = main[i], col = col, ylab = ylab[i], xlab = xlab[i], names.arg = names.arg, ylim = ylim, ...)
     }

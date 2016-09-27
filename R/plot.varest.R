@@ -1,5 +1,5 @@
-"plot.varest" <- 
-function (x, names = NULL, main.fit = NULL, main.acf = NULL, main.pacf = NULL, ylim.fit = NULL, ylim.resid = NULL, lty.fit = NULL, lty.resid = NULL, lwd.fit = NULL, lwd.resid = NULL, lag.acf = NULL, lag.pacf = NULL, col.fit = NULL, col.resid = NULL, ylab.fit = NULL, ylab.resid = NULL, ylab.acf = NULL, ylab.pacf = NULL, xlab.fit = NULL, xlab.resid = NULL, nc, mar = par("mar"), oma = par("oma"), adj.mtext = NA, padj.mtext = NA, col.mtext = NA, ...) 
+"plot.varest" <-
+function (x, names = NULL, main.fit = NULL, main.acf = NULL, main.pacf = NULL, ylim.fit = NULL, ylim.resid = NULL, lty.fit = NULL, lty.resid = NULL, lwd.fit = NULL, lwd.resid = NULL, lag.acf = NULL, lag.pacf = NULL, col.fit = NULL, col.resid = NULL, ylab.fit = NULL, ylab.resid = NULL, ylab.acf = NULL, ylab.pacf = NULL, xlab.fit = NULL, xlab.resid = NULL, nc, mar = par("mar"), oma = par("oma"), adj.mtext = NA, padj.mtext = NA, col.mtext = NA, ...)
 {
   op <- par(no.readonly = TRUE)
   K <- x$K
@@ -18,9 +18,9 @@ function (x, names = NULL, main.fit = NULL, main.acf = NULL, main.pacf = NULL, y
 
   }
   nv <- length(names)
-  
-  ifelse(is.null(main.fit), main.fit <- paste("Diagram of fit and residuals for", names), main.fit <- rep(main.fit, nv)[1:nv])  
-  ifelse(is.null(main.acf), main.acf <- rep("ACF Residuals", nv), main.acf <- rep(main.acf, nv)[1:nv])  
+
+  ifelse(is.null(main.fit), main.fit <- paste("Diagram of fit and residuals for", names), main.fit <- rep(main.fit, nv)[1:nv])
+  ifelse(is.null(main.acf), main.acf <- rep("ACF Residuals", nv), main.acf <- rep(main.acf, nv)[1:nv])
   ifelse(is.null(main.pacf), main.pacf <- rep("PACF Residuals", nv), main.pacf <- rep(main.pacf, nv)[1:nv])
   ifelse(is.null(lty.fit), lty.fit <- c(1, 2), lty.fit <- rep(lty.fit, 2)[1:2])
   ifelse(is.null(lty.resid), lty.resid <- c(1, 1), lty.resid <- rep(lty.resid, 2)[1:2])
@@ -49,7 +49,7 @@ function (x, names = NULL, main.fit = NULL, main.acf = NULL, main.pacf = NULL, y
     mtext(main.fit, side = 3, line = 3, adj = adj.mtext, padj = padj.mtext, col = col.mtext, ...)
     plot.ts(resids, main = "", ylim = ylim.resid, ylab = ylab.resid, xlab = xlab.resid, lty = lty.resid[1], lwd = lwd.resid[1], col = col.resid[1], ...)
     abline(h = 0, col = col.resid[2], lty = lty.resid[2], lwd = lwd.resid[2])
-    par(mar=c(1, 5.1, 7, 2.1)) 
+    par(mar=c(1, 5.1, 7, 2.1))
     acf(resids, main = main.acf, ylab = ylab.acf, lag.max = lag.acf, ...)
     pacf(resids, main = main.pacf, ylab = ylab.pacf, lag.max = lag.pacf, ...)
   }

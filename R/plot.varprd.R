@@ -20,7 +20,7 @@ function(x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col 
   ifelse(is.null(lty), lty <- c(2, 1, 3, 3, 4), lty <- rep(lty, 5)[1:5])
   ifelse(is.null(lwd), lwd <- rep(1, 5), lwd <- rep(lwd, 5)[1:5])
   ifelse(is.null(ylab), ylab <- rep("", nv), ylab <- rep(ylab, nv)[1:nv])
-  ifelse(is.null(xlab), xlab <- rep("", nv), xlab <- rep(xlab, nv)[1:nv])    
+  ifelse(is.null(xlab), xlab <- rep("", nv), xlab <- rep(xlab, nv)[1:nv])
   plotprd <- function(x, name, main, col, lty, lwd, ylab, xlab, ...){
     fcsty <- c(rep(NA, smpl - 1), x$endog[smpl, name], x$fcst[[name]][, 1])
     fcstl <- c(rep(NA, smpl - 1), x$endog[smpl, name], x$fcst[[name]][, 2])
@@ -31,7 +31,7 @@ function(x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col 
       max.y <- max(na.omit(c(fcsty, fcstl, fcstu, smply)))
       ylim <- c(min.y, max.y)
     }
-    plot.ts(fcsty, main = main, ylab = ylab, xlab = xlab, ylim = ylim, col = col[1], lty = lty[1], lwd = lwd[1], ...) 
+    plot.ts(fcsty, main = main, ylab = ylab, xlab = xlab, ylim = ylim, col = col[1], lty = lty[1], lwd = lwd[1], ...)
     lines(smply, col = col[2], lty = lty[2], lwd = lwd[2])
     lines(fcstl, col = col[3], lty = lty[3], lwd = lwd[3])
     lines(fcstu, col = col[4], lty = lty[4], lwd = lwd[4])
@@ -48,10 +48,10 @@ function(x, plot.type = c("multiple", "single"), names = NULL, main = NULL, col 
       nc <- ifelse(nv > 4, 2, 1)
     }
     nr <- ceiling(nv / nc)
-    par(mfcol = c(nr, nc), mar = mar, oma = oma)          
+    par(mfcol = c(nr, nc), mar = mar, oma = oma)
     for(i in 1:nv){
       plotprd(x = x, name = names[i], main = main[i], col = col, lty = lty, lwd = lwd, ylab = ylab[i], xlab = xlab[i], ...)
-    }    
-  }  
+    }
+  }
   on.exit(par(op))
 }

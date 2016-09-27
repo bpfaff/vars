@@ -22,4 +22,4 @@ function(object, equations = NULL, ...){
   class(result) <- "varsum"
   return(result)
 }
-  
+

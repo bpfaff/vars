@@ -9,9 +9,9 @@
 \encoding{latin1}
 
 \description{
-  Estimates an SVEC by utilising a scoring algorithm.  
+  Estimates an SVEC by utilising a scoring algorithm.
 }
-  
+
 \usage{
 SVEC(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100,
 conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
@@ -23,8 +23,8 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
     \command{ca.jo()} contained in \code{urca}.}
   \item{LR}{Matrix of the restricted long run impact matrix.}
   \item{SR}{Matrix of the restricted contemporaneous impact matrix.}
-  \item{r}{Integer, the cointegration rank of x.}  
-  \item{start}{Vector of starting values for \eqn{\gamma}.}  
+  \item{r}{Integer, the cointegration rank of x.}
+  \item{start}{Vector of starting values for \eqn{\gamma}.}
   \item{max.iter}{Integer, maximum number of iteration.}
   \item{conv.crit}{Real, convergence value of algorithm..}
   \item{maxls}{Real, maximum movement of the parameters between two
@@ -35,12 +35,12 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
     are computed by bootstrapping. Default is \code{FALSE}.}
   \item{runs}{Integer, number of bootstrap replications.}
   \item{digits}{the number of significant digits to use when printing.}
-  \item{\dots}{further arguments passed to or from other methods.}    
+  \item{\dots}{further arguments passed to or from other methods.}
 }
 
 \details{
   Consider the following reduced form of a k-dimensional vector
-  error correction model: 
+  error correction model:
 
   \deqn{
     A \Delta \bold{y}_t = \Pi \bold{y}_{t-1} + \Gamma_1 \Delta
@@ -57,7 +57,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
     \sum_{i=1}^{p-1}\Gamma_i)\beta_{\perp} )^{-1}\alpha_{\perp}'} and
   \eqn{\Xi^*(L)} signifies an infinite-order polynomial in the lag
   operator with coefficient matrices \eqn{\Xi^*_j} that tends to zero
-  with increasing size of \eqn{j}.\cr 
+  with increasing size of \eqn{j}.\cr
 
   Contemporaneous restrictions on the impact matrix \eqn{B} must be
   supplied as zero entries in \code{SR} and free parameters as \code{NA}
@@ -68,7 +68,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 
   \deqn{
     \ln L_c(A, B) = - \frac{KT}{2}\ln(2\pi) + \frac{T}{2}\ln|A|^2 -
-    \frac{T}{2}\ln|B|^2 - \frac{T}{2}tr(A'B'^{-1}B^{-1}A\tilde{\Sigma}_u) 
+    \frac{T}{2}\ln|B|^2 - \frac{T}{2}tr(A'B'^{-1}B^{-1}A\tilde{\Sigma}_u)
   }
 
   with \eqn{\tilde{\Sigma}_u} signifies the reduced form
@@ -82,24 +82,24 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
   \deqn{
     LR = T(\ln\det(\tilde{\Sigma}_u^r) - \ln\det(\tilde{\Sigma}_u))
     \quad , }
-  
+
   with \eqn{\tilde{\Sigma}_u^r} being the restricted variance-covariance
   matrix and \eqn{\tilde{\Sigma}_u} being the variance covariance matrix
   of the reduced form residuals. The test statistic is distributed as
   \eqn{\chi^2(K*(K+1)/2 - nr)}, where \eqn{nr} is equal to the number of
-  restrictions.   
+  restrictions.
 }
 
 \value{
   A list of class \sQuote{\code{svecest}} with the following elements is
   returned:\cr
-  
+
   \item{SR}{The estimated contemporaneous impact matrix.}
   \item{SRse}{The standard errors of the contemporaneous impact matrix,
     if \code{boot = TRUE}.}
   \item{LR}{The estimated long run impact matrix.}
   \item{LRse}{The standard errors of the long run impact matrix,
-    if \code{boot = TRUE}.}  
+    if \code{boot = TRUE}.}
   \item{Sigma.U}{The variance-covariance matrix of the reduced form
     residuals times 100, \emph{i.e.}, \eqn{\Sigma_U = A^{-1}BB'A^{-1'}
       \times 100}.}
@@ -109,11 +109,11 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
   ratio overidentification test.}
   \item{start}{Vector of used starting values.}
   \item{type}{Character, type of the SVEC-model.}
-  \item{var}{The \sQuote{\code{ca.jo}} object \sQuote{\code{x}}.} 
+  \item{var}{The \sQuote{\code{ca.jo}} object \sQuote{\code{x}}.}
   \item{LRorig}{The supplied long run impact matrix.}
   \item{SRorig}{The supplied contemporaneous impact matrix.}
   \item{r}{Integer, the supplied cointegration rank.}
-  \item{iter}{Integer, the count of iterations.}   
+  \item{iter}{Integer, the count of iterations.}
   \item{call}{The \code{call} to \command{SVEC()}.}
 }
 
@@ -127,7 +127,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
   autoregressive modeling and impulse responses, in H. Lütkepohl and
   M. Krätzig (editors), \emph{Applied Time Series Econometrics},
   Cambridge University Press, Cambridge.
-  
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 
@@ -136,7 +136,7 @@ conv.crit = 1e-07, maxls = 1.0, lrtest = TRUE, boot = FALSE, runs = 100)
 }
 
 \seealso{
-  \code{\link{SVAR}}, \code{\link{irf}}, \code{\link{fevd}}  
+  \code{\link{SVAR}}, \code{\link{irf}}, \code{\link{fevd}}
 }
 
 \examples{

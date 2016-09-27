@@ -53,27 +53,27 @@ BQ(x)
 \value{
   A list of class \sQuote{\code{svarest}} with the following elements is
   returned:\cr
-  
+
   \item{A}{An identity matrix.}
   \item{Ase}{\code{NULL}.}
   \item{B}{The estimated contemporaneous impact matrix.}
   \item{Bse}{\code{NULL}.}
-  \item{LRIM}{The estimated long-run impact matrix.}  
+  \item{LRIM}{The estimated long-run impact matrix.}
   \item{Sigma.U}{The variance-covariance matrix of the reduced form
     residuals times 100.}
   \item{LR}{\code{NULL}.}
   \item{opt}{\code{NULL}.}
   \item{start}{\code{NULL}.}
   \item{type}{Character: \dQuote{Blanchard-Quah}.}
-  \item{var}{The \sQuote{\code{varest}} object \sQuote{\code{x}}.} 
-  \item{call}{The \code{call} to \command{BQ()}.}  
+  \item{var}{The \sQuote{\code{varest}} object \sQuote{\code{x}}.}
+  \item{call}{The \code{call} to \command{BQ()}.}
 }
 
 \references{
   Blanchard, O. and D. Quah (1989), The Dynamic Effects of Aggregate
   Demand and Supply Disturbances, \emph{The American Economic Review},
   \bold{79}(4), 655-673.
-  
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 

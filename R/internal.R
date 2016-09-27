@@ -45,7 +45,7 @@ function(x, n.ahead) {
 ##
 ".fecovvec2var" <-
 function(x, n.ahead) {
-  sigma.u <- crossprod(resid(x))/x$obs 
+  sigma.u <- crossprod(resid(x))/x$obs
   Sigma.yh <- array(NA, dim = c(x$K, x$K, n.ahead))
   Sigma.yh[, , 1] <- sigma.u
   Phi <- Phi(x, nstep = n.ahead)
@@ -102,15 +102,15 @@ function(x, impulse, response, y.names, n.ahead, ortho, cumulative){
     if(cumulative){
       if(length(response) > 1) irs[[i]] <- apply(irs[[i]], 2, cumsum)
       if(length(response) == 1){
-        tmp <- matrix(cumsum(irs[[i]]))
+        tmp <- matrix(cumsum(irs[[1]]))
         colnames(tmp) <- response
-        irs[[i]] <- tmp
+        irs[[1]] <- tmp
       }
     }
   }
   names(irs) <- impulse
   result <- irs
-  return(result)    
+  return(result)
 }
 ##
 ## Bootstrapping IRF for VAR and SVAR
@@ -149,7 +149,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
       lasty <- lasty[1 : (K * p)]
       Z <- c(lasty, Zdet[j, ])
       ysampled[j + p, ] <- B %*% Z + resid[j, ]
-      lasty <- c(ysampled[j + p, ], lasty) 
+      lasty <- c(ysampled[j + p, ], lasty)
     }
     varboot <- update(VAR, y = ysampled)
     if(class(x) == "svarest"){
@@ -201,7 +201,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   varlevel <- vec2var(x, r = r)
   Resids <- scale(varlevel$resid, scale = FALSE)
   obs <- varlevel$obs
-  totobs <- varlevel$totobs 
+  totobs <- varlevel$totobs
   P <- totobs - obs
   ##
   ## Fixing beta
@@ -212,7 +212,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   ##
   coeffmat <- cbind(varlevel$deterministic, matrix(unlist(varlevel$A), nrow = K))
   ##
-  ## Initialising the BOOT matrix, the sampled y 
+  ## Initialising the BOOT matrix, the sampled y
   ## and the deterministic regressors
   ##
   BOOT <- matrix(0, nrow = 2*K^2, ncol = runs)
@@ -239,7 +239,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
       lasty <- lasty[1 : (K * P)]
       Z <- c(Zdet[j, ], lasty)
       ysampled[j + P, ] <- coeffmat %*% Z + resid[j, ]
-      lasty <- c(ysampled[j + P, ], lasty) 
+      lasty <- c(ysampled[j + P, ], lasty)
     }
     colnames(ysampled) <- colnames(x@x)
     ##
@@ -257,7 +257,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     }else {
       dumvarorig <- x@call$dumvar
     }
-    ifelse(is.null(x@call$ecdet), ecdetorig <- "none", ecdetorig <- x@call$ecdet)    
+    ifelse(is.null(x@call$ecdet), ecdetorig <- "none", ecdetorig <- x@call$ecdet)
     vecm <- ca.jo(x = ysampled, K = Korig, spec = specorig, season = seasonorig, dumvar = dumvarorig, ecdet = ecdetorig)
     vecm@V <- betafix
     ##
@@ -286,7 +286,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
   vecm.season <- vecm@season
   vecm.dumvar <- vecm@dumvar
   vecm.K <- vecm@lag
-  vecm.spec <- vecm@spec   
+  vecm.spec <- vecm@spec
   ##
   ## Getting VAR-level coefficients
   ##
@@ -357,7 +357,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     colnames(mat.l) <- response
     colnames(mat.u) <- response
     Lower[[j]] <- mat.l
-    Upper[[j]] <- mat.u    
+    Upper[[j]] <- mat.u
   }
   result <- list(Lower = Lower, Upper = Upper)
   return(result)
@@ -428,7 +428,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     vec <- ca.jo(ysampled, ecdet = vecm.ecdet, season = vecm.season, dumvar = vecm.dumvar, K = vecm.K, spec = vecm.spec)
     ##vec@V <- vecm.beta
     svec <- SVEC(x = vec, LR = x$LRorig, SR = x$SRorig, r = svec.r, max.iter = svec.maxiter, maxls = svec.maxls, lrtest = FALSE, boot = FALSE)
-    BOOT[[i]] <- .irf(x = svec, n.ahead = n.ahead, cumulative = cumulative, ortho = ortho, impulse = impulse, response = response, y.names = y.names)    
+    BOOT[[i]] <- .irf(x = svec, n.ahead = n.ahead, cumulative = cumulative, ortho = ortho, impulse = impulse, response = response, y.names = y.names)
   }
   ##
   ## Obtaining the lower and upper bounds
@@ -461,7 +461,7 @@ function(x, n.ahead, runs, ortho, cumulative, impulse, response, ci, seed, y.nam
     colnames(mat.u) <- response
     Lower[[j]] <- mat.l
     Upper[[j]] <- mat.u
-  }  
+  }
   result <- list(Lower = Lower, Upper = Upper)
   return(result)
 }
@@ -612,7 +612,7 @@ function(x, K, obs, lags.pt, obj.name, resids){
     PARAMETER <- (K^2 * lags.pt - nstar)
   } else {
     PARAMETER <- (K^2 * lags.pt - nstar + x$K)
-  }    
+  }
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
   METHOD <- "Portmanteau Test (asymptotic)"
@@ -624,7 +624,7 @@ function(x, K, obs, lags.pt, obj.name, resids){
     PARAMETER <- (K^2 * lags.pt - nstar)
   } else {
     PARAMETER <- (K^2 * lags.pt - nstar + x$K)
-  }        
+  }
   names(PARAMETER) <- "df"
   PVAL <- 1 - pchisq(STATISTIC, df = PARAMETER)
   METHOD <- "Portmanteau Test (adjusted)"

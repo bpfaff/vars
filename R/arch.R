@@ -5,13 +5,13 @@ function(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE){
   }
   obj.name <- deparse(substitute(x))
   lags.single <- abs(as.integer(lags.single))
-  lags.multi <- abs(as.integer(lags.multi)) 
+  lags.multi <- abs(as.integer(lags.multi))
   K <- x$K
   obs <- x$obs
   resid <- resid(x)
   resids <- scale(resid)
   ## ARCH test (multivariate)
-  archm.resids <- .arch.multi(resids, lags.multi = lags.multi, K = K, obs = obs, obj.name = obj.name) 
+  archm.resids <- .arch.multi(resids, lags.multi = lags.multi, K = K, obs = obs, obj.name = obj.name)
   if(multivariate.only){
     result <- list(resid=resid, arch.mul = archm.resids)
   } else {

@@ -12,7 +12,7 @@ function(x, digits = max(3, getOption("digits") - 3), ...){
   cat(paste("Log Likelihood:", round(x$logLik, 3), "\n"))
   if(!(x$type == "Blanchard-Quah")){
     cat(paste("Method:", x$call$estmethod, "\n"))
-    cat(paste("Number of iterations:", x$iter, "\n"))   
+    cat(paste("Number of iterations:", x$iter, "\n"))
     if(x$call$estmethod == "direct"){
       cat(paste("Convergence code:", x$opt$convergence, "\n"))
       if(!is.null(x$opt$message)){

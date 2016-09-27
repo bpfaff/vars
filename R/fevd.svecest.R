@@ -5,7 +5,7 @@ function(x, n.ahead=10, ...){
   }
   n.ahead <- abs(as.integer(n.ahead))
   ifelse(is.null(x$call$r), r <- 1, r <- x$call$r)
-  varlevel <- vec2var(x$var, r = r)  
+  varlevel <- vec2var(x$var, r = r)
   K <- varlevel$K
   p <- varlevel$p
   ynames <- colnames(varlevel$datamat[, 1 : K])

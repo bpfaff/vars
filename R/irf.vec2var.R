@@ -38,7 +38,7 @@ function(x, impulse=NULL, response=NULL, n.ahead=10, ortho=TRUE, cumulative=FALS
     Lower <- BOOT$Lower
     Upper <- BOOT$Upper
     names(Lower) <- impulse
-    names(Upper) <- impulse    
+    names(Upper) <- impulse
   }
   result <- list(irf=irs, Lower=Lower, Upper=Upper, response=response, impulse=impulse, ortho=ortho, cumulative=cumulative, runs=runs, ci=ci, boot=boot, model = class(x))
   class(result) <- "varirf"

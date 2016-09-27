@@ -10,7 +10,7 @@ function(x, digits = max(3, getOption("digits") - 3), ...){
   cat(paste("Type:", x$type, "\n"))
   cat(paste("Sample size:", x$obs, "\n"))
   cat(paste("Log Likelihood:", round(x$logLik, 3), "\n"))
-  cat(paste("Number of iterations:", x$iter, "\n"))   
+  cat(paste("Number of iterations:", x$iter, "\n"))
   if(!is.null(x$LRover)){
     cat("\nLR overidentification test:\n")
     print(x$LRover, digits = digits, ...)

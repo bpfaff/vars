@@ -26,7 +26,7 @@ Acoef(x)
     \hat{A}_p \bold{y}_{t-p} + \hat{C}D_t
   }
   the function returns the matrices \eqn{(\hat{A}_1,  \ldots, \hat{A}_p)}
-  each with dimension \eqn{(K \times K)} as a list object. 
+  each with dimension \eqn{(K \times K)} as a list object.
 
 }
 

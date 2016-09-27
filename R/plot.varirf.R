@@ -1,8 +1,8 @@
-"plot.varirf" <- 
-function (x, plot.type = c("multiple", "single"), names = NULL, 
-    main = NULL, sub = NULL, lty = NULL, lwd = NULL, col = NULL, ylim = NULL, 
+"plot.varirf" <-
+function (x, plot.type = c("multiple", "single"), names = NULL,
+    main = NULL, sub = NULL, lty = NULL, lwd = NULL, col = NULL, ylim = NULL,
     ylab = NULL, xlab = NULL, nc, mar.multi = c(0, 4, 0, 4),
-    oma.multi = c(6, 4, 6, 4), adj.mtext = NA, padj.mtext = NA, col.mtext = NA, ...)  
+    oma.multi = c(6, 4, 6, 4), adj.mtext = NA, padj.mtext = NA, col.mtext = NA, ...)
 {
     op <- par(no.readonly = TRUE)
     on.exit(par(op))
@@ -29,7 +29,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
     nvr <- length(rnames)
     ##
     ## Presetting certain plot-argument
-    ##   
+    ##
     ifelse(is.null(lty), lty <- c(1, 1, 2, 2), lty <- rep(lty, 4)[1:4])
     ifelse(is.null(lwd), lwd <- c(1, 1, 1, 1), lwd <- rep(lwd, 4)[1:4])
     ifelse(is.null(col), col <- c("black", "gray", "red", "red"), col <- rep(col, 4)[1:4])
@@ -60,7 +60,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
       if (x$cumulative)  text1 <- paste(text1, "(cumulative)", sep = " ")
       text2 <- ""
       if (x$boot) text2 <- paste((1 - x$ci) * 100, "% Bootstrap CI, ", x$runs, "runs")
-        
+
       result <- list(impulses = impulses, upper = upper, lower = lower, range = range, text1 = text1, text2 = text2)
       return(result)
     }
@@ -78,7 +78,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
       title(main = main, sub = sub, ...)
       axis(1, at = xy$x, labels = c(0:(length(xy$x) - 1)))
       axis(2, ...)
-      box()    
+      box()
       if (!is.null(x$upper)) lines(x$upper[, rname], col = col[3], lty = lty[3], lwd = lwd[3])
       if (!is.null(x$lower)) lines(x$lower[, rname], col = col[3], lty = lty[3], lwd = lwd[3])
       abline(h = 0, col = col[2], lty = lty[2], lwd = lwd[2])
@@ -110,7 +110,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
           if(!is.null(y)) lines(y[, i], col = col[3], lty = lty[3], lwd = lwd[3])
           if(!is.null(z)) lines(z[, i], col = col[3], lty = lty[3], lwd = lwd[3])
           box()
-        }       
+        }
         for(j in (nvr - nc + 1):nvr){
           ifelse(is.null(ylab), ylabel <- colnames(x)[j], ylabel <- ylab)
           xy <- xy.coords(x[, j])
@@ -123,7 +123,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
           if(!is.null(z)) lines(z[, j], col = col[3], lty = lty[3], lwd = lwd[3])
         }
         mtext(main, 3, line = 2, outer = TRUE, adj = adj.mtext, padj = padj.mtext, col = col.mtext, ...)
-        mtext(sub, 1, line = 4, outer = TRUE, adj = adj.mtext, padj = padj.mtext, col = col.mtext, ...)        
+        mtext(sub, 1, line = 4, outer = TRUE, adj = adj.mtext, padj = padj.mtext, col = col.mtext, ...)
       } else {
         for(j in 1:nvr){
           ifelse(is.null(ylab), ylabel <- colnames(x)[j], ylabel <- ylab)
@@ -142,7 +142,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
     ##
     if (plot.type == "single") {
       for(i in 1:nvi){
-        dp <- dataplot(x, iname = inames[i]) 
+        dp <- dataplot(x, iname = inames[i])
         for(j in 1:nvr){
           plot.single(dp, iname = inames[i], rname = rnames[j], ...)
           if (nvr > 1) par(ask = TRUE)
@@ -158,7 +158,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL,
         plot.multiple(dp, nc = nc, ...)
         if (nvi > 1) par(ask = TRUE)
       }
-    }   
+    }
 }
 
-       
+

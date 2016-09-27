@@ -7,7 +7,7 @@ Apoly   <- array(c(1.0, -0.5, 0.3, 0.8,
                  c(3, 2, 2))
 ## Setting covariance to identity-matrix
 B <- diag(2)
-## Generating the VAR(2) model 
+## Generating the VAR(2) model
 svarA  <- ARMA(A = Apoly, B = B)
 ## Simulating 500 observations
 svarsim <- simulate(svarA, sampleT = 500,

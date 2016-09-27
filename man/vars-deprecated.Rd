@@ -20,7 +20,7 @@
 
 \seealso{
     \code{\link{Acoef}}, \code{\link{arch.test}}, \code{\link{Bcoef}},
-    \code{\link{normality.test}}, \code{\link{serial.test}}  
+    \code{\link{normality.test}}, \code{\link{serial.test}}
 }
 
 \keyword{regression}

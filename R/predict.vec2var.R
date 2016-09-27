@@ -49,7 +49,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     Zdet <- cbind(Zdet, dumvar)
   }
   exogen.cols <- which(colnames(data.all) %in% colnames(object$deterministic))
-  Zy <- data.all[, -exogen.cols] 
+  Zy <- data.all[, -exogen.cols]
   yse <- matrix(NA, nrow = n.ahead, ncol = K)
   sig.y <- .fecovvec2var(x = object, n.ahead = n.ahead)
   for(i in 1 : n.ahead){
@@ -78,7 +78,7 @@ function(object, ..., n.ahead = 10, ci = 0.95, dumvar = NULL){
     colnames(forecasts[[i]]) <- c("fcst", "lower", "upper", "CI")
   }
   names(forecasts) <- ynames
-  result <- list(fcst = forecasts, endog = object$y, model = object, exo.fcst = dumvar) 
+  result <- list(fcst = forecasts, endog = object$y, model = object, exo.fcst = dumvar)
   class(result) <- "varprd"
   return(result)
 }

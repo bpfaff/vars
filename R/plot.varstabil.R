@@ -1,5 +1,5 @@
-"plot.varstabil" <- 
-function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...) 
+"plot.varstabil" <-
+function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
 {
   op <- par(no.readonly = TRUE)
   plot.type <- match.arg(plot.type)
@@ -14,7 +14,7 @@ function (x, plot.type = c("multiple", "single"), names = NULL, main = NULL, nc,
     }
   }
   nv <- length(names)
-  
+
   ifelse(is.null(main), main <- paste(x$stability[[1]]$type, "of equation", names), main <- rep(main, nv)[1:nv])
 
   if (plot.type == "single") {

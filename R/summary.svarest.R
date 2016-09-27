@@ -13,7 +13,7 @@ function(object, ...){
   iter <- object$iter
   call <- object$call
   opt <- object$opt
-  result <- list(type = type, A = A, B = B, Ase = Ase, Bse = Bse, LRIM = LRIM, Sigma.U = Sigma.U, logLik = logLik, LR = LR, obs = obs, opt = opt, iter = iter, call = call) 
+  result <- list(type = type, A = A, B = B, Ase = Ase, Bse = Bse, LRIM = LRIM, Sigma.U = Sigma.U, logLik = logLik, LR = LR, obs = obs, opt = opt, iter = iter, call = call)
   class(result) <- "svarsum"
   return(result)
 }

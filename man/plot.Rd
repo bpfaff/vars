@@ -21,7 +21,7 @@
 \description{
   Plot method for objects with class attribute \code{varest},
   \code{vec2var}, \code{varcheck}, \code{varfevd}, \code{varirf},
-  \code{varprd}, \code{varstabil}. 
+  \code{varprd}, \code{varstabil}.
 }
 
 \usage{
@@ -47,7 +47,7 @@ mar = par("mar"), oma = par("oma"), addbars = 1, ...)
 NULL, main = NULL, sub = NULL, lty = NULL, lwd = NULL, col = NULL, ylim
 = NULL, ylab = NULL, xlab = NULL, nc, mar.multi = c(0, 4, 0, 4),
 oma.multi = c(6, 4, 6, 4), adj.mtext = NA, padj.mtext = NA, col.mtext =
-NA, ...)  
+NA, ...)
 \method{plot}{varprd}(x, plot.type = c("multiple", "single"),
 names = NULL, main = NULL, col = NULL, lty = NULL, lwd = NULL,
 ylim = NULL, ylab = NULL, xlab = NULL, nc, mar = par("mar"),
@@ -64,7 +64,7 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
   \item{col.edf}{Character, color of residuals' EDF.}
   \item{col.fit}{Character vector, colors for diagram of fit.}
   \item{col.mtext}{Character, color for \code{mtext()}, only applicable
-  if \code{plot.type = "multiple"}.} 
+  if \code{plot.type = "multiple"}.}
   \item{col.resid}{Character vector, colors for residual plot.}
   \item{lag.acf}{Integer, lag.max for ACF of residuals.}
   \item{lag.acf2}{Integer, lag.max for ACF of squared residuals.}
@@ -88,13 +88,13 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
   \item{mar}{Setting of margins.}
   \item{mar.multi}{Setting of margins, if \code{plot.type = "multiple"}.}
   \item{names}{Character vector, the variables names to be plotted. If
-    left \code{NULL}, all variables are plotted.} 
+    left \code{NULL}, all variables are plotted.}
   \item{names.arg}{Character vector, names for x-axis of barplot.}
   \item{nc}{Integer, number of columns for multiple plot.}
   \item{oma}{Setting of outer margins.}
   \item{oma.multi}{Setting of margins, if \code{plot.type = "multiple"}.}
   \item{padj.mtext}{Adjustment for \code{mtext()}, only applicable if
-  \code{plot.type = "multiple"}.} 
+  \code{plot.type = "multiple"}.}
   \item{plot.type}{Character, if \code{multiple} all plots are drawn in
     a single device, otherwise the plots are shown consecutively.}
   \item{sub}{Character, sub title in plot.}
@@ -103,7 +103,7 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
   \item{xlab.acf}{Character, xlab for ACF and PACF of residuals and
     their squares in plot.varcheck.}
   \item{xlab.fit}{Character vector, xlab for diagram of fit.}
-  \item{xlab.resid}{Character vector, xlab for residual plot.}  
+  \item{xlab.resid}{Character vector, xlab for residual plot.}
   \item{ylab}{Character vector signifying the labels for the y-axis.}
   \item{ylab.acf}{Character, ylab for ACF.}
   \item{ylab.fit}{Character vector, ylab for diagram of fit.}
@@ -134,14 +134,14 @@ NULL, main = NULL, nc, mar = par("mar"), oma = par("oma"), ...)
   Zeileis, A., F. Leisch, K. Hornik and C. Kleiber (2002), strucchange:
    An R Package for Testing for Structural Change in Linear Regression
    Models, \emph{Journal of Statistical Software}, \bold{7(2)}: 1-38,
-   \url{http://www.jstatsoft.org/v07/i02/}  
+   \url{http://www.jstatsoft.org/v07/i02/}
 }
 
 \seealso{
   \code{\link{VAR}}, \code{\link{vec2var}}, \code{\link{fevd}},
   \code{\link{irf}}, \code{\link{predict}}, \code{\link{fanchart}},
   \code{\link{stability}}, \code{\link{arch.test}}, \code{\link{normality.test}},
-  \code{\link{serial.test}}  
+  \code{\link{serial.test}}
 }
 
 \examples{

@@ -17,7 +17,7 @@ function(x, nstep=10, ...){
   }
   for(i in 1:p){
     As[, , i] <- A[[i]]
-  }  
+  }
   Phi <- array(0, dim=c(K, K, nstep + 1))
   Phi[, ,1] <- diag(K)
   Phi[, , 2] <- Phi[, , 1] %*% As[, , 1]

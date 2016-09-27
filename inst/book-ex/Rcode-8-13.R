@@ -7,7 +7,7 @@ beta <- vecm.r1$beta
 resids <- resid(vecm.r1$rlm)
 N <- nrow(resids)
 sigma <- crossprod(resids) / N
-## t-stats for alpha 
+## t-stats for alpha
 alpha.se <- sqrt(solve(crossprod(
                  cbind(vecm@ZK %*% beta, vecm@Z1)))
                  [1, 1]* diag(sigma))

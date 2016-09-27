@@ -59,13 +59,13 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   SRres <- sum(is.na(SR))
   R0 <- diag(K^2)
   select <- c(apply(SR, c(1, 2), function(x) ifelse(identical(x, 0.0), TRUE, FALSE)))
-  R.B <- R0[select, ]  
-  select <- c(apply(LR, c(1, 2), function(x) ifelse(identical(x, 0.0), TRUE, FALSE)))  
+  R.B <- R0[select, ]
+  select <- c(apply(LR, c(1, 2), function(x) ifelse(identical(x, 0.0), TRUE, FALSE)))
   R.C1 <- R0[select, ]
   if(identical(nrow(R.C1), as.integer(0))){
     R.C1 <- matrix(0, nrow = K2, ncol = K2)
     nResC1 <- 0
-  }  
+  }
   R.C1 <- R.C1 %*% kronecker(IK, Xi)
   nResC1 <- qr(R.C1)$rank
   ##
@@ -118,7 +118,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
   } else {
     ident <- paste("The", svartype, "is unidentified. The non-identification rank is", rni, ".")
     stop(ident)
-  }      
+  }
   ##
   ## Scoring Algorithm
   ##
@@ -206,7 +206,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
     SRboot <- BOOTVAL[1:K2, ]
     SRse <- matrix(sqrt(apply((SRboot - c(SR))^2, 1, mean)), nrow = K, ncol = K)
     idxnull <- which(abs(SRse) < 0.1e-8, arr.ind = TRUE)
-    SRse[idxnull] <- 0.0    
+    SRse[idxnull] <- 0.0
     LRboot <- BOOTVAL[-c(1:K2), ]
     LRse <- matrix(sqrt(apply((LRboot - c(LR))^2, 1, mean)), nrow = K, ncol = K)
     idxnull <- which(abs(LRse) < 0.1e-8, arr.ind = TRUE)
@@ -214,7 +214,7 @@ function(x, LR = NULL, SR = NULL, r = 1, start = NULL, max.iter = 100, conv.crit
     colnames(SRse) <- colnames(SR)
     rownames(SRse) <- rownames(SR)
     colnames(LRse) <- colnames(LR)
-    rownames(LRse) <- rownames(LR)  
+    rownames(LRse) <- rownames(LR)
   }
   ##
   ## Setting near zero elements to zero

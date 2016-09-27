@@ -28,8 +28,8 @@ function(x, digits = max(3, getOption("digits") - 3), signif.stars = getOption("
     if (!is.null(result$fstatistic)) {
       cat("Multiple R-Squared:", formatC(result$r.squared, digits = digits))
       cat(",\tAdjusted R-squared:", formatC(result$adj.r.squared, digits = digits), "\nF-statistic:", formatC(result$fstatistic[1], digits = digits), "on", result$fstatistic[2], "and", result$fstatistic[3], "DF,  p-value:", format.pval(pf(result$fstatistic[1L], result$fstatistic[2L], result$fstatistic[3L], lower.tail = FALSE), digits = digits), "\n")
-    }    
-    cat("\n\n")   
+    }
+    cat("\n\n")
   }
   cat("\nCovariance matrix of residuals:\n")
   print(x$covres, digits = digits, ...)

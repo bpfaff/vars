@@ -48,7 +48,7 @@ signif.stars = getOption("show.signif.stars"), ...)
 \value{
   Returns either a list with class attribute \code{varsum} which contains the
   following elements:
-  
+
   \item{names}{Character vector with the names of the endogenous
     correlation matrix of VAR residuals.}
   \item{logLik}{Numeric, value of log Likelihood.}
@@ -56,10 +56,10 @@ signif.stars = getOption("show.signif.stars"), ...)
   \item{roots}{Vector, roots of the characteristic polynomial.}
   \item{type}{Character vector, deterministic regressors included in VAR:}
   \item{call}{Call, the initial call to \code{VAR}.}
-  
+
   Or a list with class attribute \code{svarsum} which contains the
   following elements:
-  
+
   \item{type}{Character, the type of SVAR-model.}
   \item{A}{Matrix, estimated coefficients for A matrix.}
   \item{B}{Matrix, estimated coefficients for B matrix.}
@@ -73,10 +73,10 @@ signif.stars = getOption("show.signif.stars"), ...)
   \item{opt}{List, result of \code{optim()}.}
   \item{iter}{Integer, the count of iterations.}
   \item{call}{Call, the call to \code{SVAR()}.}
-  
+
   Or a list with class attribute \code{svecsum} which contains the
   following elements:
-  
+
   \item{type}{Character, the type of SVEC-model.}
   \item{SR}{Matrix, contemporaneous impact matrix.}
   \item{LR}{Matrix, long-run impact matrix.}
@@ -88,13 +88,13 @@ signif.stars = getOption("show.signif.stars"), ...)
   \item{obs}{Integer, number of observations used.}
   \item{r}{Integer, co-integration rank of VECM.}
   \item{iter}{Integer, the count of iterations.}
-  \item{call}{Call, the call to \code{SVEC()}.}  
+  \item{call}{Call, the call to \code{SVEC()}.}
 }
 
 \author{Bernhard Pfaff}
 
 \seealso{
-  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVEC}}  
+  \code{\link{VAR}}, \code{\link{SVAR}}, \code{\link{SVEC}}
 }
 
 \examples{
@@ -121,7 +121,7 @@ LR[1, 2:4] <- 0
 LR[2:4, 4] <- 0
 svec.b <- SVEC(vecm, LR = LR, SR = SR, r = 1, lrtest = FALSE, boot =
 FALSE)
-summary(svec.b) 
+summary(svec.b)
 }
 
 \keyword{regression}

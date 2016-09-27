@@ -6,5 +6,5 @@ function(object, ...){
   resids <- resid(object)
   fitted <- object$datamat[, colnames(object$y)] - resids
   colnames(fitted) <- paste("fit of", colnames(object$y))
-  return(fitted)   
+  return(fitted)
 }

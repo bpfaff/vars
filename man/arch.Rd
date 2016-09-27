@@ -12,7 +12,7 @@
 
 \description{
   This function computes univariate and multivariate ARCH-LM tests for a
-  VAR(p).  
+  VAR(p).
 }
 
 \usage{
@@ -28,7 +28,7 @@ arch.test(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
   \item{lags.multi}{An integer specifying the lags to be used for the
     multivariate ARCH statistic.}
   \item{multivariate.only}{If \code{TRUE} (the default), only
-    the multivariate test statistic is computed.}  
+    the multivariate test statistic is computed.}
 }
 
 \details{
@@ -62,9 +62,9 @@ arch.test(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
   }
   and \eqn{\hat{\Omega}} assigns the covariance matrix of the above
     defined regression model. This test statistic is distributed as
-    \eqn{\chi^2(qK^2(K+1)^2/4)}.      
+    \eqn{\chi^2(qK^2(K+1)^2/4)}.
 }
-  
+
 \value{
   A list with class attribute \sQuote{\code{varcheck}} holding the
   following elements:\cr
@@ -91,7 +91,7 @@ arch.test(x, lags.single = 16, lags.multi = 5, multivariate.only = TRUE)
   Engle, R. F. (1982), Autoregressive conditional heteroscedasticity
   with estimates of the variance of United Kingdom inflation,
   \emph{Econometrica}, \bold{50}: 987-1007.
-  
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 

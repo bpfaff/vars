@@ -2,10 +2,14 @@ Package: vars
 Type: Package
 Title: VAR Modelling
 Version: 1.5-3
-Date: 2013-08-15
+Date: 2016-09-23
 Authors@R: c(person("Bernhard", "Pfaff", email = "bernhard@pfaffikus.de", role = c("aut", "cre")), person("Matthieu", "Stigler", role = "ctb"))
-Depends: R (>= 2.0.0), MASS, strucchange, urca (>= 1.1-6), lmtest (>= 0.9-26), sandwich (>= 2.2-4)
+Depends: R (>= 2.0.0), MASS, strucchange, urca (>= 1.1-6), lmtest (>=
+        0.9-26), sandwich (>= 2.2-4)
 LazyLoad: yes
 Description: Estimation, lag selection, diagnostic testing, forecasting, causality analysis, forecast error variance decomposition and impulse response functions of VAR models and estimation of SVAR and SVEC models.
 License: GPL (>= 2)
 URL: http://www.pfaffikus.de
+Author: Bernhard Pfaff [aut, cre],
+  Matthieu Stigler [ctb]
+Maintainer: Bernhard Pfaff <bernhard@pfaffikus.de>

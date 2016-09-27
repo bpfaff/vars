@@ -18,4 +18,4 @@ axis(4, pretty(range(rw.nd)))
 lines(rw.nd, lty=3)
 legend(10, 18.7, legend=c('det. trend + noise (ls)',
                    'rw drift (ls)', 'rw (rs)'),
-       lty=c(1, 2, 3)) 
+       lty=c(1, 2, 3))

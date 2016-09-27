@@ -9,6 +9,6 @@ function(x, ...){
   cat("\nCoefficient matrix of deterministic regressor(s).\n")
   cat("\n")
   print(x$deterministic, ...)
-  invisible(x)                                                                              
+  invisible(x)
 }
 

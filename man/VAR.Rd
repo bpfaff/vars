@@ -93,7 +93,7 @@ ic = c("AIC", "HQ", "SC", "FPE"))
   \code{\link{fitted}}, \code{\link{predict}}, \code{\link{irf}},
   \code{\link{fevd}}, \code{\link{Phi}}, \code{\link{Psi}},
   \code{\link{normality.test}}, \code{\link{arch.test}}, \code{\link{serial.test}},
-  \code{\link{VARselect}}, \code{\link{logLik}} 
+  \code{\link{VARselect}}, \code{\link{logLik}}
 }
 
 \examples{

@@ -9,7 +9,7 @@
 \description{
   The function returns infomation criteria and final prediction error
   for sequential increasing the lag order up to a VAR(p)-proccess.
-  which are based on the same sample size. 
+  which are based on the same sample size.
 }
 
 \usage{
@@ -25,7 +25,7 @@ season = NULL, exogen = NULL)
   \item{season}{Inlusion of centered seasonal dummy variables (integer
     value of frequency).}
   \item{exogen}{Inlusion of exogenous variables.}
-  
+
 }
 
 \details{
@@ -51,7 +51,7 @@ season = NULL, exogen = NULL)
   Based on the same sample size the following information criteria and
   the final prediction error are computed:
   \deqn{
-    AIC(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{2}{T}n K^2 \quad, 
+    AIC(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{2}{T}n K^2 \quad,
   }
   \deqn{
     HQ(n) = \ln \det(\tilde{\Sigma}_u(n)) + \frac{2 \ln(\ln(T))}{T}n K^2 \quad,
@@ -66,16 +66,16 @@ season = NULL, exogen = NULL)
   }
   with \eqn{\tilde{\Sigma}_u (n) = T^{-1} \sum_{t=1}^T \bold{\hat{u}}_t
     \bold{\hat{u}}_t'} and \eqn{n^*} is the total number of the
-  parameters in each equation and \eqn{n} assigns the lag order.  
+  parameters in each equation and \eqn{n} assigns the lag order.
 }
 
 \value{
   A list with the following elements:\cr
-  
+
   \item{selection}{Vector with the optimal lag number according to each
-    criterium.}  
+    criterium.}
   \item{criteria}{A matrix containing the values of the criteria up to
-    \code{lag.max}.} 
+    \code{lag.max}.}
 }
 
 \author{Bernhard Pfaff}
@@ -98,14 +98,14 @@ season = NULL, exogen = NULL)
   Akaike, H. (1974), A new look at the statistical model identification,
   \acronym{IEEE} \emph{Transactions on Automatic Control}, \bold{AC-19}:
   716-723.
-  
+
   Hamilton, J. (1994), \emph{Time Series Analysis}, Princeton
   University Press, Princeton.
 
   Hannan, E. J. and B. G. Quinn (1979), The determination of the order
   of an autoregression, \emph{Journal of the Royal Statistical Society},
   \bold{B41}: 190-195.
-  
+
   Lütkepohl, H. (2006), \emph{New Introduction to Multiple Time Series
     Analysis}, Springer, New York.
 

@@ -6,7 +6,7 @@
 
 \description{
   Time Series plots of VAR forecasts with differently shaded confidence
-  regions (fanchart) for each endogenous variable. 
+  regions (fanchart) for each endogenous variable.
 }
 
 \usage{
@@ -46,7 +46,7 @@ NULL, xlab = NULL, col.y = NULL, nc, plot.type = c("multiple",
 
 \seealso{
   \code{\link{VAR}}, \code{\link{predict}}, \code{\link{plot}},
-  \code{\link{par}}  
+  \code{\link{par}}
 }
 
 \examples{

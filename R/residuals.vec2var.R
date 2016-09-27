@@ -8,5 +8,5 @@ function(object, ...){
     resids <- resids - object$datamat[, colnames(object$A[[i]])] %*% t(object$A[[i]])
   }
   colnames(resids) <- paste("resids of", colnames(object$y))
-  return(resids)   
+  return(resids)
 }

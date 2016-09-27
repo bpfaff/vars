@@ -25,7 +25,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
 
   ###Restriction matrix R for Granger causality
   #build matrix of same size as coef matrix indicating which to be restricted
-  R2<-matrix(0, ncol=ncol(PI), nrow=nrow(PI)) 
+  R2<-matrix(0, ncol=ncol(PI), nrow=nrow(PI))
   g<-which(gsub("\\.l[[:digit:]]", "", rownames(PI))%in%cause) #select cause regressors
   j<-which(colnames(PI)%in%cause) #select cause regressand
   R2[g,-j]<-1	#select coef to be tested
@@ -52,7 +52,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
     k<-which(gsub("\\.l[[:digit:]]", "", colnames(co.names))%in%cause) #select cause regressors
     l<-which(rownames(co.names)%in%cause) #select cause regressand
     R2inv<-matrix(1, ncol=nrow(PI), nrow=ncol(PI)) #exact inverse steps as R2
-    R2inv[-l,k]<-0	#select coef to be tested  
+    R2inv[-l,k]<-0	#select coef to be tested
     xres<-restrict(x, method = "man", resmat = R2inv)
     pred<-sapply(xres$varresult,predict)
     res<-residuals(xres)
@@ -71,7 +71,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
     } else {
     #bootstrap function for hetero case: obliged to run whole lm
     #two next lines as needed as x<-freeny.x; mylm<-lm(freeny.y~x); rm(x);update(mylm) #does not work
-      X<-x$datamat 
+      X<-x$datamat
       if(x$type%in%c("const", "both")) X<-X[, -grep("const", colnames(X))]
       boot.fun<-function(x=1){
 	X[,1:K]<-pred+res*rnorm(n=obs, sd=x, mean=1) #workaround as calling it ynew and putting in update() fails
@@ -81,16 +81,16 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
 	PI.boot.vec <- as.vector(coef(xMlm.boot))
 	t(R %*% PI.boot.vec) %*% solve(R %*% sigma.pi.boot %*% t(R)) %*% R %*% PI.boot.vec / N
       }
-    }    
+    }
     res.rep<-replicate(boot.runs, boot.fun(x=1))
     pval<-mean(res.rep>as.numeric(STATISTIC))
   }
   names(STATISTIC) <- "F-Test"
   if(!boot){
     PARAMETER1 <- df1
-    PARAMETER2 <- df2 
+    PARAMETER2 <- df2
     names(PARAMETER1) <- "df1"
-    names(PARAMETER2) <- "df2"  
+    names(PARAMETER2) <- "df2"
     PVAL <- 1 - pf(STATISTIC, PARAMETER1, PARAMETER2)
     PARAM<-c(PARAMETER1, PARAMETER2)
   } else {
