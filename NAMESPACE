@@ -83,21 +83,6 @@ S3method(bread, varest)
 S3method(estfun, varest)
 S3method(vcovHC, varest)
 S3method(vcov, varest)
-<<<<<<< HEAD
 
-importFrom(urca, ca.jo)
-importFrom(urca, cajorls)
-
-
-
-
-=======
 
 export(A, Acoef, arch, arch.test, B, Bcoef, BQ, causality, fanchart, fevd, irf, normality, normality.test, Phi, Psi, restrict, roots, serial, serial.test, stability, SVAR, SVEC, VAR, VARselect, vec2var)
-
-
-
-
-
-
->>>>>>> e2f481a3ec3067d95b4217005ee9a2e479a11e1a
