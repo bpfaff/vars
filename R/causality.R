@@ -26,7 +26,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   ###Restriction matrix R for Granger causality
   #build matrix of same size as coef matrix indicating which to be restricted
   R2<-matrix(0, ncol=ncol(PI), nrow=nrow(PI))
-  g<-which(gsub("\\.l[[:digit:]]", "", rownames(PI))%in%cause) #select cause regressors
+  g<-which(gsub("\\.l\\d+", "", rownames(PI))%in%cause) #select cause regressors
   j<-which(colnames(PI)%in%cause) #select cause regressand
   R2[g,-j]<-1	#select coef to be tested
   w<-which(as.vector(R2)!=0)
@@ -49,7 +49,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
     ###Restricted model: estimation under null of Granger non-causality
     co.names<-Bcoef(x)
     #needs to rebuild another restriction matrix for restrict(), as disposition of coef is different
-    k<-which(gsub("\\.l[[:digit:]]", "", colnames(co.names))%in%cause) #select cause regressors
+    k<-which(gsub("\\.l\\d+", "", colnames(co.names))%in%cause) #select cause regressors
     l<-which(rownames(co.names)%in%cause) #select cause regressand
     R2inv<-matrix(1, ncol=nrow(PI), nrow=ncol(PI)) #exact inverse steps as R2
     R2inv[-l,k]<-0	#select coef to be tested
