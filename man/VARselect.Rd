@@ -7,24 +7,29 @@
 \encoding{latin1}
 
 \description{
-  The function returns infomation criteria and final prediction error
-  for sequential increasing the lag order up to a VAR(p)-proccess.
-  which are based on the same sample size.
+  The function returns infomation criteria and final selected lag order p
+  for a VAR(p)-proccess.
 }
 
 \usage{
-VARselect(y, lag.max = 10, type = c("const", "trend", "both", "none"),
+VARselect(y, lag.max = 10, lag.restrict = 0, type = c("const", "trend", "both", "none"),
 season = NULL, exogen = NULL)
 }
 
 \arguments{
-  \item{y}{Data item containing the endogenous variables}
+  \item{y}{Data item containing the endogenous variables.}
   \item{lag.max}{Integer for the highest lag order (default is
     \code{lag.max = 10}).}
+  \item{lag.restrict}{Integer to exclude low-order correlation between \eqn{y_{i,t}} and
+    \eqn{y_{j,t-r}}, where \eqn{i,j = 1,\ldots,K}, \eqn{i \neq j},
+    and \eqn{r = 1,\ldots,}\code{lag.restrict}.
+    As a result, lags \code{(lag.restrict + 1),...,lag.max} are assessed.
+    Default is \code{lag.restrict = 0}, i.e., no restrictions.
+    }
   \item{type}{Type of deterministic regressors to include.}
-  \item{season}{Inlusion of centered seasonal dummy variables (integer
+  \item{season}{Inclusion of centered seasonal dummy variables (integer
     value of frequency).}
-  \item{exogen}{Inlusion of exogenous variables.}
+  \item{exogen}{Exogenous variables.}
 
 }
 
