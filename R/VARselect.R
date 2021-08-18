@@ -1,6 +1,6 @@
 "VARselect" <- function(y,
                         lag.max = 10,
-                        lag.restrict = 0,
+                        lag.restrict = 0L,
                         type = c("const", "trend", "both", "none"),
                         season = NULL,
                         exogen = NULL)

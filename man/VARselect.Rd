@@ -24,8 +24,7 @@ season = NULL, exogen = NULL)
     \eqn{y_{j,t-r}}, where \eqn{i,j = 1,\ldots,K}, \eqn{i \neq j},
     and \eqn{r = 1,\ldots,}\code{lag.restrict}.
     As a result, lags \code{(lag.restrict + 1),...,lag.max} are assessed.
-    Default is \code{lag.restrict = 0}, i.e., no restrictions.
-    }
+    Default is \code{lag.restrict = 0}, i.e., no restrictions.}
   \item{type}{Type of deterministic regressors to include.}
   \item{season}{Inclusion of centered seasonal dummy variables (integer
     value of frequency).}
