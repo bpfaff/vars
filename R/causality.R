@@ -29,6 +29,18 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   g<-which(gsub("\\.l\\d+", "", rownames(PI))%in%cause) #select cause regressors
   j<-which(colnames(PI)%in%cause) #select cause regressand
   R2[g,-j]<-1	#select coef to be tested
+  #If the model already has restriction, overlay with the new ones
+  if (!is.null(x$restrictions)) {
+      xr <- t(x$restrictions)
+      xr <- abs(xr - 1)
+      # match positions of variables
+      rownames(xr)[rownames(xr) == "const"] <- "(Intercept)"
+      xr <- xr[rownames(PI), colnames(PI)]
+      # overlay
+      xr <- xr + R2
+      xr[xr == 2] <- 1
+      R2 <- xr
+  }
   w<-which(as.vector(R2)!=0)
   #build corresponding matrix as coef are not vectorized
   N <- length(w)
@@ -38,8 +50,13 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
   ##
   ## Granger-causality
   ##
-  sigma.pi  <- if (is.null(vcov.)) vcov(xMlm)
-        else if (is.function(vcov.)) vcov.(xMlm) else vcov.
+  if (is.null(vcov.)) {
+      sigma.pi  <- vcov(xMlm)
+  } else if (is.function(vcov.)) {
+      sigma.pi  <- vcov.(xMlm)
+  } else {
+      sigma.pi  <- vcov.
+  }
   df1 <- p * length(y1.names) * length(y2.names)
   df2 <- K * obs - length(PI)#K^2 * p - detcoeff
   STATISTIC <- t(R %*% PI.vec) %*% solve(R %*% sigma.pi %*% t(R)) %*% R %*% PI.vec / N
@@ -53,12 +70,21 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
     l<-which(rownames(co.names)%in%cause) #select cause regressand
     R2inv<-matrix(1, ncol=nrow(PI), nrow=ncol(PI)) #exact inverse steps as R2
     R2inv[-l,k]<-0	#select coef to be tested
+    #If the model already has restriction, overlay with the new ones
+    if (!is.null(x$restrictions)) {
+        xr <- x$restrictions
+        # match positions of variables
+        xr <- xr[rownames(co.names), colnames(co.names)]
+        # overlay
+        R2inv <- xr * R2inv
+    }
     xres<-restrict(x, method = "man", resmat = R2inv)
     pred<-sapply(xres$varresult,predict)
     res<-residuals(xres)
 
     #bootstrap function for homo case: use more efficient low-level, as XX-1 already computed
     if(is.null(vcov.)){
+        if (is.null(x$restrictions)) { #haven't figured out how to adjust these lines to account for existing restrictions
       Zmlm<-model.matrix(xMlm)
       cross<-crossprod(Zmlm)
       inside<-solve(R %*% sigma.pi %*% t(R))
@@ -68,16 +94,31 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
 	PI.boot.vec<-as.vector(PI.boot)
 	t(R %*% PI.boot.vec) %*% inside %*% (R %*% PI.boot.vec) / N
       }
+        } else { #if restrictions already exist; reestimate models (slower), use vcov by default
+            xtmp <- x
+            boot.fun <- function(x = 1) {
+                xtmp$datamat[,1:K] <- pred + res * rnorm(n = obs, mean = 0, sd = x)
+                xMlm.boot <- toMlm(xtmp)
+                sigma.pi.boot  <- vcov(xMlm.boot)
+                PI.boot.vec <- as.vector(coef(xMlm.boot))
+                t(R %*% PI.boot.vec) %*% solve(R %*% sigma.pi.boot %*% t(R)) %*% R %*% PI.boot.vec / N
+            }
+        }
     } else {
-    #bootstrap function for hetero case: obliged to run whole lm
     #two next lines as needed as x<-freeny.x; mylm<-lm(freeny.y~x); rm(x);update(mylm) #does not work
-      X<-x$datamat
-      if(x$type%in%c("const", "both")) X<-X[, -grep("const", colnames(X))]
+        xtmp <- x
+      # X<-x$datamat
+      # if(x$type%in%c("const", "both")) X<-X[, -grep("const", colnames(X))]
       boot.fun<-function(x=1){
-	X[,1:K]<-pred+res*rnorm(n=obs, sd=x, mean=1) #workaround as calling it ynew and putting in update() fails
-	xMlm.boot<-update(xMlm, .~.)
-	sigma.pi.boot  <- if (is.function(vcov.)) vcov.(xMlm.boot) else {vcov.;
-	  warning("vcov. should be function, not an object, when used with boot=TRUE")}
+          xtmp$datamat[,1:K]<-pred+res*rnorm(n=obs, sd=x, mean=0) #workaround as calling it ynew and putting in update() fails
+	# xMlm.boot<-update(xMlm, .~.) #replace with the row below to account for possible restrictions
+          xMlm.boot <- toMlm(xtmp)
+          if (is.function(vcov.)) {
+              sigma.pi.boot <- vcov.(xMlm.boot)
+          } else {
+              sigma.pi.boot <- vcov.
+              warning("vcov. should be function, not an object, when used with boot=TRUE")
+          }
 	PI.boot.vec <- as.vector(coef(xMlm.boot))
 	t(R %*% PI.boot.vec) %*% solve(R %*% sigma.pi.boot %*% t(R)) %*% R %*% PI.boot.vec / N
       }
@@ -117,7 +158,7 @@ function(x, cause = NULL, vcov.=NULL, boot=FALSE, boot.runs=100){
     Cmat[i, index[i]] <- 1
   }
   Dmat <- .duplicate(K)
-  Dinv <- ginv(Dmat)
+  Dinv <- MASS::ginv(Dmat)
   lambda.w <- obs %*% t(sig.vech) %*% t(Cmat) %*% solve(2 * Cmat %*% Dinv %*% kronecker(sigma.u, sigma.u) %*% t(Dinv) %*% t(Cmat)) %*% Cmat %*% sig.vech
   STATISTIC <- lambda.w
   names(STATISTIC) <- "Chi-squared"
