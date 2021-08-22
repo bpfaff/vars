@@ -1,6 +1,8 @@
 "VAR" <-
 function (y, p = 1, type = c("const", "trend", "both", "none"),
-    season = NULL, exogen = NULL, lag.max = NULL, ic = c("AIC", "HQ", "SC", "FPE"))
+    season = NULL, exogen = NULL, lag.max = NULL,
+    lag.restrict = 0L,
+    ic = c("AIC", "HQ", "SC", "FPE"))
 {
   y <- as.matrix(y)
     if (any(is.na(y)))
@@ -20,7 +22,12 @@ function (y, p = 1, type = c("const", "trend", "both", "none"),
     if(!is.null(lag.max)){
       lag.max <- abs(as.integer(lag.max))
       ic <- paste(match.arg(ic), "(n)", sep = "")
-      p <- VARselect(y, lag.max = lag.max, type = type, season = season, exogen = exogen)$selection[ic]
+      p <- VARselect(y, lag.max = lag.max, lag.restrict = lag.restrict,
+                     type = type, season = season, exogen = exogen)$selection[ic]
+    }
+    if (p <= lag.restrict) {
+      warning("lag.restrict >= p. Using lag.restrict = 0 instead.")
+      lag.restrict <- 0
     }
     sample <- obs - p
     ylags <- embed(y, dimension = p + 1)[, -(1:K)]
@@ -77,18 +84,32 @@ function (y, p = 1, type = c("const", "trend", "both", "none"),
     datamat <- as.data.frame(rhs)
     colnames(datamat) <- colnames(rhs)
     equation <- list()
+    if (lag.restrict == 0) {
+      restrictions = NULL
+    } else {
+      restrictions <- matrix(1, K, ncol(rhs))
+      dimnames(restrictions) <- list(colnames(y.orig), colnames(rhs))
+    }
     for (i in 1:K) {
-        y <- yend[, i]
+      y <- yend[, i]
+      if (lag.restrict == 0) {
         equation[[colnames(yend)[i]]] <- lm(y ~ -1 + ., data = datamat)
-        if(any(c("const", "both") %in% type)){
-         attr(equation[[colnames(yend)[i]]]$terms, "intercept") <- 1
-        }
+      } else {
+        tmp <- rep(TRUE, K)
+        tmp[i] <- FALSE #do not restrict for the current variable
+        irestr <- which(rep(tmp, lag.restrict))
+        restrictions[i, irestr] <- 0
+        equation[[colnames(yend)[i]]] <- lm(y ~ -1 + ., data = datamat[,-irestr])
+      }
+      if(any(c("const", "both") %in% type)){
+        attr(equation[[colnames(yend)[i]]]$terms, "intercept") <- 1
+      }
     }
   call <- match.call()
   if("season" %in% names(call)) call$season <- eval(season)
     result <- list(varresult = equation, datamat = data.frame(cbind(yend,
         rhs)), y = y.orig, type = type, p = p, K = K, obs = sample,
-        totobs = sample + p, restrictions = NULL, call = call)
+        totobs = sample + p, restrictions = restrictions, call = call)
     class(result) <- "varest"
     return(result)
 }

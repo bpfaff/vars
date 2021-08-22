@@ -14,7 +14,7 @@
 
 \usage{
 VAR(y, p = 1, type = c("const", "trend", "both", "none"),
-season = NULL, exogen = NULL, lag.max = NULL,
+season = NULL, exogen = NULL, lag.max = NULL, lag.restrict = 0L,
 ic = c("AIC", "HQ", "SC", "FPE"))
 \method{print}{varest}(x, digits = max(3, getOption("digits") - 3), ...)
 }
@@ -28,6 +28,11 @@ ic = c("AIC", "HQ", "SC", "FPE"))
   \item{exogen}{Inlusion of exogenous variables.}
   \item{lag.max}{Integer, determines the highest lag order for lag
     length selection according to the choosen \code{ic}.}
+  \item{lag.restrict}{Integer to exclude low-order correlation between \eqn{y_{i,t}} and
+    \eqn{y_{j,t-r}}, where \eqn{i,j = 1,\ldots,K}, \eqn{i \neq j},
+    and \eqn{r = 1,\ldots,}\code{lag.restrict}.
+    As a result, lags \code{(lag.restrict + 1),...,lag.max} are assessed.
+    Default is \code{lag.restrict = 0}, i.e., no restrictions.}
   \item{ic}{Character, selects the information criteria, if
     \code{lag.max} is not \code{NULL}.}
   \item{x}{Object with class attribute \sQuote{varest}.}
