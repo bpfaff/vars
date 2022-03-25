@@ -5,7 +5,7 @@ require(strucchange)
 ##
 ".fecov" <-
 function(x, n.ahead) {
-  n.par<-sapply(x$varresult, function(x) summary(x)$df[2])
+  n.par <- sapply(x$varresult, function (res) x$obs - length(res$coefficients))
   sigma.u <- crossprod(resid(x))/n.par
   Sigma.yh <- array(NA, dim = c(x$K, x$K, n.ahead))
   Sigma.yh[, , 1] <- sigma.u
